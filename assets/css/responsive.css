@@ -1,0 +1,252 @@
+@media (max-width: 1100px) {
+    
+    .navigation-r {
+        flex: 1;
+        justify-content: flex-end;
+        margin-right: 2em;
+    }
+
+    .nav-btn {
+        display: block;
+    }
+
+    .nav-ul {
+        display: none;
+    }
+
+    .nav-ul.n-active {
+        
+    }
+
+}
+
+
+@media (max-width: 720px) {
+
+    .bm-title h3 {
+        font-size: 1.2em;
+    }
+    .bm-title h3::after, .bm-title h3::before {
+        opacity: 0.5;
+        width: 34px;
+    }
+    .bm-title h3::before {
+        right: -40px;
+    }
+    .bm-title h3::after {
+        left: -40px;
+    }
+    .bm-title h1 {
+        font-size: 3em;
+    }
+
+    .bm-presented h3 {
+        font-size: 1.6em;
+        letter-spacing: 2px;
+    }
+    .bm-presented h5 span {
+        display: table;
+        margin: 0 auto;
+    }
+
+    .bm-bottom {
+        flex-direction: column;
+        margin-top: 6vh;
+    }
+
+    .bm-about {
+        align-items: center;
+        margin-bottom: 3vh;
+    }
+    .bm-about-box h1 {
+        font-size: 2.4em;
+    }
+    .bm-about-box p {
+        font-size: 1em;
+    }
+
+    .bm-counter {
+        display: table;
+        margin: 0 auto;
+    }
+
+    .bm-count-type {
+        font-size: 0.8em;
+        letter-spacing: 1px;
+        margin-top: 0px;
+    }
+    .bm-count-type::after {
+        content: "";
+        height: 4px;
+        position: absolute;
+        bottom: 3px;
+        left: 0;
+    }
+
+    .bm-count-amount {
+        font-size: 2em;
+    }
+
+    .bottom-scroll {
+        width: 40px;
+        height: 40px;
+        bottom: -14vh;
+    }
+
+    .bottom-scroll-one {
+        width: 8px;
+        height: 8px;
+    }
+    .bottom-scroll-two {
+        top: 4px;
+        width: 14px;
+        height: 14px;
+    }
+    .bottom-scroll-three {
+        top: 8px;
+        width: 22px;
+        height: 22px;
+    }
+
+    .heading-text h1 {
+        font-size: 2.4em;
+    }
+    .heading-text h3 {
+        font-size: 1.4em;
+    }
+    .heading-button a {
+        display: block;
+        text-align: center;
+        font-size: 1em;
+        font-weight: 700;
+        box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.15);
+        letter-spacing: 1px;
+        padding: 0.5em 1.2em;
+    }
+    .content-heading {
+        padding: 2em 1em;
+    }
+
+    .team-boxes {
+        margin: 2em auto;
+        width: 88%;
+    }
+
+    .about-content {
+        flex-direction: column;
+    }
+    .about-text p {
+        font-size: 1.2em;
+    }
+
+    .about-video {
+        width: 300px;
+        margin-top: 2em;
+        align-self: center;
+    }
+
+    .event-features {
+        flex-wrap: wrap;
+    }
+
+    .event-feature-box {
+        flex-basis: calc(50% - 2em);
+        box-sizing: border-box;
+        margin-top: 2em;
+    }
+    .event-feature-box:nth-child(2) {
+        margin-right: 0;
+    }
+    .event-feature-box:nth-child(3) {
+        margin-left: 0;
+    }
+
+    .event-text h3 {
+        font-size: 1em;
+    }
+    .event-icon img {
+        width: 30px;
+        height: 30px;
+    }
+
+    .competition-boxes {
+        flex-wrap: wrap;
+    }
+    .competition-box {
+        flex-basis: calc(50% - 5em);
+        margin: 2em 1em;
+        padding: 7em 0;
+    }
+    .competition-box:nth-child(2) {
+        margin-right: 0;
+    }
+    .competition-box:nth-child(3) {
+        margin-left: 0;
+    }
+    .competition-title h1 {
+        font-size: 1em;
+        font-weight: 700;
+    }
+    .competition-title h1::before {
+        height: 2px;
+        bottom: -5px;
+    }
+
+    .glimpse-row {
+        flex-direction: column
+    }
+    .glimpse-testimonials {
+        width: 100%;
+        margin-right: 0;
+    }
+    .testi-name h1 {
+        font-size: 1.2em;
+        font-weight: 700;
+    }
+    .testi-content p {
+        font-size: 1.2em;
+        line-height: 1.4;
+    }
+    .glimpse-imgs {
+        margin: 0 4em;
+    }
+
+    .footer-inner {
+        flex-direction: column;
+    }
+
+
+    .footer-l {
+        margin-bottom: 5em;
+    }
+    .footer-logo {
+        max-width: 140px;
+        border-right: 1px solid rgba(255, 255, 255, 0.1);
+        padding-right: 1em;
+    }
+    .footer-about h3 {
+        font-size: 1em;
+        letter-spacing: 1px;
+    }
+    .f-e-days-top {
+        font-size: 1.2em;
+        letter-spacing: 3px;
+    }
+    .f-e-days-bottom {
+        font-size: 0.8em;
+        letter-spacing: 1px;
+        font-weight: 700;
+        padding: 0.1em 1em;
+    }
+    .f-e-year {
+        font-size: 3em;
+        letter-spacing: 0px;
+    }
+
+    #footer-bottom p {
+        font-size: 1em;
+        font-weight: 300;
+        letter-spacing: 1px;
+    }
+
+}
