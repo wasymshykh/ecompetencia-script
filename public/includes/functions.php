@@ -21,6 +21,56 @@
     }
 
 
+    function updateUserPassword($email, $password, $code) {
+        global $db;
+        $hashed_password = password_hash($password, PASSWORD_BCRYPT);
+
+        $q = "UPDATE `users` SET `user_password`=:pass WHERE `user_email`=:email";
+        $s = $db->prepare($q);
+        
+        if($s->execute(['email'=>$email, 'pass'=>$hashed_password]) && resetCodeUpdate($code)){
+            return true;
+        }
+        return false;
+    }
+    
+    // returns true if team code exists
+    function resetCodeUpdate($code) {
+        global $db;
+        $q = "UPDATE `reset_requests` SET `reset_status`='U', `reset_completed_on`=NOW() WHERE `reset_code`=:code";
+        $s = $db->prepare($q);
+
+        if($s->execute(['code'=>$code])){
+            return true;
+        }
+        return false;
+    }
+
+
+    // returns true if team code exists
+    function validResetCode($email, $code) {
+        global $db;
+        $q = "SELECT `reset_code` FROM `reset_requests` WHERE `reset_code`=:reset_code AND `user_email`=:email AND `reset_status`='N'";
+        $s = $db->prepare($q);
+        $s->execute(['reset_code'=>$code,'email'=>$email]);
+        if($s->rowCount() > 0){
+            return true;
+        }
+        return false;
+    }
+
+    // returns true if team code exists
+    function resetCodeExists($code) {
+        global $db;
+        $q = "SELECT `reset_code` FROM `reset_requests` WHERE `reset_code`=:reset_code AND `reset_status`='N'";
+        $s = $db->prepare($q);
+        $s->execute(['reset_code'=>$code]);
+        if($s->rowCount() > 0){
+            return true;
+        }
+        return false;
+    }
+    
     // returns true if team email exists
     function userEmailExists($email) {
         global $db;

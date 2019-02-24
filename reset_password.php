@@ -4,6 +4,46 @@
     session_start();
 
     $error = "";
+
+    if(isset($_GET['email']) && isset($_GET['code'])){
+
+        $email = normal($_GET['email']);
+        $code = normal($_GET['code']);
+        $reset_display = true;
+
+        if(!userEmailExists($email) || !resetCodeExists($code) || !validResetCode($email, $code)){
+            $error = "Invalid email or reset code. Please try reset option again.";
+            $reset_display = false;
+        }
+
+        $reset_request = true;
+
+        if(empty($error) && isset($_POST['reset_request'])){
+
+            $password = normal($_POST['password']);
+            $password_c = normal($_POST['password_c']);
+
+            if(empty($password) || empty($password_c) || strlen($password) < 4){
+                $error = "Password fields can't be empty. At least 4 characters password is acceptable.";
+            }
+
+            if(empty($error) && ($password != $password_c)) {
+                $error = "Passwords didn't matched. Write them again!";
+            }
+
+            if(empty($error)) {
+                if(updateUserPassword($email, $password, $code)){
+                    $success = "Password successfully updated!";
+                    $reset_display = false;
+                } else {
+                    $error = "Internal error: couldn't update the password. Contact team.";
+                }
+            }
+
+        }
+        
+
+    }
     
     if(isset($_POST['reset'])){
 
