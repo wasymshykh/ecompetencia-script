@@ -18,14 +18,14 @@
     <div id="header">
         <div class="header-inner">
 
-            <a href="" id="logo">
+            <a href="<?=URL?>" id="logo">
                 <img src="<?=URL?>/assets/img/logo_white.png">
             </a>
 
             <nav>
                 <ul>
-                    <li><a href="team.php">Become a team member</a></li>
-                    <li><a href="ambassador.php">Become a ambassador</a></li>
+                    <li><a href="<?=URL?>/inductions/team.php">Become a team member</a></li>
+                    <li><a href="<?=URL?>/inductions/ambassador.php">Become a ambassador</a></li>
                 </ul>
             </nav>
 

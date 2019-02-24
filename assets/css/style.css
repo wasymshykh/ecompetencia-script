@@ -7,7 +7,6 @@
 body {
     font-family: 'Montserrat', sans-serif;
     font-size: 10px;
-    min-height: 150vh;
 }
 
 h1, h2, h3, h4, h5 {
@@ -42,7 +41,7 @@ a:link {
 }
 
 .navigation-logo {
-    max-width: 180px;
+    max-width: 160px;
     transition: 0.3s all;
 }
 
@@ -50,14 +49,13 @@ a:link {
     background-color: rgba(18,37,47,1)
 }
 #navigation.sticky .navigation-logo {
-    max-width: 120px;
+    max-width: 100px;
 }
 
 .navigation-logo img {
     width: 100%;
     height: auto;
     display: block;
-    margin-bottom: -50px;
 }
 
 .navigation-r {
@@ -1293,11 +1291,6 @@ a:link {
     border-radius: 2em;
 }
 
-
-.footer-contact {
-
-}
-
 .footer-contact p {
     font-size: 1.4em;
     color: #ffffff;
@@ -1363,4 +1356,3 @@ a:link {
     ORANGE: #f26322
     Black: #0b1921
 */
-

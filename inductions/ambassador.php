@@ -109,7 +109,7 @@
                             <tr>
                                 <td style="font-family:Trebuchet MS,Arial,Helvetica,sans-serif;box-shadow: 0 0 10px rgba(0,0,0,0.1); padding: 10px;" bgcolor="#FFFFFF" align="left">
                                     <p>Dear <strong>'.$name.'</strong>,</p>
-                                    <p>Thank you for applying for Iqra University Ecompetencia 2019. Your application has been recorded.</p>
+                                    <p>Thank you for applying as a Ambassador for Iqra University Ecompetencia 2019. Your application has been recorded.</p>
                                     <br>
                                     <p>We\'ll contact you soon. Meanwhile, Stay updated with the event by following our facebook page.</p>
                                     <br>

@@ -76,7 +76,7 @@
     }
 
     // Get a team member applicant
-    function isApplicant($id)
+    function isTeamApplicant($id)
     {
         global $db;
         $q = "SELECT * FROM `member_applicant` WHERE `id`=:id";
@@ -98,6 +98,74 @@
         }
         
         return $html;
+    }
+
+    
+    // Get all ambassador applicants
+    function getAmbassadorApplicants($sortBy = 'id', $sortType = 'asc')
+    {
+        global $db;
+        $q = "SELECT * FROM `ambassador_applicant` ORDER BY $sortBy $sortType";
+        $s = $db->prepare($q);
+        $s->execute();
+        return $s->fetchAll();
+    }
+
+    // Get a ambassador applicant
+    function getAmbassadorApplicant($id)
+    {
+        global $db;
+        $q = "SELECT * FROM `ambassador_applicant` WHERE `id`=:id";
+        $s = $db->prepare($q);
+        $s->execute(['id'=>$id]);
+        return $s->fetch();
+    }
+
+    // Is ambassador applicant exists
+    function isAmbassadorApplicant($id)
+    {
+        global $db;
+        $q = "SELECT * FROM `ambassador_applicant` WHERE `id`=:id";
+        $s = $db->prepare($q);
+        $s->execute(['id'=>$id]);
+        if($s->rowCount() === 1){
+            return true;
+        }
+        return false;
+    }
+
+    // Get institute details by it's id
+    function getInstituteById($id)
+    {
+        global $db;
+        $q = "SELECT * FROM `institutes` WHERE `institute_ID`=:id";
+        $s = $db->prepare($q);
+        $s->execute(['id'=>$id]);
+        return $s->fetch();
+    }
+
+    // Get settings value
+    function getSettings($name)
+    {
+        global $db;
+        $q = "SELECT `setting_value` FROM `site_settings` WHERE `setting_name`=:name";
+        $s = $db->prepare($q);
+        $s->execute(['name'=>$name]);
+        if($s->rowCount() > 0){
+            return $s->fetch()['setting_value'];
+        }
+        return false;
+    }
+
+    // Set settings value
+    function setSettings($name, $value)
+    {
+        global $db;
+        $q = "UPDATE `site_settings` SET `setting_value`=:value WHERE `setting_name`=:name";
+        $s = $db->prepare($q);
+        $r = $s->execute(['value'=>$value, 'name'=>$name]);
+        
+        return $r;
     }
 
 

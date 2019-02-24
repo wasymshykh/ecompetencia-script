@@ -1,5 +1,4 @@
 <?php
-
     session_start();
     
     if(!isset($_SESSION['admin']) && empty($_SESSION['admin'])){
@@ -11,5 +10,4 @@
     }
 
     $admin = adminDetails($_SESSION['admin_id']);
-
 ?>

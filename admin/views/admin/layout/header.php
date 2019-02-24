@@ -47,6 +47,7 @@
           <h5 class="sidenav-heading">Main</h5>
           <ul id="side-main-menu" class="side-menu list-unstyled">                  
             <li><a href="index.php"><i class="icon-home"></i>Home</a></li>
+            <li><a href="settings.php"><i class="icon-flask"></i>Settings</a></li>
           </ul>
         </div>
         <div class="admin-menu">

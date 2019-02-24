@@ -9,10 +9,10 @@ error_reporting(E_ALL);
     define('DB_HOST', 'localhost');
     define('DB_USER', 'root');
     define('DB_PASSWORD', 'root');
-    define('DB_NAME', 'ecompete_ecom');
+    define('DB_NAME', 'studiioo_ecom');
 
     // url without '/' in the end
-    define('URL', 'http://localhost/ecom_new');
+    define('URL', 'http://localhost/ecompetencia-script');
     // admin directory url
     define('ADMIN_URL', URL.'/admin');
 

@@ -9,8 +9,7 @@
   include 'views/admin/layout/header.php'; 
 ?>
 <?php 
-
-    if(isset($_GET['view']) && isApplicant(normal($_GET['view']))){
+    if(isset($_GET['view']) && isTeamApplicant(normal($_GET['view']))){
         $applicant = getTeamApplicant(normal($_GET['view']));
         include 'views/admin/member_view.php';
     }
