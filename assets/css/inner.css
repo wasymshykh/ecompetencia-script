@@ -66,10 +66,14 @@ body {
     font-weight: 700;
     border-bottom: 1px solid #0b1921;
 }
+
 .form-type-title {
     width: 100%;
     display: flex;
     margin: 2em 0;
+}
+.form-type-title.login-p {
+    margin-top: 4em;
 }
 .form-type-step-n {
     display: flex;
@@ -87,6 +91,10 @@ body {
     border-bottom: 1px solid white;
     margin-left: 0.5em;
 }
+.form-type-title.login-p .form-type-step-n span {
+    margin-left: 0;
+    margin-right: 0.5em;
+}
 .form-type-title-text {
     flex: 1;
 }
@@ -103,6 +111,11 @@ body {
     text-transform: uppercase;
     letter-spacing: 2px;
     color: #2e5f7c;
+}
+.form-type-title-text p a {
+    font-weight: 700;
+    color: #2e5f7c;
+    border-bottom: 1px solid #0b1921;
 }
 
 .c-form-content {

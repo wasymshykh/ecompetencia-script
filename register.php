@@ -67,9 +67,7 @@
                 $error = "Sorry, we couldn't register. Insert error 1100. Share this error code with the team.";
             }
 
-
         }
-
 
     }
 

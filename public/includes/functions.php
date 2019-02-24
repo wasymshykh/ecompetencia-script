@@ -53,4 +53,39 @@
         return false;
     }
 
+    function userLoginDetailsCheck($entered_email, $entered_password) {
+        $user = getUserByEmail($entered_email);
+        if(count($user) > 0){
+            if($user['user_status'] == 'E'){
+                if(password_verify($entered_password, $user['user_password'])){
+                    return true;
+                }
+            } else {
+                return false;
+            }
+        }
+
+        return false;
+    }
+
+    function getUserByEmail($email) {
+        global $db;
+        $q = "SELECT * FROM `users` WHERE `user_email`=:email";
+        $s = $db->prepare($q);
+        $s->execute(['email'=>$email]);
+        if($s->rowCount() > 0){
+            return $s->fetch();
+        }
+        return false;
+    }
+
+    function isUserDisabled($email) {
+        $user = getUserByEmail($email);
+        if($user['user_status'] == 'D'){
+            return true;
+        }
+        return false;
+    }
+
+
 ?>
