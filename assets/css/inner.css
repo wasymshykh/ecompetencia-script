@@ -471,7 +471,6 @@ body {
     background-color: #f26322;
     margin-top: -3em;
 }
-
 .form-error-text {
     padding: 1em 2em;
 }
@@ -483,6 +482,30 @@ body {
     letter-spacing: 2px;
 }
 .form-error-text p {
+    color: #ffffff;
+    font-size: 1.2em;
+    font-weight: 400;
+    letter-spacing: 1px;
+}
+
+.form-success {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: #85ab30;
+    margin-top: -3em;
+}
+.form-success-text {
+    padding: 1em 2em;
+}
+.form-success-text h3 {
+    color: #ffffff;
+    font-size: 1.4em;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+.form-success-text p {
     color: #ffffff;
     font-size: 1.2em;
     font-weight: 400;

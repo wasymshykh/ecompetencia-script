@@ -87,5 +87,20 @@
         return false;
     }
 
+    // Reset code generate
+    function getResetCode($email)
+    {
+        global $db;
+
+        $randomString = md5($email . time());
+
+        $q = "INSERT INTO `reset_requests`(`reset_code`,`user_email`) VALUE (:reset_code, :user_email)";
+        $s = $db->prepare($q);
+        if($s->execute(['reset_code'=>$randomString, 'user_email'=>$email])){
+            return $randomString;
+        }
+        return false;
+    }
+
 
 ?>
