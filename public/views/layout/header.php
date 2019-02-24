@@ -10,12 +10,18 @@
     <link rel="stylesheet" href="<?=URL?>/assets/css/slick.css">
     <link rel="stylesheet" href="<?=URL?>/assets/css/slick-theme.css">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <?php if(isset($showMaterialize)): ?>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <?php endif; ?>
 
     <link rel="stylesheet" type="text/css" media="screen" href="<?=URL?>/assets/css/style.css">
+    <?php if(isset($innerPage)):?>
+        <link rel="stylesheet" type="text/css" media="screen" href="<?=URL?>/assets/css/inner.css">
+    <?php endif; ?>
     <link rel="stylesheet" type="text/css" media="screen" href="<?=URL?>/assets/css/responsive.css">
+
     
     <link rel="stylesheet" href="<?=URL?>/assets/fontawesome/css/all.min.css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700,900" rel="stylesheet">
@@ -25,7 +31,7 @@
     <script src="<?=URL?>/assets/js/jquery.js"></script>
 
 </head>
-<body>
+<body <?=(isset($specialId))?'id="'.$specialId.'"':''?>>
 
     <div id="navigation">
         <div class="navigation-inner">
@@ -53,8 +59,8 @@
                         <li><a class="cont">Contact</a></li>
                     </ul>
                     <ul class="nav-r">
-                        <li><a href="" id="r1">Login</a></li>
-                        <li><a href="" id="r2" class="reg-btn">Registration</a></li>
+                        <li><a href="<?=URL?>/login.php" id="r1">Login</a></li>
+                        <li><a href="<?=URL?>/register.php" id="r2" class="reg-btn">Registration</a></li>
                     </ul>
                 </div>
 

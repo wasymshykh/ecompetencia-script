@@ -12,7 +12,7 @@
     // Returns true if passed id is admin
     function isAdmin($id) {
         global $db;
-        $q = "SELECT * FROM `users` WHERE `user_ID`=:id AND `user_type`='A'";
+        $q = "SELECT * FROM `management` WHERE `management_ID`=:id AND `management_type`='A'";
         $s = $db->prepare($q);
         $s->execute(['id'=>$id]);
         if($s->rowCount() === 1){
@@ -24,7 +24,7 @@
     // Returns true if user exists
     function isUser($id) {
         global $db;
-        $q = "SELECT * FROM `users` WHERE `user_ID`=:id";
+        $q = "SELECT * FROM `management` WHERE `management_ID`=:id";
         $s = $db->prepare($q);
         $s->execute(['id'=>$id]);
         if($s->rowCount() === 1){
@@ -37,7 +37,7 @@
     // Returns true if user is using password
     function isValidLogin($id, $pass) {
         global $db;
-        $q = "SELECT * FROM `users` WHERE `user_ID`=:id AND `user_password`=:password";
+        $q = "SELECT * FROM `management` WHERE `management_ID`=:id AND `management_password`=:password";
         $s = $db->prepare($q);
         $s->execute(['id'=>$id, 'password'=>$pass]);
         if($s->rowCount() === 1){
@@ -49,7 +49,7 @@
     // Get administrator details 
     function adminDetails($id) {
         global $db;
-        $q = "SELECT * FROM `users` WHERE `user_ID`=:id AND `user_type`='A'";
+        $q = "SELECT * FROM `management` WHERE `management_ID`=:id AND `management_type`='A'";
         $s = $db->prepare($q);
         $s->execute(['id'=>$id]);
         return $s->fetch();

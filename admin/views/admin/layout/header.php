@@ -37,7 +37,7 @@
         <div class="sidenav-header d-flex align-items-center justify-content-center">
           <!-- User Info-->
           <div class="sidenav-header-inner text-center"><img src="<?=ADMIN_URL?>/assets/img/avatar.png" alt="person" class="img-fluid rounded-circle">
-            <h2 class="h5"><?=$admin['user_fname']?> <?=$admin['user_lname']?></h2><span>administrator</span>
+            <h2 class="h5"><?=$admin['management_fname']?> <?=$admin['management_lname']?></h2><span>administrator</span>
           </div>
           <!-- Small Brand information, appears on minimized sidebar-->
           <div class="sidenav-header-logo"><a href="index.html" class="brand-small text-center"> <strong>E</strong><strong class="text-primary">C</strong></a></div>

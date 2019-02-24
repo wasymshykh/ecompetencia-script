@@ -49,7 +49,7 @@
         </div>
     </footer>
 
-
+<?php if(isset($showMaterialize)): ?>
 
     <div id="modal1" class="modal">
         <div class="modal-content">
@@ -146,22 +146,7 @@
             })
         })*/
 
-       document.querySelector('#r1').addEventListener('click',(e)=>{
-            document.querySelector('.#r1').classList.add('n-active')
-            let eleam2 = document.querySelector('#modal2');
-            var instance2 = M.Modal.getInstance(eleam2);
-            instance2.open();
-        })
-
-        document.querySelectorAll('#r1').forEach(navul => {
-            navul.addEventListener('click',(e)=>{
-                e.preventDefault();
-                let eleam2 = document.querySelector('#modal2');
-                var instance2 = M.Modal.getInstance(eleam2);
-                instance2.open();
-            })
-        })
-               document.querySelector('#galleryy').addEventListener('click',(e)=>{
+        document.querySelector('#galleryy').addEventListener('click',(e)=>{
             document.querySelector('.#galleryy').classList.add('n-active')
             let eleam2 = document.querySelector('#modal4');
             var instance2 = M.Modal.getInstance(eleam2);
@@ -192,22 +177,7 @@
                 instance2.open();
             })
         })
-        document.querySelector('#r2').addEventListener('click',(e)=>{
-            document.querySelector('.#r2').classList.add('n-active')
-            let eleam2 = document.querySelector('#modal2');
-            var instance2 = M.Modal.getInstance(eleam2);
-            instance2.open();
-        })
 
-        document.querySelectorAll('#r2').forEach(navul => {
-            navul.addEventListener('click',(e)=>{
-                e.preventDefault();
-                let eleam2 = document.querySelector('#modal2');
-                var instance2 = M.Modal.getInstance(eleam2);
-                instance2.open();
-            })
-        })
-        
         document.querySelector('.cont').addEventListener('click',(e)=>{
             document.querySelector('..cont').classList.add('n-active')
             let eleam2 = document.querySelector('#modal5');
@@ -259,12 +229,13 @@
             var elems = document.querySelectorAll('.modal');
             var instances = M.Modal.init(elems);
             
-            let eleam = document.querySelector('#modal3');
-            var instance = M.Modal.getInstance(eleam);
-            instance.open();
+            //let eleam = document.querySelector('#modal3');
+            //var instance = M.Modal.getInstance(eleam);
+            //instance.open();
             
         });
     </script>
+<?php endif; ?>
 
     </body>
 </html>
