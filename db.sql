@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Feb 24, 2019 at 11:47 PM
+-- Generation Time: Feb 25, 2019 at 02:26 PM
 -- Server version: 5.7.25-0ubuntu0.18.10.2
 -- PHP Version: 7.3.2-3+ubuntu18.10.1+deb.sury.org+1
 
@@ -19,17 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `studiioo_ecom`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `admins`
---
-
-CREATE TABLE `admins` (
-  `admin_ID` int(11) NOT NULL,
-  `user_ID` int(11) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -50,15 +39,15 @@ CREATE TABLE `ambassadors` (
 --
 
 CREATE TABLE `ambassador_applicant` (
-  `id` int(11) NOT NULL,
-  `fname` varchar(255) NOT NULL,
-  `lname` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `phoneno` varchar(255) NOT NULL,
-  `experience` text NOT NULL,
+  `ambassador_ID` int(11) NOT NULL,
+  `ambassador_fname` varchar(255) NOT NULL,
+  `ambassador_lname` varchar(255) NOT NULL,
+  `ambassador_email` varchar(255) NOT NULL,
+  `ambassador_phoneno` varchar(255) NOT NULL,
+  `ambassador_experience` text NOT NULL,
   `institute_ID` int(11) NOT NULL,
-  `avatar` varchar(512) NOT NULL,
-  `status` enum('A','R','S') NOT NULL DEFAULT 'S' COMMENT 'S - Submitted, A - Approved, R - Rejected',
+  `ambassador_avatar` varchar(512) NOT NULL,
+  `ambassador_status` enum('A','R','S') NOT NULL DEFAULT 'S' COMMENT 'S - Submitted, A - Approved, R - Rejected',
   `submission_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -253,6 +242,13 @@ CREATE TABLE `management` (
   `management_type` varchar(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `management`
+--
+
+INSERT INTO `management` (`management_ID`, `management_fname`, `management_lname`, `management_password`, `management_email`, `management_mobile`, `management_status`, `management_type`) VALUES
+(11, 'Hassan', 'Latif', '12345', 'hassanl.buttofficial@gmail.com', '03212508437', 'E', 'A');
+
 -- --------------------------------------------------------
 
 --
@@ -367,19 +363,6 @@ CREATE TABLE `transactions` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `universities`
---
-
-CREATE TABLE `universities` (
-  `university_ID` int(11) NOT NULL,
-  `university_name` varchar(1000) DEFAULT NULL,
-  `university_status` varchar(30) DEFAULT NULL,
-  `user_ID` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `users`
 --
 
@@ -391,19 +374,13 @@ CREATE TABLE `users` (
   `user_password` varchar(255) NOT NULL,
   `user_phone` varchar(100) NOT NULL,
   `institute_ID` int(11) NOT NULL,
+  `ambassador_ID` int(11) DEFAULT NULL,
   `user_status` enum('E','D') DEFAULT 'E' COMMENT 'E - enabled, D - disabled'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `admins`
---
-ALTER TABLE `admins`
-  ADD PRIMARY KEY (`admin_ID`),
-  ADD KEY `user_ID` (`user_ID`);
 
 --
 -- Indexes for table `ambassadors`
@@ -417,7 +394,7 @@ ALTER TABLE `ambassadors`
 -- Indexes for table `ambassador_applicant`
 --
 ALTER TABLE `ambassador_applicant`
-  ADD PRIMARY KEY (`id`),
+  ADD PRIMARY KEY (`ambassador_ID`),
   ADD KEY `institute_ID` (`institute_ID`);
 
 --
@@ -525,29 +502,18 @@ ALTER TABLE `transactions`
   ADD PRIMARY KEY (`transaction_ID`);
 
 --
--- Indexes for table `universities`
---
-ALTER TABLE `universities`
-  ADD PRIMARY KEY (`university_ID`),
-  ADD KEY `user_ID` (`user_ID`);
-
---
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`user_ID`),
   ADD UNIQUE KEY `user_email` (`user_email`),
-  ADD KEY `institute_ID` (`institute_ID`);
+  ADD KEY `institute_ID` (`institute_ID`),
+  ADD KEY `ambassador_ID` (`ambassador_ID`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
---
--- AUTO_INCREMENT for table `admins`
---
-ALTER TABLE `admins`
-  MODIFY `admin_ID` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `ambassadors`
 --
@@ -557,7 +523,7 @@ ALTER TABLE `ambassadors`
 -- AUTO_INCREMENT for table `ambassador_applicant`
 --
 ALTER TABLE `ambassador_applicant`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `ambassador_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 --
 -- AUTO_INCREMENT for table `categories`
 --
@@ -629,11 +595,6 @@ ALTER TABLE `teams`
 ALTER TABLE `transactions`
   MODIFY `transaction_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
--- AUTO_INCREMENT for table `universities`
---
-ALTER TABLE `universities`
-  MODIFY `university_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
---
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
@@ -674,16 +635,11 @@ ALTER TABLE `reset_requests`
   ADD CONSTRAINT `reset_requests_ibfk_1` FOREIGN KEY (`user_email`) REFERENCES `users` (`user_email`);
 
 --
--- Constraints for table `universities`
---
-ALTER TABLE `universities`
-  ADD CONSTRAINT `universities_ibfk_1` FOREIGN KEY (`user_ID`) REFERENCES `management` (`management_ID`);
-
---
 -- Constraints for table `users`
 --
 ALTER TABLE `users`
-  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`institute_ID`) REFERENCES `institutes` (`institute_ID`);
+  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`institute_ID`) REFERENCES `institutes` (`institute_ID`),
+  ADD CONSTRAINT `users_ibfk_2` FOREIGN KEY (`ambassador_ID`) REFERENCES `ambassador_applicant` (`ambassador_ID`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -1,39 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Ecompetentia</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="<?=URL?>/assets/css/inner.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="<?=URL?>/assets/css/account.css" />
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-</head>
-<body>
-
-
-<div id="wrapper">
-    <header>
-        <div id="header">
-            <div class="header-inner">
-                
-                <div class="header-logo">
-                    <a href="./">
-                        <img src="<?=URL;?>/assets/img/logo.png" alt="Logo">
-                    </a>
-                </div>
-
-                <div class="header-r">
-                    <a href="addparticipation.php" class="addp-btn"><i class="fas fa-plus"></i> Add Participation</a>
-                    <a href="logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a>
-                </div>
-
-            </div>
-        </div>
-    </header>
-
-    <div class="d-container">
+<div class="d-container">
 
     <div class="d-row">
 
@@ -49,7 +14,7 @@
                     Team leader
                 </span>
                 <span class="d-d-value">
-                    Muhammad Waseem
+                    <?=$user['user_fname'] . ' ' . $user['user_lname'];?>
                 </span>
             </div>
             <div class="d-detail-box">
@@ -58,7 +23,7 @@
                     Your mobile
                 </span>
                 <span class="d-d-value">
-                    03022736286
+                    <?=$user['user_phone']?>
                 </span>
             </div>
             <div class="d-detail-box">
@@ -67,7 +32,7 @@
                     Your email
                 </span>
                 <span class="d-d-value">
-                    wasymshykh@gmail.com
+                    <?=$user['user_email']?>
                 </span>
             </div>
             <div class="d-detail-box">
@@ -76,7 +41,7 @@
                     Your university
                 </span>
                 <span class="d-d-value">
-                    Iqra University IU
+                    <?=$user['institute_name']?>
                 </span>
             </div>
             <div class="d-detail-box">
@@ -85,8 +50,15 @@
                     Your ambassador
                 </span>
                 <span class="d-d-value">
-                    <i>none</i>
-                    <a href="#">set</a>
+                    <?php if($user['ambassador_ID'] != NULL):
+                        $ambassador = getAmbassadorDetailsByID($user['ambassador_ID']);
+                    ?>
+                        <?=$ambassador['ambassador_fname'] . ' ' . $ambassador['ambassador_lname'] ?>
+                        <a href="#">remove</a>
+                    <?php else: ?>
+                        <i>none</i>
+                        <a href="#">set</a>
+                    <?php endif;?>
                 </span>
             </div>
         </div>
@@ -156,16 +128,3 @@
     </div>
 
 </div>
-
-    <footer>
-        <div id="footer">
-            <div class="footer-inner">
-
-                <p>Copyright ecompetencia &copy; 2019. Developed by IU-ACM.</p>
-
-            </div>
-        </div>
-    </footer>
-
-</body>
-</html>

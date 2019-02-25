@@ -129,9 +129,58 @@
         return false;
     }
 
+    function getUserById($id) {
+        global $db;
+        $q = "SELECT * FROM `users` WHERE `user_ID`=:userid";
+        $s = $db->prepare($q);
+        $s->execute(['userid'=>$id]);
+        if($s->rowCount() > 0){
+            return $s->fetch();
+        }
+        return false;
+    }
+
+    function getUserDetailsById($id) {
+        global $db;
+        $q = "SELECT * FROM `users` u INNER JOIN `institutes` i ON u.institute_ID = i.institute_ID WHERE `user_ID`=:userid";
+        $s = $db->prepare($q);
+        $s->execute(['userid'=>$id]);
+        if($s->rowCount() > 0){
+            return $s->fetch();
+        }
+        return false;
+    }
+
+    function getAmbassadorDetailsByID($id)
+    {
+        global $db;
+        $q = "SELECT * FROM `ambassador_applicant` WHERE `ambassador_ID`=:id";
+        $s = $db->prepare($q);
+        $s->execute(['id'=>$id]);
+        if($s->rowCount()>0){
+            return $s->fetch();
+        }
+        return false;
+    }
+
     function isUserDisabled($email) {
         $user = getUserByEmail($email);
         if($user['user_status'] == 'D'){
+            return true;
+        }
+        return false;
+    }
+
+    function isUserIdDisabled($id) {
+        $user = getUserById($id);
+        if($user['user_status'] == 'D'){
+            return true;
+        }
+        return false;
+    }
+    function isUserIdExists($id) {
+        $user = getUserById($id);
+        if(!empty($user) && count($user) > 0){
             return true;
         }
         return false;
