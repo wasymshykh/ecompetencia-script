@@ -201,5 +201,18 @@
         return false;
     }
 
+    // Get competitions [joins with category]
+    function getCompetitions()
+    {
+        global $db;
+
+        global $db;
+        $q = "SELECT * FROM `competitions` co INNER JOIN `categories` ca ON co.category_ID = ca.category_ID WHERE `competition_deleted`='F'";
+        $s = $db->prepare($q);
+        $s->execute();
+        return $s->fetchAll();
+    }
+
+
 
 ?>

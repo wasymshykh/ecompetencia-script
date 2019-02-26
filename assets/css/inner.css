@@ -210,6 +210,14 @@ body {
     position: relative;
     padding: 1em 1.2em 1em 0;
 }
+.form-row .form-row-box p {
+    font-size: 1em;
+    font-weight: 300;
+    color: #0b1921;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+}
 .form-row .form-row-box label::after {
     content: "";
     width: 50%;
