@@ -37,7 +37,7 @@
     function ambassadorEmailExists($email)
     {
         global $db;
-        $q = "SELECT `email` FROM `ambassador_applicant` WHERE `email`=:email";
+        $q = "SELECT `ambassador_email` FROM `ambassador_applicant` WHERE `ambassador_email`=:email";
         $s = $db->prepare($q);
         $s->execute(['email'=>$email]);
         if($s->rowCount() > 0){

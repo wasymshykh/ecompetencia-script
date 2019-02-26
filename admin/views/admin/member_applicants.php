@@ -25,7 +25,7 @@
                                     <tr>
                                         <td><?=$i?></td>
                                         <td><div style="width: 30px;height: 30px;overflow:hidden;border-radius:50%;">
-                                            <img src="http://ecompetencia19.com/inductions/applicants/member/<?=$applicant['avatar']?>" style="width: 100%;height:auto;display:block">
+                                            <img src="<?=URL;?>/inductions/applicants/member/<?=$applicant['avatar']?>" style="width: 100%;height:auto;display:block">
                                             </div>
                                         </td>
                                         <td><?=$applicant['fname']?> <?=$applicant['lname']?></td>

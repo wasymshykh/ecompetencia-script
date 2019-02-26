@@ -25,7 +25,7 @@
                 </div>
 
                 <div class="header-r">
-                    <a href="addparticipation.php" class="addp-btn"><i class="fas fa-plus"></i> Add Participation</a>
+                    <a href="participate.php" class="addp-btn"><i class="fas fa-plus"></i> Add Participation</a>
                     <a href="logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a>
                 </div>
 

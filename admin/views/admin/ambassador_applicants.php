@@ -25,15 +25,15 @@
                                     <tr>
                                         <td><?=$i?></td>
                                         <td><div style="width: 30px;height: 30px;overflow:hidden;border-radius:50%;">
-                                            <img src="<?=URL?>/inductions/applicants/ambassador/<?=$applicant['avatar']?>" style="width: 100%;height:auto;display:block">
+                                            <img src="<?=URL?>/inductions/applicants/ambassador/<?=$applicant['ambassador_avatar']?>" style="width: 100%;height:auto;display:block">
                                             </div>
                                         </td>
-                                        <td><?=$applicant['fname']?> <?=$applicant['lname']?></td>
-                                        <td><?=$applicant['email']?></td>
+                                        <td><?=$applicant['ambassador_fname']?> <?=$applicant['ambassador_lname']?></td>
+                                        <td><?=$applicant['ambassador_email']?></td>
                                         <td><?=getInstituteById($applicant['institute_ID'])['institute_name']?></td>
-                                        <td><?=$applicant['phoneno']?></td>
+                                        <td><?=$applicant['ambassador_phoneno']?></td>
                                         <td>
-                                            <a href="?view=<?=$applicant['id']?>" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></a>
+                                            <a href="?view=<?=$applicant['ambassador_ID']?>" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></a>
                                         </td>
                                     </tr>
                                     <?php $i++; endforeach; ?>

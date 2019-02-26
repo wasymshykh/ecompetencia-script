@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="<?=ADMIN_URL?>/assets/vendor/bootstrap/css/bootstrap.min.css">
     <!-- Font Awesome CSS-->
     <link rel="stylesheet" href="<?=ADMIN_URL?>/assets/vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="<?=URL?>/assets/fontawesome/css/all.min.css">
+
     <!-- Fontastic Custom icon font-->
     <link rel="stylesheet" href="<?=ADMIN_URL?>/assets/css/fontastic.css">
     <!-- Google fonts - Roboto -->
@@ -23,8 +25,13 @@
     <link rel="stylesheet" href="<?=ADMIN_URL?>/assets/css/style.sea.css" id="theme-stylesheet">
     <!-- Custom stylesheet - for your changes-->
     <link rel="stylesheet" href="<?=ADMIN_URL?>/assets/css/custom.css">
+    
+    <script src="<?=ADMIN_URL?>/assets/vendor/jquery/jquery.min.js"></script>
+    <script src="<?=ADMIN_URL?>/assets/vendor/popper.js/umd/popper.min.js"> </script>
+    <script src="<?=ADMIN_URL?>/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+
     <!-- Favicon-->
-    <link rel="shortcut icon" href="img/favicon.ico">
+    <link rel="shortcut icon" href="<?=URL?>/favicon.ico">
     <!-- Tweaks for older IEs--><!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
@@ -48,13 +55,24 @@
           <ul id="side-main-menu" class="side-menu list-unstyled">                  
             <li><a href="index.php"><i class="icon-home"></i>Home</a></li>
             <li><a href="settings.php"><i class="icon-flask"></i>Settings</a></li>
+            <li><a href="#compdropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i> Competitions</a>
+              <ul id="compdropdownDropdown" class="collapse list-unstyled ">
+                <li><a href="competition_categories.php"><i class="icon-form"></i> Categories</a></li>
+                <li><a href="competitions.php"><i class="icon-form"></i> Competitions</a></li>
+                <li><a href="competition_details.php"><i class="icon-form"></i> Details</a></li>
+              </ul>
+            </li>
           </ul>
         </div>
         <div class="admin-menu">
           <h5 class="sidenav-heading">Applicants</h5>
           <ul class="side-menu list-unstyled">
-            <li><a href="member_applicants.php"><i class="icon-form"></i> Team Member</a></li>
-            <li><a href="ambassador_applicants.php"><i class="icon-form"></i> Ambassadors</a></li>
+            <li><a href="#applicantsdropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i> Applicants List</a>
+              <ul id="applicantsdropdownDropdown" class="collapse list-unstyled ">
+                <li><a href="member_applicants.php"><i class="icon-form"></i> Team Member</a></li>
+                <li><a href="ambassador_applicants.php"><i class="icon-form"></i> Ambassadors</a></li>
+              </ul>
+            </li>
           </ul>
         </div>
       </div>

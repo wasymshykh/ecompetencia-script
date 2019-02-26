@@ -8,6 +8,10 @@
         return '';
     }
 
+    function fileNameCheck($filename) {
+        return ((preg_match("`^[-0-9A-Z_\.]+$`i",$filename)) ? true : false);
+    }
+
 
     // Returns true if passed id is admin
     function isAdmin($id) {
@@ -102,7 +106,7 @@
 
     
     // Get all ambassador applicants
-    function getAmbassadorApplicants($sortBy = 'id', $sortType = 'asc')
+    function getAmbassadorApplicants($sortBy = 'ambassador_ID', $sortType = 'asc')
     {
         global $db;
         $q = "SELECT * FROM `ambassador_applicant` ORDER BY $sortBy $sortType";
@@ -115,7 +119,7 @@
     function getAmbassadorApplicant($id)
     {
         global $db;
-        $q = "SELECT * FROM `ambassador_applicant` WHERE `id`=:id";
+        $q = "SELECT * FROM `ambassador_applicant` WHERE `ambassador_ID`=:id";
         $s = $db->prepare($q);
         $s->execute(['id'=>$id]);
         return $s->fetch();
@@ -125,7 +129,7 @@
     function isAmbassadorApplicant($id)
     {
         global $db;
-        $q = "SELECT * FROM `ambassador_applicant` WHERE `id`=:id";
+        $q = "SELECT * FROM `ambassador_applicant` WHERE `ambassador_ID`=:id";
         $s = $db->prepare($q);
         $s->execute(['id'=>$id]);
         if($s->rowCount() === 1){
@@ -166,6 +170,110 @@
         $r = $s->execute(['value'=>$value, 'name'=>$name]);
         
         return $r;
+    }
+
+    // Get all competition categories
+    function getCategories()
+    {
+        global $db;
+        $q = "SELECT * FROM `categories`";
+        $s = $db->prepare($q);
+        $s->execute();
+        return $s->fetchAll();
+    }
+
+    // Get category by category id
+    function getCategoryById($cat_id)
+    {
+        global $db;
+        $q = "SELECT * FROM `categories` WHERE `category_ID` = :catid";
+        $s = $db->prepare($q);
+        $s->execute(['catid'=>$cat_id]);
+        return $s->fetch();
+    }
+
+    function updateCategoryName($name, $cat_id)
+    {
+        global $db;
+        $q = "UPDATE `categories` SET `category_name`=:name WHERE `category_ID` = :catid";
+        $s = $db->prepare($q);
+        if($s->execute(['name'=>$name, 'catid'=>$cat_id])){
+            return true;
+        }
+        return false;
+    }
+
+    function updateCategoryImage($name, $cat_id)
+    {
+        global $db;
+        $q = "UPDATE `categories` SET `category_img`=:name WHERE `category_ID` = :catid";
+        $s = $db->prepare($q);
+        if($s->execute(['name'=>$name, 'catid'=>$cat_id])){
+            return true;
+        }
+        return false;
+    }
+
+    function updateCategoryDelete($cat_id)
+    {
+        global $db;
+        $q = "UPDATE `categories` SET `is_deleted`='Y' WHERE `category_ID` = :catid";
+        $s = $db->prepare($q);
+        if($s->execute(['catid'=>$cat_id])){
+            return true;
+        }
+        return false;
+    }
+
+    function getCompetitionsByCategoryId($cat_id)
+    {
+        global $db;
+        $q = "SELECT * FROM `competitions` WHERE `category_ID` = :catid";
+        $s = $db->prepare($q);
+        $s->execute(['catid'=>$cat_id]);
+        return $s->fetchAll();
+    }
+
+    // Get all competitions
+    function getCompetitions()
+    {
+        global $db;
+        $q = "SELECT * FROM `competitions` WHERE `competition_deleted`='F'";
+        $s = $db->prepare($q);
+        $s->execute();
+        return $s->fetchAll();
+    }
+    // Get all competitions
+    function getCompetitionById($comp_id)
+    {
+        global $db;
+        $q = "SELECT * FROM `competitions` WHERE `competition_ID` = :compid";
+        $s = $db->prepare($q);
+        $s->execute(['compid'=>$comp_id]);
+        return $s->fetch();
+    }
+
+    function updateCompetitionStatus($comp_id, $status)
+    {
+        global $db;
+        $q = "UPDATE `competitions` SET `competition_status`=:status WHERE `competition_ID` = :compid";
+        $s = $db->prepare($q);
+        if($s->execute(['status'=>$status, 'compid'=>$comp_id])){
+            return true;
+        }
+        return false;
+    }
+
+
+    function updateCompetitionDeleted($comp_id, $status)
+    {
+        global $db;
+        $q = "UPDATE `competitions` SET `competition_deleted`=:status WHERE `competition_ID` = :compid";
+        $s = $db->prepare($q);
+        if($s->execute(['status'=>$status, 'compid'=>$comp_id])){
+            return true;
+        }
+        return false;
     }
 
 
