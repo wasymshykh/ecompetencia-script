@@ -200,7 +200,8 @@ body {
     margin-left: 5em;
 }
 
-.form-row .form-row-box label {
+.form-row .form-row-box label,
+.d-confirm-discount .form-row-box label {
     display: table;
     color: rgba(18,37,47,0.7);
     font-size: 1.2em;
@@ -210,7 +211,8 @@ body {
     position: relative;
     padding: 1em 1.2em 1em 0;
 }
-.form-row .form-row-box p {
+.form-row .form-row-box p,
+.d-confirm-discount .form-row-box p {
     font-size: 1em;
     font-weight: 300;
     color: #0b1921;
@@ -218,7 +220,8 @@ body {
     letter-spacing: 1px;
     margin-bottom: 15px;
 }
-.form-row .form-row-box label::after {
+.form-row .form-row-box label::after,
+.d-confirm-discount .form-row-box label::after {
     content: "";
     width: 50%;
     height: 2px;
@@ -228,6 +231,7 @@ body {
     left: 100%;
 }
 
+.d-confirm-discount .form-row-box input[type="text"],
 .form-row .form-row-box input[type="text"],
 .form-row .form-row-box input[type="password"],
 .form-row .form-row-box input[type="email"],
@@ -244,6 +248,7 @@ body {
 }
 
 .form-row .form-row-box textarea:focus,
+.d-confirm-discount .form-row-box input[type="text"]:focus,
 .form-row .form-row-box input[type="text"]:focus,
 .form-row .form-row-box input[type="password"]:focus,
 .form-row .form-row-box input[type="email"]:focus {
@@ -263,7 +268,7 @@ body {
     bottom: 2em;
 }
 
-
+.d-confirm-discount .form-row-box input[type="text"]:focus ~ .activate,
 .form-row .form-row-box input[type="text"]:focus ~ .activate,
 .form-row .form-row-box input[type="password"]:focus ~ .activate,
 .form-row .form-row-box input[type="email"]:focus ~ .activate {

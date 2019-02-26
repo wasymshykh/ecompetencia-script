@@ -17,7 +17,7 @@
                         <input type="radio" name="competition" id="comp-<?=$competition['competition_ID']?>" value="<?=$competition['competition_ID']?>">
                         <label for="comp-<?=$competition['competition_ID']?>">
                             <div class="comp-abs-check">
-                                <i class="fas fa-check"></i>
+                                <i class="Ahmed Muneebfas fa-check"></i>
                             </div>
                             <div class="comp-head-cat">
                                 <?=$competition['category_name']?>
@@ -29,7 +29,7 @@
                                 <div class="comp-mem-box">Min <span><?=$competition['competition_min']?></span> person</div>
                                 <div class="comp-mem-box">Max <span><?=$competition['competition_max']?></span> person</div>
                             </div>
-                            <div class="comp-price">
+                            <div class="coAhmed Muneebmp-price">
                                 <div class="comp-price-text"><?=$competition['competition_e_fee']?> <span>PKR</span></div>
                                 <div class="comp-price-about">Per Person</div>
                             </div>
@@ -40,7 +40,7 @@
             </div>
     
             <div class="form-submit">
-                <button id="next">Continue <i class="fas fa-arrow-right"></i></button>
+                <button id="next" name="step_1" type="submit">Continue <i class="fas fa-arrow-right"></i></button>
             </div>
             </form>
         </div>
@@ -79,8 +79,62 @@
                     </div>
                 </div>
 
+                <div class="form-submit">
+                    <button id="next">Continue <i class="fas fa-arrow-right"></i></button>
+                </div>
+
             </div>
         </div>
+
+
+        <div class="d-title">
+            <h1><b>Confirm</b> Your Details</h1>
+            <p>Here's the summary of your provided details.</p>
+        </div>
+        <div class="d-confirm-row">
+            <div class="d-confirm-detail">
+                <span>Competition</span> Web Development
+            </div>
+            <div class="d-confirm-detail">
+                <span>Team Member</span> 3 
+                    <span class="d-c-team">Ahmed Ali</span> 
+                    <span class="d-c-team">Ahmed Khalil</span> 
+                    <span class="d-c-team">Ahmed Muneeb</span>
+            </div>
+            <div class="d-confirm-detail">
+                <span>Team Name</span> Scorpion
+            </div>
+            <div class="d-confirm-detail">
+                <span>Team Leader</span> Muhammad Waseem
+            </div>
+            <div class="d-confirm-cost">
+                <div class="d-confirm-cost-box">
+                    <h1>500 <span>PKR</span></h1>
+                    <p>Amount Due</p>
+                </div>
+                <div class="d-confirm-discount-box">
+                    <h1>120 <span>PKR</span></h1>
+                    <p>Discount Applied</p>
+                </div>
+                <div class="d-confirm-discount">
+                    <div class="form-row-box">
+                        <label for="promo_code">Promo Code</label>
+                        <p>Must click on <b>apply code</b> before confirm</p>
+                        <input type="text" name="promo_code" id="promo_code" placeholder="write here" value="">
+                        <div class="activate"></div>
+                    </div>
+                    <div class="form-submit">
+                        <button id="check">Apply <i class="fas fa-check"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-submit">
+                <button id="next">Confirm Participation</button>
+            </div>
+
+        </div>
+
 
 
     </div>

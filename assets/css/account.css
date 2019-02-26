@@ -523,3 +523,176 @@ h1,h2,h3,h4,h5,h6,p{
     position: relative;
     width: 100%;
 }
+
+.d-form-top {
+    width: 100%;
+    display: flex;
+    margin-bottom: 5em;
+}
+
+.d-form-t-box {
+    flex: 1;
+    color: #0b1921;
+    font-size: 1.6em;
+    font-weight: 900;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-align: center;
+    position: relative;
+}
+
+.d-form-t-box::before {
+    content: "";
+    width: 50px;
+    height: 3px;
+    background-color: #0080c4;
+    position: absolute;
+    bottom: -1em;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.d-form-t-box span {
+    display: block;
+    font-size: 0.8em;
+    font-weight: 400;
+}
+
+.d-confirm-row {
+    display: flex;
+    flex-direction: column;
+    margin: 3em 0;
+}
+
+.d-confirm-detail {
+    font-size: 1.6em;
+    color: #0b1921;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 1em 0 3em 0;
+    position: relative;
+}
+
+.d-confirm-detail::before {
+    content: "";
+    position: absolute;
+    bottom: -0.5em;
+    left: -10px;
+    width: 40%;
+    max-width: 100px;
+    height: 2px;
+    background-color: #0080c4
+}
+
+.d-confirm-detail span {
+    font-weight: 400;
+    display: inline-block;
+    min-width: 150px;;
+}
+
+.d-confirm-detail span.d-c-team {
+    display: inline-block;
+    background-color: #0b1921;
+    font-size: 0.8em;
+    letter-spacing: 3px;
+    color: #fff;
+    padding: 0.2em 1em;
+    font-weight: 300;
+    position: relative;
+    margin: 0 0.5em;
+}
+
+.d-confirm-detail span.d-c-team::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    background-color: #0080c4;
+    position: absolute;
+    top: 50%;
+    left: -4px;
+    transform: translateY(-50%);
+}
+
+.d-confirm-cost {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin: 5em 0 3em 0;
+}
+
+.d-confirm-cost-box,
+.d-confirm-discount-box {
+    flex: 1;
+    border: 1px solid #e0e0e0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.d-confirm-discount-box {
+    margin: 0 1em;
+}
+
+.d-confirm-cost-box h1,
+.d-confirm-discount-box h1 {
+    font-weight: 900;
+    font-size: 2em;
+    color: #f26322;
+    line-height: 1.2;
+}
+.d-confirm-discount-box h1 {
+    color: #85ab30;
+}
+.d-confirm-discount-box h1 span,
+.d-confirm-cost-box h1 span {
+    font-weight: 300;
+    color: #0b1921;
+}
+
+.d-confirm-cost-box p,
+.d-confirm-discount-box p {
+    font-size: 1.2em;
+    font-weight: 300;
+    color: #0b1921;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.d-confirm-discount {
+    flex: 2;
+    border-left: 3px solid #85ab30;
+    display: flex;
+    padding: 1em;
+}
+.d-confirm-discount .form-row-box {
+    position: relative;
+}
+
+.d-confirm-discount .form-submit {
+    align-self: flex-end;
+    margin-bottom: 0;
+}
+
+.d-confirm-discount .form-row-box label {
+    padding-top: 0;
+}
+
+.d-confirm-discount .form-submit button {
+    display: block;
+    border-radius: 2em;
+    font-size: 1.2em;
+    line-height: 1.5;
+    font-family: inherit;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #ffffff;
+    background: #85ab30;
+    border: none;
+    padding: 1.2em 2em;
+    cursor: pointer;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
