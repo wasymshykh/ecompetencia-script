@@ -404,8 +404,8 @@
         });
         
         $('.testimonial-boxes').slick({
-            autoplay: true,
-            autoplaySpeed: 2000
+            //autoplay: true,
+            //autoplaySpeed: 2000
         });
     
     </script>

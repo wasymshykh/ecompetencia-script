@@ -45,15 +45,14 @@
             <div class="navigation-r">
                 <div class="nav-ul">
                     <ul class="nav-l">
-                        <li class="hasDrops">
-                            <a href="<?=URL?>/#about-heading">About</a>
-                       
-                        </li>
+                        <li><a href="<?=URL?>/#about-heading">About</a></li>
                         <li><a href="<?=URL?>/inductions/team.php">Apply As Member</a></li>
                         <li><a href="<?=URL?>/inductions/ambassador.php">Apply As Ambassador</a></li>
                         <li class="hasDrops">
-                            <a id="r3">Competitions <i class="fas fa-caret-down"></i></a>
+                            <a>Competitions <i class="fas fa-caret-down"></i></a>
                             <ul>
+                                <li><a href="#">Web Development</a></li>
+                                <li><a href="#">Speed Programming</a></li>
                             </ul>
                         </li>
                         <li><a class="cont">Contact</a></li>
@@ -82,3 +81,23 @@
 
         </div>
     </div>
+
+    <script>
+        document.querySelectorAll('.hasDrops a').forEach(drop =>{
+            drop.addEventListener('click', (e)=>{
+                console.log(e);
+
+                if(!e.target.classList.contains('active')){
+                    e.target.classList.add('active');
+                    e.target.firstElementChild.classList.remove('fa-caret-down');
+                    e.target.firstElementChild.classList.add('fa-caret-up');
+                } else {
+                    e.target.classList.remove('active');
+                    e.target.firstElementChild.classList.remove('fa-caret-up');
+                    e.target.firstElementChild.classList.add('fa-caret-down');
+                }
+
+                e.target.nextElementSibling.classList.add('active');
+            })
+        })
+    </script>

@@ -54,7 +54,6 @@
           <h5 class="sidenav-heading">Main</h5>
           <ul id="side-main-menu" class="side-menu list-unstyled">                  
             <li><a href="index.php"><i class="icon-home"></i>Home</a></li>
-            <li><a href="settings.php"><i class="icon-flask"></i>Settings</a></li>
             <li><a href="#compdropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i> Competitions</a>
               <ul id="compdropdownDropdown" class="collapse list-unstyled ">
                 <li><a href="competition_categories.php"><i class="icon-form"></i> Categories</a></li>
@@ -71,6 +70,17 @@
               <ul id="applicantsdropdownDropdown" class="collapse list-unstyled ">
                 <li><a href="member_applicants.php"><i class="icon-form"></i> Team Member</a></li>
                 <li><a href="ambassador_applicants.php"><i class="icon-form"></i> Ambassadors</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div class="admin-menu">
+          <h5 class="sidenav-heading">Website</h5>
+          <ul class="side-menu list-unstyled">
+            <li><a href="#WebsitedropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i> Controls</a>
+              <ul id="WebsitedropdownDropdown" class="collapse list-unstyled ">
+                <li><a href="settings.php"><i class="icon-flask"></i>Settings</a></li>
+                <li><a href="logs.php"><i class="icon-form"></i> Web Logs</a></li>
               </ul>
             </li>
           </ul>
@@ -101,7 +111,7 @@
                 <!-- Log out-->
                 <li class="nav-item">
                   <a href="logout.php" class="nav-link logout">
-                    <span class="d-none d-sm-inline-block">Logout</span><i class="fa fa-sign-out"></i>
+                    <span class="d-none d-sm-inline-block">Logout</span><i class="fa fa-sign-out"  aria-hidden="true"></i>
                   </a>
                 </li>
               </ul>

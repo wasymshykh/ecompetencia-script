@@ -17,7 +17,6 @@
     <script src="<?=ADMIN_URL?>/assets/vendor/chart.js/Chart.min.js"></script>
     <script src="<?=ADMIN_URL?>/assets/vendor/jquery-validation/jquery.validate.min.js"></script>
     <script src="<?=ADMIN_URL?>/assets/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
-    <script src="<?=ADMIN_URL?>/assets/js/charts-home.js"></script>
     <!-- Main File-->
     <script src="<?=ADMIN_URL?>/assets/js/front.js"></script>
   </body>

@@ -130,6 +130,10 @@
     </div>
 
     <script>
+        document.querySelector('.nav-btn').addEventListener('click',(e)=>{
+            document.querySelector('.nav-ul').classList.add('n-active');
+        })
+
         /*document.querySelector('.nav-btn').addEventListener('click',(e)=>{
             document.querySelector('.nav-ul').classList.add('n-active')
             let eleam2 = document.querySelector('#modal2');
@@ -193,12 +197,12 @@
                 instance2.open();
             })
         })
-        document.querySelector('#r3').addEventListener('click',(e)=>{
-            document.querySelector('.#r1').classList.add('n-active')
-            let eleam2 = document.querySelector('#modal2');
-            var instance2 = M.Modal.getInstance(eleam2);
-            instance2.open();
-        })
+        // document.querySelector('#r3').addEventListener('click',(e)=>{
+        //     document.querySelector('.#r1').classList.add('n-active')
+        //     let eleam2 = document.querySelector('#modal2');
+        //     var instance2 = M.Modal.getInstance(eleam2);
+        //     instance2.open();
+        // })
 
         document.querySelectorAll('#r3').forEach(navul => {
             navul.addEventListener('click',(e)=>{

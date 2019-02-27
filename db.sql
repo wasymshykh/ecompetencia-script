@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Feb 27, 2019 at 10:34 AM
+-- Generation Time: Feb 28, 2019 at 02:41 AM
 -- Server version: 5.7.25-0ubuntu0.18.10.2
 -- PHP Version: 7.3.2-3+ubuntu18.10.1+deb.sury.org+1
 
@@ -19,6 +19,25 @@ SET time_zone = "+00:00";
 --
 -- Database: `studiioo_ecom`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ambassador_applicant`
+--
+
+CREATE TABLE `ambassador_applicant` (
+  `ambassador_ID` int(11) NOT NULL,
+  `ambassador_fname` varchar(255) NOT NULL,
+  `ambassador_lname` varchar(255) NOT NULL,
+  `ambassador_email` varchar(255) NOT NULL,
+  `ambassador_phoneno` varchar(255) NOT NULL,
+  `ambassador_experience` text NOT NULL,
+  `institute_ID` int(11) NOT NULL,
+  `ambassador_avatar` varchar(512) NOT NULL,
+  `ambassador_status` enum('A','R','S') NOT NULL DEFAULT 'S' COMMENT 'S - Submitted, A - Approved, R - Rejected',
+  `submission_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -94,31 +113,6 @@ CREATE TABLE `coupon_used` (
   `coupon_ID` int(11) NOT NULL,
   `transaction_ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `details`
---
-
-CREATE TABLE `details` (
-  `detail_ID` int(11) NOT NULL,
-  `competition_ID` int(11) DEFAULT NULL,
-  `detail_info` varchar(1000) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `fees`
---
-
-CREATE TABLE `fees` (
-  `fee_ID` int(11) NOT NULL,
-  `fee_external` varchar(100) DEFAULT NULL,
-  `fee_internal` varchar(100) DEFAULT NULL,
-  `competition_slogan` varchar(60) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -202,6 +196,18 @@ INSERT INTO `institutes` (`institute_ID`, `institute_name`, `institute_status`, 
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `loggers`
+--
+
+CREATE TABLE `loggers` (
+  `logger_id` int(11) NOT NULL,
+  `logger_text` text NOT NULL,
+  `logger_time` datetime DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `management`
 --
 
@@ -234,6 +240,28 @@ CREATE TABLE `members` (
   `member_name` varchar(255) NOT NULL,
   `participant_ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `member_applicant`
+--
+
+CREATE TABLE `member_applicant` (
+  `id` int(11) NOT NULL,
+  `fname` varchar(100) NOT NULL,
+  `lname` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `phoneno` varchar(100) NOT NULL,
+  `program` varchar(100) NOT NULL,
+  `semester` varchar(100) NOT NULL,
+  `regno` varchar(100) NOT NULL,
+  `skill` varchar(100) NOT NULL,
+  `experience` varchar(1300) NOT NULL,
+  `experienceyes` varchar(100) NOT NULL,
+  `submission_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `avatar` varchar(100) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -296,7 +324,8 @@ CREATE TABLE `transactions` (
   `transaction_discount` int(11) NOT NULL,
   `transaction_total` int(11) NOT NULL,
   `transaction_date` datetime DEFAULT CURRENT_TIMESTAMP,
-  `transaction_status` enum('P','U') DEFAULT 'U'
+  `transaction_status` enum('P','U') DEFAULT 'U',
+  `transaction_update` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
@@ -320,6 +349,13 @@ CREATE TABLE `users` (
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `ambassador_applicant`
+--
+ALTER TABLE `ambassador_applicant`
+  ADD PRIMARY KEY (`ambassador_ID`),
+  ADD KEY `institute_ID` (`institute_ID`);
 
 --
 -- Indexes for table `categories`
@@ -355,20 +391,8 @@ ALTER TABLE `coupons`
 --
 ALTER TABLE `coupon_used`
   ADD PRIMARY KEY (`used_ID`),
-  ADD KEY `coupon_ID` (`coupon_ID`);
-
---
--- Indexes for table `details`
---
-ALTER TABLE `details`
-  ADD PRIMARY KEY (`detail_ID`),
-  ADD KEY `competition_ID` (`competition_ID`);
-
---
--- Indexes for table `fees`
---
-ALTER TABLE `fees`
-  ADD PRIMARY KEY (`fee_ID`);
+  ADD KEY `coupon_ID` (`coupon_ID`),
+  ADD KEY `transaction_ID` (`transaction_ID`);
 
 --
 -- Indexes for table `institutes`
@@ -376,6 +400,12 @@ ALTER TABLE `fees`
 ALTER TABLE `institutes`
   ADD PRIMARY KEY (`institute_ID`),
   ADD UNIQUE KEY `institute_name` (`institute_name`);
+
+--
+-- Indexes for table `loggers`
+--
+ALTER TABLE `loggers`
+  ADD PRIMARY KEY (`logger_id`);
 
 --
 -- Indexes for table `management`
@@ -389,6 +419,12 @@ ALTER TABLE `management`
 ALTER TABLE `members`
   ADD PRIMARY KEY (`member_ID`),
   ADD KEY `participant_ID` (`participant_ID`);
+
+--
+-- Indexes for table `member_applicant`
+--
+ALTER TABLE `member_applicant`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `participants`
@@ -433,6 +469,11 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `ambassador_applicant`
+--
+ALTER TABLE `ambassador_applicant`
+  MODIFY `ambassador_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+--
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
@@ -458,20 +499,15 @@ ALTER TABLE `coupons`
 ALTER TABLE `coupon_used`
   MODIFY `used_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
--- AUTO_INCREMENT for table `details`
---
-ALTER TABLE `details`
-  MODIFY `detail_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT for table `fees`
---
-ALTER TABLE `fees`
-  MODIFY `fee_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
---
 -- AUTO_INCREMENT for table `institutes`
 --
 ALTER TABLE `institutes`
   MODIFY `institute_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+--
+-- AUTO_INCREMENT for table `loggers`
+--
+ALTER TABLE `loggers`
+  MODIFY `logger_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `management`
 --
@@ -481,12 +517,17 @@ ALTER TABLE `management`
 -- AUTO_INCREMENT for table `members`
 --
 ALTER TABLE `members`
-  MODIFY `member_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `member_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+--
+-- AUTO_INCREMENT for table `member_applicant`
+--
+ALTER TABLE `member_applicant`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=160;
 --
 -- AUTO_INCREMENT for table `participants`
 --
 ALTER TABLE `participants`
-  MODIFY `participant_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `participant_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `reset_requests`
 --
@@ -496,7 +537,7 @@ ALTER TABLE `reset_requests`
 -- AUTO_INCREMENT for table `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `transaction_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `transaction_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `users`
 --
@@ -505,6 +546,12 @@ ALTER TABLE `users`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `ambassador_applicant`
+--
+ALTER TABLE `ambassador_applicant`
+  ADD CONSTRAINT `ambassador_applicant_ibfk_1` FOREIGN KEY (`institute_ID`) REFERENCES `institutes` (`institute_ID`);
 
 --
 -- Constraints for table `competitions`
@@ -522,7 +569,8 @@ ALTER TABLE `competition_details`
 -- Constraints for table `coupon_used`
 --
 ALTER TABLE `coupon_used`
-  ADD CONSTRAINT `coupon_used_ibfk_1` FOREIGN KEY (`coupon_ID`) REFERENCES `coupons` (`coupon_ID`);
+  ADD CONSTRAINT `coupon_used_ibfk_1` FOREIGN KEY (`coupon_ID`) REFERENCES `coupons` (`coupon_ID`),
+  ADD CONSTRAINT `coupon_used_ibfk_2` FOREIGN KEY (`transaction_ID`) REFERENCES `transactions` (`transaction_ID`);
 
 --
 -- Constraints for table `members`

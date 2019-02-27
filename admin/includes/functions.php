@@ -276,5 +276,14 @@
         return false;
     }
 
+    function getAllLogs()
+    {
+        global $db;
+        $q = "SELECT * FROM `loggers`";
+        $s = $db->prepare($q);
+        $s->execute();
+        return $s->fetchAll();
+    }
+
 
 ?>
