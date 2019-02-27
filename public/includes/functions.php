@@ -235,4 +235,34 @@
     }
 
 
+    // Get participation details 
+    function getUserParticipation($user_id)
+    {
+        global $db;
+        $q = "SELECT * FROM `participants` p 
+            INNER JOIN `transactions` t ON p.participant_ID = t.participant_ID 
+            INNER JOIN `competitions` c ON p.competition_ID = c.competition_ID
+            WHERE `user_ID` = :userid";
+        $s = $db->prepare($q);
+        $s->execute(['userid'=>$user_id]);
+
+
+        echo '<pre>';
+        var_dump($s->fetchAll());
+        echo '</pre>';
+        return ;
+    }
+
+    // Get fellow members of participant
+    function getMembersOfParticipant($part_id)
+    {
+        global $db;
+        $q = "SELECT * FROM `members` WHERE `user_ID` = :partid";
+        $s = $db->prepare($q);
+        $s->execute(['partid'=>$part_id]);
+        
+        return $s->fetchAll();
+    }
+
+
 ?>

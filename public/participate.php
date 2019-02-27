@@ -135,17 +135,78 @@
         if(empty($error)){
 
             // values to insert
-            
+            $team_name = $_SESSION['process_team_name'];
+            $comp_id = $competition_details['competition_ID'];
+            $user_id = $user['user_ID'];
+            $amount = $_SESSION['process_competition_fee'];
+            $discount = 0;
+            $total = $_SESSION['process_competition_fee'];
 
-            // insert -step1 into participants table [participant_team, user_ID, competition_ID, participant_time]
-            // insert -step2 into members [member_name, participant_ID]
-            
-            // check for promo code [if]
-                // insert - coupon_used [coupon_ID, transaction_ID]
+            $hasmembers = isset($_SESSION['process_team_members'])?true:false;
+            if($hasmembers){
+                $members = $_SESSION['process_team_member_names'];
+                $amount += $amount * count($_SESSION['process_team_member_names']);
+                $total += $total * count($_SESSION['process_team_member_names']);
+            }
+
+            try {
+                $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                $db->beginTransaction();
+
+                // insert -step1 into participants table [participant_team, user_ID, competition_ID, participant_time]
+                $participationQuery = "INSERT INTO `participants` (`participant_team`, `user_ID`, `competition_ID`) 
+                VALUE ('$team_name', '$user_id', '$comp_id')";
+                $db->exec($participationQuery);
+                // [TODO] get participant inserted id;
+                $part_ID = $db->lastInsertId();
+
+
+                // insert -step2 into members [member_name, participant_ID]
+                if($hasmembers){
+                    foreach ($members as $member) {
+                        $membersQuery = "INSERT INTO `members`(`member_name`, `participant_ID`) VALUE ('$member', '$part_ID')";
+                        $db->exec($membersQuery);
+                    }
+                }
+
                 // calculate discount
+                if($coupon_used) {
+                    if($promo['coupon_type'] == 'P'){
+                        $discount = $amount * ($promo['coupon_discount']/100);
+                        $total = $amount - $discount;
+                    } else {
+                        $discount = $promo['coupon_discount'];
+                        $total = $amount - $discount;
+                    }
+                }
 
-            // insert -step3 into transactions [participant_ID,transaction_amount,transaction_discount,transaction_total,transaction_date]
-            
+                // insert -step3 into transactions [participant_ID,transaction_amount,transaction_discount,transaction_total]
+                $transactionQuery = "INSERT INTO `transactions`(`participant_ID`, `transaction_amount`, `transaction_discount`, `transaction_total`) VALUE
+                ('$part_ID', '$amount', '$discount', '$total')";
+                $db->exec($transactionQuery);
+                // [TODO] get transaction inserted id;
+                $trans_ID = $db->lastInsertId();
+                
+                // check for promo code [if]
+                    // insert - coupon_used [coupon_ID, transaction_ID]
+                    if($coupon_used){
+                        $discountQuery = "INSERT INTO `coupon_used` (`coupon_ID`, `transaction_ID`) VALUE ('".$promo['coupon_ID']."', '$trans_ID')";
+                        $db->exec($discountQuery);
+                    }
+
+                $db->commit();
+                $step_1 = false;
+                $step_2 = false;
+                $step_3 = false;
+                $step_4 = true;
+
+            } catch(Exception $e){
+                $error = "Sorry, we couldn't complete your request. Try again.";
+                $step_1 = false;
+                $step_2 = false;
+                $step_3 = true;
+            }
+
             
         } else {
             $step_1 = false;

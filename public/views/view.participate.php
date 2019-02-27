@@ -124,16 +124,28 @@
             <h1><b>Confirm</b> Your Details</h1>
             <p>Here's the summary of your provided details.</p>
         </div>
+
+        <?php if(!empty($error)):?>
+            <div class="form-error" style="margin-top: 2em;">
+                <div class="form-error-text">
+                    <h3>Error!</h3>
+                    <p><?=$error;?></p>
+                </div>
+            </div>
+        <?php endif; ?>
+        <form action="" method="POST">
         <div class="d-confirm-row">
             <div class="d-confirm-detail">
                 <span>Competition</span> <?=$_SESSION['process_competition_name']?>
             </div>
+            <?php if(isset($_SESSION['process_team_members'])): ?>
             <div class="d-confirm-detail">
                 <span>Team Member</span> <?=$_SESSION['process_team_members']?>
                     <?php foreach($_SESSION['process_team_member_names'] as $member_name): ?>
                     <span class="d-c-team"><?=$member_name?></span>
                     <?php endforeach;?>
             </div>
+            <?php endif; ?>
             <div class="d-confirm-detail">
                 <span>Team Name</span> <?=$_SESSION['process_team_name']?>
             </div>
@@ -164,10 +176,11 @@
             </div>
 
             <div class="form-submit">
-                <button id="next">Confirm Participation</button>
+                <button id="next" type="submit" name="step_3">Confirm Participation</button>
             </div>
 
         </div>
+        </form>
         <?php endif; ?>
 
 
@@ -179,44 +192,7 @@
 
 <script>
 
-    totalAmount = <?=$_SESSION['process_total_amount']?>;
 
-    document.querySelector("#check").addEventListener('click',(e)=>{
-        e.preventDefault();
-
-        promocode = (document.querySelector('#promo_code').value).trim();
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                const res = JSON.parse(this.responseText);
-                if(res.success != undefined && res.success === true){
-                    console.log(res);
-                    if(res.type == 'P'){
-                        amm = totalAmount * (Number(res.discount)/100);
-                    } else {
-                        amm = totalAmount - Number(res.discount);
-                    }
-                    document.querySelector('#totalamm').innerText = totalAmount - amm;
-                    document.querySelector('#totaldiscount').innerText = amm;
-
-                    document.querySelector('.form-msg-box').innerText = 'Discount of '+amm+'PKR is applied.';
-                    document.querySelector('.form-msg-box').classList.add('success-msg');
-                } else {
-                    document.querySelector('.form-msg-box').innerText = res.error;
-                    document.querySelector('.form-msg-box').classList.add('error-msg');
-                }
-            }
-        };
-        xhttp.open("GET", "<?=URL?>/public/requests/promocode.php?promo="+promocode, true);
-        xhttp.send(); 
-
-        
-        
-        
-
-    })
-
-    
     // Select option styles
 
     document.querySelectorAll('select').forEach(select =>{
@@ -332,5 +308,44 @@
             sl.nextElementSibling.firstElementChild.firstElementChild.textContent = sl.selectedOptions[0].textContent;
         })
     })
+
+
+
+    totalAmount = <?=$_SESSION['process_total_amount']?>;
+
+    document.querySelector("#check").addEventListener('click',(e)=>{
+        e.preventDefault();
+
+        promocode = (document.querySelector('#promo_code').value).trim();
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                const res = JSON.parse(this.responseText);
+                if(res.success != undefined && res.success === true){
+                    console.log(res);
+                    if(res.type == 'P'){
+                        amm = totalAmount * (Number(res.discount)/100);
+                    } else {
+                        amm = totalAmount - Number(res.discount);
+                    }
+                    document.querySelector('#totalamm').innerText = totalAmount - amm;
+                    document.querySelector('#totaldiscount').innerText = amm;
+
+                    document.querySelector('.form-msg-box').innerText = 'Discount of '+amm+'PKR is applied.';
+                    document.querySelector('.form-msg-box').classList.remove('error-msg');
+                    document.querySelector('.form-msg-box').classList.add('success-msg');
+                } else {
+                    document.querySelector('#totalamm').innerText = totalAmount;
+                    document.querySelector('#totaldiscount').innerText = 0;
+
+                    document.querySelector('.form-msg-box').innerText = res.error;
+                    document.querySelector('.form-msg-box').classList.remove('success-msg');
+                    document.querySelector('.form-msg-box').classList.add('error-msg');
+                }
+            }
+        };
+        xhttp.open("GET", "<?=URL?>/public/requests/promocode.php?promo="+promocode, true);
+        xhttp.send(); 
+    });
 
 </script>
