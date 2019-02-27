@@ -2,6 +2,7 @@
 
     <div class="d-row">
 
+    <?php if(isset($step_1) && $step_1): ?>
         <div class="d-title">
             <h1>Select <b>Competition</b></h1>
             <p>You are about to start participation process.</p>
@@ -9,6 +10,14 @@
 
         <div class="d-form">
             <form action="" method="POST">
+            <?php if(!empty($error)):?>
+            <div class="form-error" style="margin-top: 2em;">
+                <div class="form-error-text">
+                    <h3>Error!</h3>
+                    <p><?=$error;?></p>
+                </div>
+            </div>
+            <?php endif; ?>
             <div class="form-row-checks">
                 <div class="form-row-checks-all">
                     <?php foreach($competitions as $competition):
@@ -44,18 +53,28 @@
             </div>
             </form>
         </div>
+        <?php endif; ?>
 
+        <?php if(isset($step_2) && $step_2): ?>
         <div class="d-form">
             <div class="d-form-top">
                 <div class="d-form-t-box">
-                    <span>Selected Competition</span> Speed Programming
+                    <span>Selected Competition</span> <?=$_SESSION['process_competition_name']?>
                 </div>
                 <div class="d-form-t-box">
-                    <span>Team Leader</span> Muhammad Waseem
+                    <span>Team Leader</span> <?=$user['user_fname'].' '.$user['user_lname']?>
                 </div>
             </div>
+            <?php if(!empty($error)):?>
+            <div class="form-error" style="margin-top: 2em;">
+                <div class="form-error-text">
+                    <h3>Error!</h3>
+                    <p><?=$error;?></p>
+                </div>
+            </div>
+            <?php endif; ?>
             <div class="d-form-body">
-                
+                <form action="" method="POST">
                 <div class="form-row">
                     <div class="form-row-box">
                         <label for="team_name">Team Name</label>
@@ -70,50 +89,64 @@
                         <p>Make sure to select number of members in defined limits.</p>
                         <select name="persons" id="persons">
                             <option value="">Number of Persons</option>
-                            <?php for($i = 1; $i < 6; $i++): ?>
-                                <option value="<?=$i?>"><?=$i?></option>
-                            <?php endfor; ?>
+                            <?php if($_SESSION['process_competition_min'] === $_SESSION['process_competition_max']): ?>
+                                <option value="<?=$_SESSION['process_competition_min'] - 1?>" <?=(isset($persons) && ($_SESSION['process_competition_min']-1)==$persons)?'selected=true':'';?>><?=$_SESSION['process_competition_min'] - 1;?></option>
+                            <?php else: ?>
+                                <?php for($i = $_SESSION['process_competition_min']-1; $i < $_SESSION['process_competition_max']; $i++): ?>
+                                    <option value="<?=$i?>" <?=(isset($persons) && $i==$persons)?'selected=true':'';?>><?=$i?></option>
+                                <?php endfor; ?>
+                            <?php endif; ?>
                         </select>
                     </div>
                     <div class="form-row-box" id="memberFields">
+                        <?php if(isset($persons) && $persons > 0):?>
+                            <?php for($i = 1; $i <= $persons; $i++):?>
+                            <div class="alotFields">
+                                <label for="member-<?=$i?>">Member <?=$i?></label>
+                                <input name="member[]" type="text" placeholder="e.g. Ahmed" id="member-<?=$i?>" value="<?=isset($members[$i-1])?$members[$i-1]:''?>">
+                                <div class="activate"></div>
+                            </div>
+                            <?php endfor;?>
+                        <?php endif; ?>
                     </div>
                 </div>
 
                 <div class="form-submit">
-                    <button id="next">Continue <i class="fas fa-arrow-right"></i></button>
+                    <button id="next" type="submit" name="step_2">Continue <i class="fas fa-arrow-right"></i></button>
                 </div>
-
+                </form>
             </div>
         </div>
+        <?php endif; ?>
 
-
+        <?php if(isset($step_3) && $step_3): ?>
         <div class="d-title">
             <h1><b>Confirm</b> Your Details</h1>
             <p>Here's the summary of your provided details.</p>
         </div>
         <div class="d-confirm-row">
             <div class="d-confirm-detail">
-                <span>Competition</span> Web Development
+                <span>Competition</span> <?=$_SESSION['process_competition_name']?>
             </div>
             <div class="d-confirm-detail">
-                <span>Team Member</span> 3 
-                    <span class="d-c-team">Ahmed Ali</span> 
-                    <span class="d-c-team">Ahmed Khalil</span> 
-                    <span class="d-c-team">Ahmed Muneeb</span>
+                <span>Team Member</span> <?=$_SESSION['process_team_members']?>
+                    <?php foreach($_SESSION['process_team_member_names'] as $member_name): ?>
+                    <span class="d-c-team"><?=$member_name?></span>
+                    <?php endforeach;?>
             </div>
             <div class="d-confirm-detail">
-                <span>Team Name</span> Scorpion
+                <span>Team Name</span> <?=$_SESSION['process_team_name']?>
             </div>
             <div class="d-confirm-detail">
-                <span>Team Leader</span> Muhammad Waseem
+                <span>Team Leader</span> <?=$user['user_fname'].' '.$user['user_lname']?>
             </div>
             <div class="d-confirm-cost">
                 <div class="d-confirm-cost-box">
-                    <h1>500 <span>PKR</span></h1>
+                    <h1><span id="totalamm"><?=$_SESSION['process_total_amount']?></span> PKR</h1>
                     <p>Amount Due</p>
                 </div>
                 <div class="d-confirm-discount-box">
-                    <h1>120 <span>PKR</span></h1>
+                    <h1><span id="totaldiscount"><?=isset($_SESSION['process_discount'])?$_SESSION['process_discount']:'0';?></span> PKR</h1>
                     <p>Discount Applied</p>
                 </div>
                 <div class="d-confirm-discount">
@@ -126,6 +159,7 @@
                     <div class="form-submit">
                         <button id="check">Apply <i class="fas fa-check"></i></button>
                     </div>
+                    <div class="form-msg-box"></div>
                 </div>
             </div>
 
@@ -134,6 +168,7 @@
             </div>
 
         </div>
+        <?php endif; ?>
 
 
 
@@ -144,8 +179,42 @@
 
 <script>
 
+    totalAmount = <?=$_SESSION['process_total_amount']?>;
 
+    document.querySelector("#check").addEventListener('click',(e)=>{
+        e.preventDefault();
 
+        promocode = (document.querySelector('#promo_code').value).trim();
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                const res = JSON.parse(this.responseText);
+                if(res.success != undefined && res.success === true){
+                    console.log(res);
+                    if(res.type == 'P'){
+                        amm = totalAmount * (Number(res.discount)/100);
+                    } else {
+                        amm = totalAmount - Number(res.discount);
+                    }
+                    document.querySelector('#totalamm').innerText = totalAmount - amm;
+                    document.querySelector('#totaldiscount').innerText = amm;
+
+                    document.querySelector('.form-msg-box').innerText = 'Discount of '+amm+'PKR is applied.';
+                    document.querySelector('.form-msg-box').classList.add('success-msg');
+                } else {
+                    document.querySelector('.form-msg-box').innerText = res.error;
+                    document.querySelector('.form-msg-box').classList.add('error-msg');
+                }
+            }
+        };
+        xhttp.open("GET", "<?=URL?>/public/requests/promocode.php?promo="+promocode, true);
+        xhttp.send(); 
+
+        
+        
+        
+
+    })
 
     
     // Select option styles

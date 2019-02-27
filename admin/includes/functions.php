@@ -243,7 +243,7 @@
         $s->execute();
         return $s->fetchAll();
     }
-    // Get all competitions
+    // Get competition by id
     function getCompetitionById($comp_id)
     {
         global $db;

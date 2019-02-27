@@ -214,5 +214,25 @@
     }
 
 
+    // Get competition by id
+    function getCompetitionById($comp_id)
+    {
+        global $db;
+        $q = "SELECT * FROM `competitions` WHERE `competition_ID` = :compid";
+        $s = $db->prepare($q);
+        $s->execute(['compid'=>$comp_id]);
+        return $s->fetch();
+    }
+
+    // Get coupon details
+    function getPromoByName($promo)
+    {
+        global $db;
+        $q = "SELECT * FROM `coupons` WHERE `coupon_name` = :coupid";
+        $s = $db->prepare($q);
+        $s->execute(['coupid'=>$promo]);
+        return $s->fetch();
+    }
+
 
 ?>

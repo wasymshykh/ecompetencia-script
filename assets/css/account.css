@@ -637,18 +637,20 @@ h1,h2,h3,h4,h5,h6,p{
 
 .d-confirm-cost-box h1,
 .d-confirm-discount-box h1 {
-    font-weight: 900;
+    font-weight: 300;
+    color: #0b1921;
     font-size: 2em;
-    color: #f26322;
     line-height: 1.2;
 }
-.d-confirm-discount-box h1 {
+.d-confirm-discount-box h1 span {
     color: #85ab30;
+}
+.d-confirm-cost-box h1 span {
+    color: #f26322;
 }
 .d-confirm-discount-box h1 span,
 .d-confirm-cost-box h1 span {
-    font-weight: 300;
-    color: #0b1921;
+    font-weight: 900;
 }
 
 .d-confirm-cost-box p,
@@ -664,6 +666,7 @@ h1,h2,h3,h4,h5,h6,p{
     flex: 2;
     border-left: 3px solid #85ab30;
     display: flex;
+    flex-wrap: wrap;
     padding: 1em;
 }
 .d-confirm-discount .form-row-box {
@@ -695,4 +698,23 @@ h1,h2,h3,h4,h5,h6,p{
     cursor: pointer;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
+}
+
+.form-msg-box {
+    width: 100%;
+    padding: 0.6em 1em;
+    font-size: 1em;
+    display: none;
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.form-msg-box.error-msg {
+    display: block;
+    color: red;
+}
+.form-msg-box.success-msg {
+    display: block;
+    font-weight: 700;
+    color: #85ab30;
 }
