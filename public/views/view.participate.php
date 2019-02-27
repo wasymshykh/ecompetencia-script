@@ -26,7 +26,7 @@
                         <input type="radio" name="competition" id="comp-<?=$competition['competition_ID']?>" value="<?=$competition['competition_ID']?>">
                         <label for="comp-<?=$competition['competition_ID']?>">
                             <div class="comp-abs-check">
-                                <i class="Ahmed Muneebfas fa-check"></i>
+                                <i class="fas fa-check"></i>
                             </div>
                             <div class="comp-head-cat">
                                 <?=$competition['category_name']?>
@@ -311,6 +311,7 @@
 
 
 
+    <?php if(isset($step_3) && $step_3): ?>
     totalAmount = <?=$_SESSION['process_total_amount']?>;
 
     document.querySelector("#check").addEventListener('click',(e)=>{
@@ -347,5 +348,6 @@
         xhttp.open("GET", "<?=URL?>/public/requests/promocode.php?promo="+promocode, true);
         xhttp.send(); 
     });
+<?php endif; ?>
 
 </script>

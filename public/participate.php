@@ -17,6 +17,14 @@
             if(!$competition_details || count($competition_details) < 1){
                 $error = "Invalid competition selected!";
             }
+
+            if(empty($error) && !isUserEligibleParticipation($user['user_ID'], $competition_details['competition_ID'])){
+               // $error = "Sorry, you have already participated in the selected competition!";
+            }
+
+            if(empty($error) && !isLimitExceeded($competition_details['competition_ID'], $competition_details['competition_limit'])){
+                $error = "Sorry, competition available limit is exceeded!";
+            }
     
             if(empty($error)){
                 $_SESSION['process_step'] = 2; // must go to second step
@@ -195,10 +203,11 @@
                     }
 
                 $db->commit();
-                $step_1 = false;
-                $step_2 = false;
-                $step_3 = false;
-                $step_4 = true;
+                
+                logger("User ID: ".$user['user_ID']." [".$user['user_fname']." ".$user['user_lname']."] registered for 
+                    Competition ID: ".$comp_id." [".$competition_details['competition_name']."]");
+
+                header('location: '.URL.'/public/account.php?success=participation');
 
             } catch(Exception $e){
                 $error = "Sorry, we couldn't complete your request. Try again.";

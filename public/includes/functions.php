@@ -20,6 +20,18 @@
         return false;
     }
 
+    // Records logger's provided text
+    function logger($text)
+    {
+        global $db;
+        $q = "INSERT INTO `loggers` (`logger_text`) VALUE (:ltext)";
+        $s = $db->prepare($q);
+        if($s->execute(['ltext'=>$text])){
+            return true;
+        }
+        return false;
+    }
+
 
     function updateUserPassword($email, $password, $code) {
         global $db;
@@ -234,6 +246,48 @@
         return $s->fetch();
     }
 
+    // Returns false if user hasn't participated in given competition
+    function isUserEligibleParticipation($user_id, $comp_id)
+    {
+        global $db;
+        $q = "SELECT * FROM `participants` WHERE `competition_ID` = :compid AND `user_ID` = :userid";
+        $s = $db->prepare($q);
+        $s->execute(['compid'=>$comp_id, 'userid'=>$user_id]);
+        
+        if($s->rowCount() > 0){
+            return false;
+        }
+
+        return true;
+    }
+
+    // Return false if limit is > than paid transaction in certain comp
+    function isLimitExceeded($comp_id, $limit)
+    {
+        global $db;
+        $q = "SELECT * FROM `participants` p INNER JOIN `transactions` t ON t.participant_ID = p.participant_ID
+        WHERE p.competition_ID = :compid AND t.transaction_status = 'P'";
+        $s = $db->prepare($q);
+        $s->execute(['compid'=>$comp_id]);
+        $participations = $s->fetchAll();
+
+        $totalmembers = 0;
+
+        foreach($participations as $participation){
+            $totalmembers++;
+
+            $q = "SELECT * FROM `members` WHERE `participant_ID`=:pid";
+            $s = $db->prepare($q);
+            $s->execute(['pid'=>$participation['participant_ID']]);
+            $totalmembers = $totalmembers + $s->rowCount();
+        }
+
+        if($totalmembers < $limit) {
+            return true;
+        }
+
+        return false;
+    }
 
     // Get participation details 
     function getUserParticipation($user_id)
@@ -246,22 +300,56 @@
         $s = $db->prepare($q);
         $s->execute(['userid'=>$user_id]);
 
-
-        echo '<pre>';
-        var_dump($s->fetchAll());
-        echo '</pre>';
-        return ;
+        return $s->fetchAll();
     }
 
     // Get fellow members of participant
     function getMembersOfParticipant($part_id)
     {
         global $db;
-        $q = "SELECT * FROM `members` WHERE `user_ID` = :partid";
+        $q = "SELECT * FROM `members` WHERE `participant_ID` = :partid";
         $s = $db->prepare($q);
         $s->execute(['partid'=>$part_id]);
         
         return $s->fetchAll();
+    }
+
+    // Remove ambassador ID of participant
+    function setUserAmbassador($user_id, $value)
+    {
+        global $db;
+        $q = "UPDATE `users` SET `ambassador_ID`=:ambassador WHERE `user_ID`=:userid";
+        $s = $db->prepare($q);
+
+        if($s->execute(['ambassador'=>$value, 'userid'=>$user_id])){
+            return true;
+        }
+        return false;
+    }
+
+    // Get all ambassadors of institute 
+    function getInstituteAmbassadors($ins_id)
+    {
+        global $db;
+        $q = "SELECT * FROM `ambassador_applicant` WHERE `institute_ID` = :insid";
+        $s = $db->prepare($q);
+        $s->execute(['insid'=>$ins_id]);
+        
+        return $s->fetchAll();
+    }
+
+    // Verify ambassador exists 
+    function verifyAmbassador($am_id)
+    {
+        global $db;
+        $q = "SELECT * FROM `ambassador_applicant` WHERE `ambassador_ID` = :amid";
+        $s = $db->prepare($q);
+        $s->execute(['amid'=>$am_id]);
+        
+        if($s->rowCount() > 0){
+            return true;
+        }
+        return false;
     }
 
 
