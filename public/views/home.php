@@ -93,7 +93,7 @@
                     <h3>Ecompetencia</h3>
                 </div>
                 <div class="heading-button">
-                    <a id="galleryy">View Gallery</a>
+                    <a class="galopen">View Gallery</a>
                 </div>
             </div>
             <div  class="about-content">
@@ -199,7 +199,7 @@
 
             <div class="competition-boxes-bottom">
                 <div class="bm-button">
-                    <a href="#">
+                    <a href="<?=URL?>/register.php">
                         <span class="btn-text">get your team registered</span> 
                         <span class="btn-icon"><i class="fas fa-arrow-right"></i></span>
                     </a>
@@ -295,7 +295,7 @@
                     <h3>last year</h3>
                 </div>
                 <div class="heading-button">
-                    <a id="gal">View Gallery</a>
+                    <a class="galopen">View Gallery</a>
                 </div>
             </div>
 
@@ -364,7 +364,59 @@
 	<script src="<?=URL?>/assets/js/countdown.js"></script>
 
 
+    <div id="modal4" class="modal">
+        <div class="modal-content">
+            <h5 style="font-weight:900;letter-spacing:2px;color:#0b1921;font-size: 3em;text-transform:uppercase;"><span style="font-weight:300;">Gallery</span> Pictures</h5>
+            <a class="modal-close waves-effect waves-blue btn-flat blue lighten-3" style="float:right;">Close</a>
+            <div class="row mt2">
+                <div class="col s6 m6">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="http://ecompetencia19.com/assets/img/g-img-1.jpg">
+                    </div>
+                </div>
+                </div>
+                    <div class="col s6 m6">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="http://ecompetencia19.com/assets/img/g-img-3.jpg">
+                    </div>
+                </div>
+                </div>
+                <div class="col s6 m6">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="http://ecompetencia19.com/assets/img/g-img-4.jpg">
+                    </div>
+                </div>
+                </div>
+                    <div class="col s6 m6">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="http://ecompetencia19.com/assets/img/g-img-5.jpg">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a class="modal-close waves-effect waves-blue btn-flat blue lighten-3">Close</a>
+        </div>
+    </div>
+
     <script>
+
+        document.querySelectorAll('.galopen').forEach(gal=>{
+            gal.addEventListener('click',(e)=>{
+                let eleam2 = document.querySelector('#modal4');
+                var instance2 = M.Modal.getInstance(eleam2);
+                instance2.open();
+            })
+        })
+
+        document.querySelector('.bottom-scroll').addEventListener('click', ()=>{
+            aboutScroll();
+        });
 
         $('.bm-count-boxes').downCount({
             date: '04/16/2019'

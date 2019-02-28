@@ -98,64 +98,70 @@
             <p>Your participation details in the competitions</p>
         </div>
 
-<?php foreach($participations as $participation): 
-    // calculating members
-    $members = getMembersOfParticipant($participation['participant_ID']);
-?>
-        <div class="d-competition">
-            <div class="comp-box-name">
-                <div class="d-c-icon">
-                    <i class="fas fa-project-diagram"></i>
-                </div>
-                <div class="d-c-data">
-                    <p>Competition</p>
-                    <h1><?=$participation['competition_name']?></h1>
-                </div>
+        <?php if(count($participations) < 1): ?>
+            <div class="d-msg-progress">
+                <p>You haven't participated in any event yet. <a href="participate.php">Participate Now</a></p>
             </div>
-            <div class="d-comp-box">
-                <div class="d-comp-b-content">
+        <?php else: ?>
+            <?php foreach($participations as $participation): 
+                // calculating members
+                $members = getMembersOfParticipant($participation['participant_ID']);
+            ?>
+            <div class="d-competition">
+                <div class="comp-box-name">
                     <div class="d-c-icon">
-                        <i class="fas fa-users"></i>
+                        <i class="fas fa-project-diagram"></i>
                     </div>
                     <div class="d-c-data">
-                        <p>Members</p>
-                        <h1><?=count($members)?></h1>
-                        <?php if(count($members) > 0): ?>
-                        <ul>
-                            <?php $i = 0;foreach($members as $member):$i++;?>
-                            <li><span><?=$i;?></span> <?=$member['member_name']?></li>
-                            <?php endforeach; ?>
-                        </ul>
-                        <?php endif; ?>
+                        <p>Competition</p>
+                        <h1><?=$participation['competition_name']?></h1>
                     </div>
                 </div>
-            </div>
+                <div class="d-comp-box">
+                    <div class="d-comp-b-content">
+                        <div class="d-c-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="d-c-data">
+                            <p>Members</p>
+                            <h1><?=count($members)?></h1>
+                            <?php if(count($members) > 0): ?>
+                            <ul>
+                                <?php $i = 0;foreach($members as $member):$i++;?>
+                                <li><span><?=$i;?></span> <?=$member['member_name']?></li>
+                                <?php endforeach; ?>
+                            </ul>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                </div>
 
-            <div class="d-comp-box comp-status-<?=($participation['transaction_status']=='U')?'unpaid':'paid';?>">
-                <div class="d-comp-b-content">
-                    <div class="d-c-icon">
-                        <i class="fas fa-vote-yea"></i>
-                    </div>
-                    <div class="d-c-data">
-                        <p>status</p>
-                        <h1><?=($participation['transaction_status']=='U')?'Unpaid':'Paid';?></h1>
+                <div class="d-comp-box comp-status-<?=($participation['transaction_status']=='U')?'unpaid':'paid';?>">
+                    <div class="d-comp-b-content">
+                        <div class="d-c-icon">
+                            <i class="fas fa-vote-yea"></i>
+                        </div>
+                        <div class="d-c-data">
+                            <p>status</p>
+                            <h1><?=($participation['transaction_status']=='U')?'Unpaid':'Paid';?></h1>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="d-comp-box">
-                <div class="d-comp-b-content">
-                    <div class="d-c-icon">
-                        <i class="fas fa-coins"></i>
-                    </div>
-                    <div class="d-c-data">
-                        <p>Cash <?=($participation['transaction_status']=='U')?'Due':'Paid';?></p>
-                        <h1><?=$participation['transaction_total'];?> <span>PKR</span></h1>
+                <div class="d-comp-box">
+                    <div class="d-comp-b-content">
+                        <div class="d-c-icon">
+                            <i class="fas fa-coins"></i>
+                        </div>
+                        <div class="d-c-data">
+                            <p>Cash <?=($participation['transaction_status']=='U')?'Due':'Paid';?></p>
+                            <h1><?=$participation['transaction_total'];?> <span>PKR</span></h1>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-<?php endforeach; ?>
+            <?php endforeach; ?>
+        <?php endif; ?>
     
     </div>
 

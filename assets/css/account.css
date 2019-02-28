@@ -740,3 +740,24 @@ h1,h2,h3,h4,h5,h6,p{
     font-weight: 700;
     color: #85ab30;
 }
+
+.d-msg-progress {
+    width: 100%;
+    display: block;
+    padding: 1em 2em;
+    background-color: #f4f5ff;
+    border-left: 3px solid #85ab30;
+}
+
+.d-msg-progress p {
+    font-size: 1.2em;
+    font-weight: 300;
+    letter-spacing: 1px;
+    color: #0b1921;
+}
+
+.d-msg-progress p a {
+    font-weight: 400;
+    color: #0b1921;
+    border-bottom: 1px solid #0b1921;
+}

@@ -1,3 +1,4 @@
+<?php $competitions = getCompetitions(); ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,7 +38,7 @@
         <div class="navigation-inner">
             
             <div class="navigation-logo">
-                <a href="/">
+                <a href="<?=URL?>">
                     <img src="<?=URL?>/assets/img/logo_white.png" alt="Ecompetencia 2019">
                 </a>
             </div>
@@ -45,21 +46,30 @@
             <div class="navigation-r">
                 <div class="nav-ul">
                     <ul class="nav-l">
-                        <li><a href="<?=URL?>/#about-heading">About</a></li>
+                        <li><a id="aboutNav">About</a></li>
                         <li><a href="<?=URL?>/inductions/team.php">Apply As Member</a></li>
                         <li><a href="<?=URL?>/inductions/ambassador.php">Apply As Ambassador</a></li>
                         <li class="hasDrops">
                             <a>Competitions <i class="fas fa-caret-down"></i></a>
                             <ul>
-                                <li><a href="#">Web Development</a></li>
-                                <li><a href="#">Speed Programming</a></li>
+                                <li><a href="competitions.php"><b>View All</b></a></li>
+                                <?php foreach($competitions as $comp): ?>
+                                <li><a href="competitions.php?comp=<?=$comp['competition_ID']?>"><?=$comp['competition_name']?></a></li>
+                                <?php endforeach; ?>
                             </ul>
                         </li>
                         <li><a class="cont">Contact</a></li>
                     </ul>
                     <ul class="nav-r">
-                        <li><a href="<?=URL?>/login.php" id="r1">Login</a></li>
-                        <li><a href="<?=URL?>/register.php" id="r2" class="reg-btn">Registration</a></li>
+                        <?php
+                            if(!isset($_SESSION['logged']) || empty($_SESSION['logged']) || !$_SESSION['logged']):
+                        ?>
+                        <li><a href="<?=URL?>/login.php">Login</a></li>
+                        <li><a href="<?=URL?>/register.php" class="reg-btn">Registration</a></li>
+                        <?php else: ?>
+                        <li><a href="<?=URL?>/public/logout.php">Logout</a></li>
+                        <li><a href="<?=URL?>/public/account.php" class="reg-btn">Dashboard</a></li>
+                        <?php endif; ?>
                     </ul>
                 </div>
 
@@ -83,10 +93,14 @@
     </div>
 
     <script>
-        document.querySelectorAll('.hasDrops a').forEach(drop =>{
-            drop.addEventListener('click', (e)=>{
-                console.log(e);
+        document.querySelector('.nav-ul').addEventListener('click',e=>{
+            if(e.target.classList.contains('n-active')){
+                e.target.classList.remove('n-active');
+            }
+        })
 
+        document.querySelectorAll('.hasDrops > a').forEach(drop =>{
+            drop.addEventListener('click', (e)=>{
                 if(!e.target.classList.contains('active')){
                     e.target.classList.add('active');
                     e.target.firstElementChild.classList.remove('fa-caret-down');
@@ -96,8 +110,6 @@
                     e.target.firstElementChild.classList.remove('fa-caret-up');
                     e.target.firstElementChild.classList.add('fa-caret-down');
                 }
-
-                e.target.nextElementSibling.classList.add('active');
             })
         })
     </script>
