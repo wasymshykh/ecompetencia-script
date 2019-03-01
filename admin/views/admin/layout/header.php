@@ -61,6 +61,8 @@
                 <li><a href="competition_details.php"><i class="icon-form"></i> Details</a></li>
               </ul>
             </li>
+            <li><a href="coupons.php"><i class="icon-form"></i> Coupons</a></li>
+            </li>
           </ul>
         </div>
         <div class="admin-menu">

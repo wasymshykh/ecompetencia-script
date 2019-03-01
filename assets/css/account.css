@@ -26,7 +26,8 @@ h1,h2,h3,h4,h5,h6,p{
 #wrapper {
     background-color: #ffffff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 1100px;
+    max-width: 1100px;
+    width: 94%;
     margin: 2em auto;
 }
 
@@ -405,6 +406,7 @@ h1,h2,h3,h4,h5,h6,p{
     font-size: 12px;
     text-transform: uppercase;
     padding: 2em 1em;
+    text-align: center;
 }
 
 /* Participation */
@@ -416,7 +418,8 @@ h1,h2,h3,h4,h5,h6,p{
 }
 
 .form-row-check {
-    flex: 18%;
+    flex: 31%;
+    max-width: 31%;
     margin: 1% 1%;
     border: 1px solid #d7d8e2;
     position: relative;
@@ -447,17 +450,17 @@ h1,h2,h3,h4,h5,h6,p{
     padding: 0.1em 1em;
 }
 .form-row-check label .comp-title {
-    font-size: 2em;
+    font-size: 1.6em;
     text-transform: uppercase;
     letter-spacing: 1px;
     color: #0b1921;
     font-weight: 900;
-    padding: 0.1em 1em;
+    padding: 0.1em 0 0.5em 0;
 }
 
 .form-row-check label .comp-members {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 .form-row-check label .comp-mem-box {
@@ -535,7 +538,7 @@ h1,h2,h3,h4,h5,h6,p{
 
 .d-form .form-row-checks,
 .d-form .form-submit {
-    margin-top: 4em;
+    margin-top: 2em;
 }
 
 .d-form-body .select-box {
@@ -760,4 +763,204 @@ h1,h2,h3,h4,h5,h6,p{
     font-weight: 400;
     color: #0b1921;
     border-bottom: 1px solid #0b1921;
+}
+
+
+@media (max-width: 1100px){
+
+    .d-confirm-detail {
+        margin: 0.5em 0 2em 0;
+    }
+
+    .d-confirm-cost {
+        justify-content: center;
+        flex-wrap: wrap;
+        margin: 3em 0;
+    }
+    .d-confirm-cost-box {
+        flex: 40%;
+        padding: 2em 0;
+        text-align: center;
+    }
+    .d-confirm-discount-box {
+        flex: 40%;
+        padding: 2em 0;
+        text-align: center;
+    }
+    .d-confirm-discount {
+        flex: auto;
+        justify-content: center;
+    }
+
+}
+
+@media (max-width: 850px){
+    .form-row-check {
+        flex: 48%;
+        max-width: 48%;
+        margin: 1% 1%;
+        border: 1px solid #d7d8e2;
+        position: relative;
+    }
+
+
+}
+
+@media (max-width: 700px){
+
+    .header-inner {
+        flex-direction: column;
+        align-items: center;
+    }
+    .header-logo {
+        max-width: 160px;
+        margin-bottom: 2em;
+    }
+
+    .d-row {
+        margin: 2em 0;
+        padding: 0 0;
+    }
+
+    .d-title h1 {
+        font-size: 1.6em;
+        letter-spacing: 2px;
+    }
+
+    .d-title p {
+        font-size: 1em;
+        letter-spacing: 1px;
+    }
+
+    .d-details {
+        margin-top: 0;
+    }
+
+    .d-detail-box span.d-d-type,
+    .d-detail-box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .d-d-type i {
+        margin-right: 0;
+    }
+
+
+    .d-competition{
+        width: 100%;
+    }    
+    .comp-box-name {
+        width: 94%;
+    }
+    
+
+
+    .d-form-top {
+        flex-direction: column;
+        margin: 0;
+    }
+
+    .d-form-t-box {
+        margin-bottom: 2em;
+    }
+
+    .d-form-t-box::before {
+        width: 40px;
+        height: 2px;
+        bottom: -0.5em;
+    }
+
+    .d-confirm-row {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .d-confirm-detail {
+        flex: 50% ;
+        display: flex;
+        flex-direction: column;
+        font-size: 1.2em;
+        text-align: center;
+        align-self: baseline;
+    }
+    .d-confirm-detail::before {
+        content: "";
+        position: absolute;
+        bottom: -0.5em;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 40px;
+        max-width: 100px;
+        height: 2px;
+        background-color: #0080c4;
+    }
+
+    .d-confirm-detail span.d-c-team {
+        margin: 0.3em 0.5em;
+        align-self: center;
+    }
+
+    .d-confirm-discount .form-row-box {
+        flex: 1;
+    }
+    .d-confirm-discount .form-row-box input[type="text"] {
+        padding: 0.6em 0.5em 0.6em 1.5em;
+    }
+    .d-confirm-discount .form-submit button {
+        padding: 0.75em 1em;
+    }
+
+    .d-confirm-cost-box h1, .d-confirm-discount-box h1 {
+        font-weight: 300;
+        color: #0b1921;
+        font-size: 1.6em;
+        line-height: 1.2;
+    }
+
+    .d-confirm-discount .form-row-box .activate {
+        bottom: 1.4em;
+    }
+    .d-confirm-discount .form-row-box input[type="text"]:focus ~ .activate {
+        width: 4px;
+        height: 4px;
+    }
+    .form-submit {
+        flex: 1;
+        margin-bottom: 0;
+    }
+
+
+
+
+}
+
+@media (max-width: 550px){
+
+    .form-row-check {
+        flex: 100%;
+        max-width: 100%;
+        margin: 3% 0;
+        border: 1px solid #d7d8e2;
+        position: relative;
+    }
+
+    .form-row .form-row-box label, .d-confirm-discount .form-row-box label {
+        padding: 0.6em 0.6em 0.5em 0;
+    }
+
+    .d-competition {
+        flex-direction: column;
+    }
+
+    .d-comp-box {
+        width: 100%;
+        margin: 1em 0 0.5em 0;
+        display: flex;
+        align-items: center;
+    }
+    .d-comp-b-content {
+        flex-direction: row;
+    }
+
 }

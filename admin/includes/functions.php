@@ -285,5 +285,22 @@
         return $s->fetchAll();
     }
 
+    // Get all coupons from db with details
+    function getCoupons() {
+        global $db;
+        $q = 'SELECT * FROM `coupons`';
+        $s = $db->prepare($q);
+        $s->execute();
+        return $s->fetchAll();
+    }
+    // Get a coupon with it's id
+    function getCoupon($coup_id) {
+        global $db;
+        $q = 'SELECT * FROM `coupons` WHERE coupon_id=:id';
+        $s = $db->prepare($q);
+        $s->execute(['id'=>$coup_id]);
+        return $s->fetch();
+    }
+
 
 ?>

@@ -19,7 +19,7 @@
             }
 
             if(empty($error) && !isUserEligibleParticipation($user['user_ID'], $competition_details['competition_ID'])){
-               // $error = "Sorry, you have already participated in the selected competition!";
+               $error = "Sorry, you have already participated in the selected competition!";
             }
 
             if(empty($error) && !isLimitExceeded($competition_details['competition_ID'], $competition_details['competition_limit'])){
