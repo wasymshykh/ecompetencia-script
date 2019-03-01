@@ -39,7 +39,7 @@
                                 <div class="comp-mem-box">Max <span><?=$competition['competition_max']?></span> person</div>
                             </div>
                             <div class="coAhmed Muneebmp-price">
-                                <div class="comp-price-text"><?=$competition['competition_e_fee']?> <span>PKR</span></div>
+                                <div class="comp-price-text"><?=($user['institute_type']=='E')?$competition['competition_e_fee']:$competition['competition_i_fee']?> <span>PKR</span></div>
                                 <div class="comp-price-about">Per Person</div>
                             </div>
                         </label>
@@ -323,11 +323,11 @@
             if (this.readyState == 4 && this.status == 200) {
                 const res = JSON.parse(this.responseText);
                 if(res.success != undefined && res.success === true){
-                    console.log(res);
                     if(res.type == 'P'){
                         amm = totalAmount * (Number(res.discount)/100);
                     } else {
-                        amm = totalAmount - Number(res.discount);
+                        amm = Number(res.discount);
+                        
                     }
                     document.querySelector('#totalamm').innerText = totalAmount - amm;
                     document.querySelector('#totaldiscount').innerText = amm;

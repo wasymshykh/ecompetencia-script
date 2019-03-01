@@ -156,7 +156,7 @@
                                     <tr>
                                         <td><?=$coupon['coupon_name']?></td>
                                         <td><?=$coupon['coupon_discount']. ''.(($coupon['coupon_type']=='P')?'%':'PKR') .''?></td>
-                                        <td><?=$coupon['times_used']?></td>
+                                        <td><?=numberTimeCouponUsed($coupon['coupon_ID'])?></td>
                                         <td><?=$coupon['coupon_limit']?></td>
                                         <td style="max-width: 100px">
                                             <a href="<?=ADMIN_URL?>/coupons.php?edit=<?=$coupon['coupon_ID']?>" class="btn btn-primary btn-sm mr-3">

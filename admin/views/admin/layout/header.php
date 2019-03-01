@@ -62,6 +62,13 @@
               </ul>
             </li>
             <li><a href="coupons.php"><i class="icon-form"></i> Coupons</a></li>
+            <li><a href="#usersdropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i> Users</a>
+              <ul id="usersdropdownDropdown" class="collapse list-unstyled ">
+                <li><a href="users.php"><i class="icon-user"></i> Manage Users</a></li>
+                <li><a href="participants.php"><i class="icon-form"></i> Manage Participants</a></li>
+                <li><a href="participants.php"><i class="icon-form"></i> Unconfirmed Participants</a></li>
+                <li><a href="participants.php"><i class="icon-form"></i> Confirmed Participants</a></li>
+              </ul>
             </li>
           </ul>
         </div>
@@ -97,7 +104,7 @@
         <nav class="navbar">
           <div class="container-fluid">
             <div class="navbar-holder d-flex align-items-center justify-content-between">
-              <div class="navbar-header"><a id="toggle-btn" href="#" class="menu-btn"><i class="icon-bars"> </i></a><a href="index.html" class="navbar-brand">
+              <div class="navbar-header"><a id="toggle-btn" href="#" class="menu-btn"><i class="icon-bars"> </i></a><a href="<?=$_SERVER['PHP_SELF']?>" class="navbar-brand">
                   <div class="brand-text d-none d-md-inline-block"><strong><?=$page_title?></strong></div></a></div>
               <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
                 <!-- Languages dropdown    -->

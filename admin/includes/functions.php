@@ -138,6 +138,16 @@
         return false;
     }
 
+    // Get all institutes details
+    function getInstitutes()
+    {
+        global $db;
+        $q = "SELECT * FROM `institutes`";
+        $s = $db->prepare($q);
+        $s->execute();
+        return $s->fetchAll();
+    }
+
     // Get institute details by it's id
     function getInstituteById($id)
     {
@@ -296,11 +306,142 @@
     // Get a coupon with it's id
     function getCoupon($coup_id) {
         global $db;
-        $q = 'SELECT * FROM `coupons` WHERE coupon_id=:id';
+        $q = 'SELECT * FROM `coupons` WHERE `coupon_ID`=:id';
         $s = $db->prepare($q);
         $s->execute(['id'=>$coup_id]);
         return $s->fetch();
     }
+    // Returns total number of times coupon is used.
+    function numberTimeCouponUsed($coup_id)
+    {
+        global $db;
+        $q = 'SELECT * FROM `coupon_used` WHERE `coupon_ID`=:id';
+        $s = $db->prepare($q);
+        $s->execute(['id'=>$coup_id]);
+        return $s->rowCount();
+    }
+
+    // Get all users details with ambassador/institute details
+    function getUsersDetails()
+    {
+        global $db;
+        $q = 'SELECT * FROM `users` u INNER JOIN `institutes` i ON u.institute_ID = i.institute_ID LEFT JOIN `ambassador_applicant` a ON u.ambassador_ID = a.ambassador_ID';
+        $s = $db->prepare($q);
+        $s->execute();
+        return $s->fetchAll();
+    }
+
+    // Get specific user details by id
+    function getUserDetailsById($user_id)
+    {
+        global $db;
+        $q = 'SELECT * FROM `users` u INNER JOIN `institutes` i ON u.institute_ID = i.institute_ID LEFT JOIN `ambassador_applicant` a ON u.ambassador_ID = a.ambassador_ID WHERE `user_ID`=:userid';
+        $s = $db->prepare($q);
+        $s->execute(['userid'=>$user_id]);
+        return $s->fetch();
+    }
+
+    function getAmbassadors()
+    {
+        global $db;
+        $q = 'SELECT * FROM `ambassador_applicant`';
+        $s = $db->prepare($q);
+        $s->execute();
+        return $s->fetchAll();
+    }
+
+    function getAmbassadorsDetails()
+    {
+        global $db;
+        $q = 'SELECT * FROM `ambassador_applicant` a INNER JOIN `institutes` i ON a.institute_ID = i.institute_ID';
+        $s = $db->prepare($q);
+        $s->execute();
+        return $s->fetchAll();
+    }
+
+    // returns true if team email exists
+    function userEmailExists($email) {
+        global $db;
+        $q = "SELECT `user_email` FROM `users` WHERE `user_email`=:email";
+        $s = $db->prepare($q);
+        $s->execute(['email'=>$email]);
+        if($s->rowCount() > 0){
+            return true;
+        }
+        return false;
+    }
+
+    function getParticipantsDetails()
+    {
+        global $db;
+        $q = 'SELECT * FROM `participants` p INNER JOIN `users` u ON p.user_ID = u.user_ID INNER JOIN `transactions` t ON p.participant_ID = t.participant_ID INNER JOIN `competitions` c ON p.competition_ID = c.competition_ID';
+        $s = $db->prepare($q);
+        $s->execute();
+        return $s->fetchAll();
+    }
+
+    function getPartDetailsById($part_id)
+    {
+        global $db;
+        $q = 'SELECT * FROM `participants` p INNER JOIN `users` u ON p.user_ID = u.user_ID INNER JOIN `transactions` t ON p.participant_ID = t.participant_ID INNER JOIN `competitions` c ON p.competition_ID = c.competition_ID WHERE p.participant_ID=:partid';
+        $s = $db->prepare($q);
+        $s->execute(['partid'=>$part_id]);
+        return $s->fetch();
+    }
+
+    function getMembersOfParticipant($part_id)
+    {
+        global $db;
+        $q = "SELECT * FROM `members` WHERE `participant_ID` = :partid";
+        $s = $db->prepare($q);
+        $s->execute(['partid'=>$part_id]);
+        
+        return $s->fetchAll();
+    }
+
+    // Return false if limit is > than paid transaction in certain comp
+    function isLimitExceeded($comp_id, $limit)
+    {
+        global $db;
+        $q = "SELECT * FROM `participants` p INNER JOIN `transactions` t ON t.participant_ID = p.participant_ID
+        WHERE p.competition_ID = :compid AND t.transaction_status = 'P'";
+        $s = $db->prepare($q);
+        $s->execute(['compid'=>$comp_id]);
+        $participations = $s->fetchAll();
+
+        $totalmembers = 0;
+
+        foreach($participations as $participation){
+            $totalmembers++;
+
+            $q = "SELECT * FROM `members` WHERE `participant_ID`=:pid";
+            $s = $db->prepare($q);
+            $s->execute(['pid'=>$participation['participant_ID']]);
+            $totalmembers = $totalmembers + $s->rowCount();
+        }
+
+        if($totalmembers < $limit) {
+            return true;
+        }
+
+        return false;
+    }
+
+    // Returns false if user hasn't participated in given competition
+    function isUserEligibleParticipation($user_id, $comp_id)
+    {
+        global $db;
+        $q = "SELECT * FROM `participants` WHERE `competition_ID` = :compid AND `user_ID` = :userid";
+        $s = $db->prepare($q);
+        $s->execute(['compid'=>$comp_id, 'userid'=>$user_id]);
+        
+        if($s->rowCount() > 0){
+            return false;
+        }
+
+        return true;
+    }
+
 
 
 ?>

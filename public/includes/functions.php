@@ -245,6 +245,15 @@
         $s->execute(['coupid'=>$promo]);
         return $s->fetch();
     }
+    // Returns total number of times coupon is used.
+    function numberTimeCouponUsed($coup_id)
+    {
+        global $db;
+        $q = 'SELECT * FROM `coupon_used` WHERE `coupon_ID`=:id';
+        $s = $db->prepare($q);
+        $s->execute(['id'=>$coup_id]);
+        return $s->rowCount();
+    }
 
     // Returns false if user hasn't participated in given competition
     function isUserEligibleParticipation($user_id, $comp_id)

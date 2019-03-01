@@ -10,7 +10,7 @@
 
             $promo = getPromoByName(normal($_GET['promo']));
             if($promo && count($promo) > 0 && $promo['coupon_status'] == 'E'){
-                if($promo['times_used'] < $promo['coupon_limit']){
+                if(numberTimeCouponUsed($promo['coupon_ID']) < $promo['coupon_limit']){
                     $toSend = [
                         'success'=> true,
                         'name'=> $promo['coupon_name'],
