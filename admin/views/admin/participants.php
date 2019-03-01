@@ -114,6 +114,7 @@
 </section>
 
 
+<?php if($showEdit): ?>
 <script>
 
 document.querySelector('#e_comp').addEventListener('change',(e)=>{
@@ -161,6 +162,5 @@ document.querySelector('#e_comp').addEventListener('change',(e)=>{
 
 
 })
-
-
 </script>
+<?php endif; ?>

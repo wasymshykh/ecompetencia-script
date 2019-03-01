@@ -66,8 +66,7 @@
               <ul id="usersdropdownDropdown" class="collapse list-unstyled ">
                 <li><a href="users.php"><i class="icon-user"></i> Manage Users</a></li>
                 <li><a href="participants.php"><i class="icon-form"></i> Manage Participants</a></li>
-                <li><a href="participants.php"><i class="icon-form"></i> Unconfirmed Participants</a></li>
-                <li><a href="participants.php"><i class="icon-form"></i> Confirmed Participants</a></li>
+                <li><a href="unconfirmed.php"><i class="icon-form"></i> Unconfirmed Participants</a></li>
               </ul>
             </li>
           </ul>
