@@ -8,6 +8,14 @@
         return '';
     }
 
+    function back($data)
+    {
+        if(gettype($data) !== "array"){
+            return htmlspecialchars_decode($data, ENT_QUOTES);
+        }
+        return '';
+    }
+
     function fileNameCheck($filename) {
         return ((preg_match("`^[-0-9A-Z_\.]+$`i",$filename)) ? true : false);
     }
@@ -16,7 +24,7 @@
     // Returns true if passed id is admin
     function isAdmin($id) {
         global $db;
-        $q = "SELECT * FROM `management` WHERE `management_ID`=:id AND `management_type`='A'";
+        $q = "SELECT * FROM `management` WHERE `management_ID`=:id AND (`management_type`='A' OR `management_type`='R')";
         $s = $db->prepare($q);
         $s->execute(['id'=>$id]);
         if($s->rowCount() === 1){
@@ -28,7 +36,7 @@
     // Returns true if user exists
     function isUser($id) {
         global $db;
-        $q = "SELECT * FROM `management` WHERE `management_ID`=:id";
+        $q = "SELECT * FROM `management` WHERE `management_ID`=:id AND `management_status`='E'";
         $s = $db->prepare($q);
         $s->execute(['id'=>$id]);
         if($s->rowCount() === 1){
@@ -263,6 +271,17 @@
         return $s->fetch();
     }
 
+    function getCompetitionDetailsById($comp_id)
+    {
+        global $db;
+        $q = "SELECT * FROM `competitions` co INNER JOIN `categories` ca 
+        ON co.category_ID = ca.category_ID
+        LEFT JOIN `competition_details` cd ON co.competition_ID = cd.competition_ID WHERE co.competition_ID = :compid AND co.competition_deleted='F'";
+        $s = $db->prepare($q);
+        $s->execute(['compid'=>$comp_id]);
+        return $s->fetch();
+    }
+
     function updateCompetitionStatus($comp_id, $status)
     {
         global $db;
@@ -336,6 +355,16 @@
     {
         global $db;
         $q = 'SELECT * FROM `users` u INNER JOIN `institutes` i ON u.institute_ID = i.institute_ID LEFT JOIN `ambassador_applicant` a ON u.ambassador_ID = a.ambassador_ID WHERE `user_ID`=:userid';
+        $s = $db->prepare($q);
+        $s->execute(['userid'=>$user_id]);
+        return $s->fetch();
+    }
+
+    // Get specific management details by id
+    function getManagementDetailsById($user_id)
+    {
+        global $db;
+        $q = 'SELECT * FROM `management` WHERE `management_ID`=:userid';
         $s = $db->prepare($q);
         $s->execute(['userid'=>$user_id]);
         return $s->fetch();
@@ -458,6 +487,16 @@
         }
 
         return true;
+    }
+
+
+    function getAllManagement()
+    {
+        global $db;
+        $q = 'SELECT * FROM `management`';
+        $s = $db->prepare($q);
+        $s->execute();
+        return $s->fetchAll();
     }
 
 

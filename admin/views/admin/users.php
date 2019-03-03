@@ -166,6 +166,7 @@
                                             <a href="<?=ADMIN_URL?>/users.php?edit=<?=$user['user_ID']?>" class="btn btn-primary btn-sm m-1">
                                                 <i class="fas fa-edit mr-2"></i> Edit
                                             </a>
+                                            <?php if($_SESSION['management']['management_type'] === 'A'):?>
                                             <?php if($user['user_status'] == 'D'): ?>
                                             <a href="<?=ADMIN_URL?>/users.php?toggle=<?=$user['user_ID']?>" class="btn btn-success btn-sm m-1">
                                                 <i class="fas fa-check-double mr-2"></i> Unban
@@ -175,6 +176,7 @@
                                                 <i class="fas fa-ban mr-2"></i> Ban
                                             </a>
                                             <?php endif; ?>
+                                            <?php endif;?>
                                         </td>
                                     </tr>
                                     <?php endforeach; ?>

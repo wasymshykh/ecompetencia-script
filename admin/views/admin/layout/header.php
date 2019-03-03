@@ -54,6 +54,7 @@
           <h5 class="sidenav-heading">Main</h5>
           <ul id="side-main-menu" class="side-menu list-unstyled">                  
             <li><a href="index.php"><i class="icon-home"></i>Home</a></li>
+            <?php if($_SESSION['management']['management_type'] === 'A'): ?>
             <li><a href="#compdropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i> Competitions</a>
               <ul id="compdropdownDropdown" class="collapse list-unstyled ">
                 <li><a href="competition_categories.php"><i class="icon-form"></i> Categories</a></li>
@@ -61,6 +62,7 @@
                 <li><a href="competition_details.php"><i class="icon-form"></i> Details</a></li>
               </ul>
             </li>
+            <?php endif; ?>
             <li><a href="coupons.php"><i class="icon-form"></i> Coupons</a></li>
             <li><a href="#usersdropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i> Users</a>
               <ul id="usersdropdownDropdown" class="collapse list-unstyled ">
@@ -71,6 +73,7 @@
             </li>
           </ul>
         </div>
+        <?php if($_SESSION['management']['management_type'] === 'A'): ?>
         <div class="admin-menu">
           <h5 class="sidenav-heading">Applicants</h5>
           <ul class="side-menu list-unstyled">
@@ -87,12 +90,14 @@
           <ul class="side-menu list-unstyled">
             <li><a href="#WebsitedropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i> Controls</a>
               <ul id="WebsitedropdownDropdown" class="collapse list-unstyled ">
+                <li><a href="management.php"><i class="icon-user"></i>Management</a></li>
                 <li><a href="settings.php"><i class="icon-flask"></i>Settings</a></li>
                 <li><a href="logs.php"><i class="icon-form"></i> Web Logs</a></li>
               </ul>
             </li>
           </ul>
         </div>
+        <?php endif; ?>
       </div>
     </nav>
 

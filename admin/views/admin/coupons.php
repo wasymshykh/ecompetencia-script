@@ -162,15 +162,17 @@
                                             <a href="<?=ADMIN_URL?>/coupons.php?edit=<?=$coupon['coupon_ID']?>" class="btn btn-primary btn-sm mr-3">
                                                 <i class="fas fa-edit mr-2"></i> Edit
                                             </a>
-                                            <?php if($coupon['coupon_status']=='E'): ?>
-                                            <a href="coupons.php?toggle=<?=$coupon['coupon_ID']?>" class="btn btn-danger btn-sm">
-                                                <i class="fas fa-times mr-2"></i> Disable
-                                            </a>
-                                            <?php else: ?>
-                                            <a href="coupons.php?toggle=<?=$coupon['coupon_ID']?>" class="btn btn-success btn-sm">
-                                                <i class="fas fa-check mr-2"></i> Enable
-                                            </a>
-                                            <?php endif; ?>
+                                            <?php if($_SESSION['management']['management_type'] === 'A'):?>
+                                                <?php if($coupon['coupon_status']=='E'): ?>
+                                                <a href="coupons.php?toggle=<?=$coupon['coupon_ID']?>" class="btn btn-danger btn-sm">
+                                                    <i class="fas fa-times mr-2"></i> Disable
+                                                </a>
+                                                <?php else: ?>
+                                                <a href="coupons.php?toggle=<?=$coupon['coupon_ID']?>" class="btn btn-success btn-sm">
+                                                    <i class="fas fa-check mr-2"></i> Enable
+                                                </a>
+                                                <?php endif; ?>
+                                            <?php endif;?>
                                         </td>
                                     </tr>
                                     <?php endforeach;?>

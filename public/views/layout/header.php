@@ -54,7 +54,7 @@
                             <ul>
                                 <li><a href="competitions.php"><b>View All</b></a></li>
                                 <?php foreach($competitions as $comp): ?>
-                                <li><a href="competitions.php?comp=<?=$comp['competition_ID']?>"><?=$comp['competition_name']?></a></li>
+                                <li><a href="competition.php?comp=<?=$comp['competition_ID']?>"><?=$comp['competition_name']?></a></li>
                                 <?php endforeach; ?>
                             </ul>
                         </li>

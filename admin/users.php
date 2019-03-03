@@ -9,7 +9,7 @@
   $edit_success = false;
   $edit_error = false;
 
-  if(isset($_GET['toggle']) && !empty($_GET['toggle']) && is_numeric($_GET['toggle'])){
+  if(isset($_GET['toggle']) && !empty($_GET['toggle']) && is_numeric($_GET['toggle']) && $_SESSION['management']['management_type'] === 'A'){
     $user_details = getUserDetailsById(normal($_GET['toggle']));
     if(is_array($user_details) && count($user_details) > 0) {
         $status = 'E';

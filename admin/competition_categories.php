@@ -3,6 +3,10 @@
     include 'includes/functions.php';
     include '../config/auth_admin.php';
 
+    if(!($_SESSION['management']['management_type'] === 'A')){
+        header('location: '.ADMIN_URL.'/index.php');
+    }
+
     if(isset($_GET['delete'])){
         $cat = getCategoryById(normal($_GET['delete']));
         if(!empty($cat) && count($cat) > 0) {

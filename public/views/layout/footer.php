@@ -18,7 +18,7 @@
                         </div>
                         <h3>At</h3>
                         <h2>Iqra University</h2>
-                        <h5>Main Campus <a href="#">Direction</a></h5>
+                        <h5>Main Campus <a href="https://goo.gl/maps/tj1N2tN6swH2" target="_blank">Direction</a></h5>
                     </div>
                 </div>
 
@@ -75,38 +75,6 @@
 
     <script>
 
-        // document.querySelector('#galleryy').addEventListener('click',(e)=>{
-        //     document.querySelector('.#galleryy').classList.add('n-active')
-        //     let eleam2 = document.querySelector('#modal4');
-        //     var instance2 = M.Modal.getInstance(eleam2);
-        //     instance2.open();
-        // })
-
-        // document.querySelectorAll('#galleryy').forEach(navul => {
-        //     navul.addEventListener('click',(e)=>{
-        //         e.preventDefault();
-        //         let eleam2 = document.querySelector('#modal4');
-        //         var instance2 = M.Modal.getInstance(eleam2);
-        //         instance2.open();
-        //     })
-        // })
-        
-        // document.querySelector('#gal').addEventListener('click',(e)=>{
-        //     document.querySelector('.#gal').classList.add('n-active')
-        //     let eleam2 = document.querySelector('#modal4');
-        //     var instance2 = M.Modal.getInstance(eleam2);
-        //     instance2.open();
-        // })
-
-        // document.querySelectorAll('#gal').forEach(navul => {
-        //     navul.addEventListener('click',(e)=>{
-        //         e.preventDefault();
-        //         let eleam2 = document.querySelector('#modal4');
-        //         var instance2 = M.Modal.getInstance(eleam2);
-        //         instance2.open();
-        //     })
-        // })
-
         document.querySelectorAll('.cont').forEach(navul => {
             navul.addEventListener('click',(e)=>{
                 e.preventDefault();
@@ -115,12 +83,6 @@
                 instance2.open();
             })
         })
-        // document.querySelector('#r3').addEventListener('click',(e)=>{
-        //     document.querySelector('.#r1').classList.add('n-active')
-        //     let eleam2 = document.querySelector('#modal2');
-        //     var instance2 = M.Modal.getInstance(eleam2);
-        //     instance2.open();
-        // })
 
         document.querySelectorAll('#r3').forEach(navul => {
             navul.addEventListener('click',(e)=>{
@@ -139,22 +101,9 @@
             }
         }
         
-        /*document.addEventListener('DOMContentLoaded', function() {
-            var elems = document.querySelectorAll('.modal');
-            var instances = M.Modal.init(elems);
-            let eleam = document.querySelector('#modal1');
-            var instance = M.Modal.getInstance(eleam);
-            instance.open();
-        });*/
-        
         document.addEventListener('DOMContentLoaded', function() {
             var elems = document.querySelectorAll('.modal');
             var instances = M.Modal.init(elems);
-            
-            //let eleam = document.querySelector('#modal3');
-            //var instance = M.Modal.getInstance(eleam);
-            //instance.open();
-
         });
     </script>
 <?php endif; ?>

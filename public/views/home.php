@@ -35,7 +35,7 @@
                         </div>
                     </div>
                     <div class="bm-button">
-                        <a href="#">
+                        <a href="<?=URL?>/competitions.php">
                             <span class="btn-text">Explore</span> 
                             <span class="btn-icon"><i class="fas fa-arrow-right"></i></span>
                         </a>

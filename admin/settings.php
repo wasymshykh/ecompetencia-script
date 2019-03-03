@@ -3,6 +3,10 @@
   include 'includes/functions.php';
   include '../config/auth_admin.php';
 
+  if(!($_SESSION['management']['management_type'] === 'A')){
+    header('location: '.ADMIN_URL.'/index.php');
+  }
+
     $errors = [];
   if(isset($_POST['save_pages'])){
 

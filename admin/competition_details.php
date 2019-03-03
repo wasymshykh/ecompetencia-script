@@ -4,9 +4,6 @@
     include '../config/auth_admin.php';
 
     if(isset($_GET['delete'])){
-        if(!($_SESSION['management']['management_type'] === 'A')){
-            header('location: '.ADMIN_URL.'/index.php');
-        }
         $comp = getCompetitionById(normal($_GET['delete']));
         if(!empty($comp) && count($comp) > 0) {
             $status = 'T';
@@ -17,9 +14,6 @@
     }
     
     if(isset($_GET['toggle'])){
-        if(!($_SESSION['management']['management_type'] === 'A')){
-            header('location: '.ADMIN_URL.'/index.php');
-        }
         $comp = getCompetitionById(normal($_GET['toggle']));
         if(!empty($comp) && count($comp) > 0) {
             if($comp['competition_status'] == 'E'){
@@ -39,9 +33,7 @@
     $showEdit = false;
 
     if(isset($_POST['add_comp'])){
-        if(!($_SESSION['management']['management_type'] === 'A')){
-            header('location: '.ADMIN_URL.'/index.php');
-        }
+
         $c_name = normal($_POST['c_name']);
         $c_limit = normal($_POST['c_limit']);
         $c_cat = normal($_POST['c_cat']);
@@ -77,33 +69,19 @@
 
         if(empty($error)){
 
-
-
-            try {
-                $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                $db->beginTransaction();
-                
-                
-                $competitionQuery = "INSERT INTO `competitions` (`competition_name`, `competition_min`, `competition_max`, `category_ID`, `competition_limit`, `competition_e_fee`, `competition_i_fee`)
+            $competitionQuery = "INSERT INTO `competitions` (`competition_name`, `competition_min`, `competition_max`, `category_ID`, `competition_limit`, `competition_e_fee`, `competition_i_fee`)
             VALUE ('$c_name', '$c_min', '$c_max', '$c_cat', '$c_limit', '$c_fee_e', '$c_fee_i')";
-                $db->exec($competitionQuery);
 
-                $comp_ID = $db->lastInsertId();
-                $competitionDetailsQuery = "INSERT INTO `competition_details` (`competition_ID`) VALUE ($comp_ID)";
-                $db->exec($competitionDetailsQuery);
+            $stmt = $db->prepare($competitionQuery);
 
-                $db->commit();
-
+            if(!$stmt->execute()){
+                $error = "Unable to insert the category!";
+                $showNewModal = true;
+            } else {
                 $c_name = '';$c_limit = '';$c_cat = '';$c_min = '';
                 $c_max = '';$c_fee_e = '';$c_fee_i = '';
-
-            } catch(Exception $e){
-                $user_error = "Sorry, we couldn't complete your request. Try again.";
-                $showNewModal = true;
             }
 
-            
-            
         } else {
             $showNewModal = true;
         }
@@ -111,7 +89,7 @@
 
     if(isset($_GET['edit'])){
 
-        $comp = getCompetitionById(normal($_GET['edit']));
+        $comp = getCompetitionDetailsById(normal($_GET['edit']));
 
         if(!empty($comp) && count($comp) > 0) {
             $showEdit = true;
@@ -119,45 +97,14 @@
 
         if(isset($_POST['edit_comp'])){
             
-            $e_cname = normal($_POST['e_cname']);
-            $e_c_limit = normal($_POST['e_c_limit']);
-            $e_c_cat = normal($_POST['e_c_cat']);
-            $e_c_min = normal($_POST['e_c_min']);
-            $e_c_max = normal($_POST['e_c_max']);
-            $e_c_fee_e = normal($_POST['e_c_fee_e']);
-            $e_c_fee_i = normal($_POST['e_c_fee_i']);
-
-            if(empty($e_cname) && strlen($e_cname) < 2){
-                $comp_error = "Name can't be left empty. Must be atleast 2 char long.";
-            } else
-            if(empty($e_c_limit) && ((int)$e_c_limit) < 1){
-                $comp_error = "Limit can be 1 or greater.";
-            } else
-            if(empty($e_c_cat) && strlen($e_c_cat) < 1){
-                $comp_error = "Category can't be left empty.";
-            } else
-            if(empty($e_c_min) && ((int)$e_c_min) < 1){
-                $comp_error = "Minimum members can be 1 or greater.";
-            } else
-            if(empty($e_c_max) && ((int)$e_c_max) < 1){
-                $comp_error = "Maximum members can be 1 or greater.";
-            } else
-            if(((int)$e_c_max) < ((int)$e_c_min)){
-                $comp_error = "Maximum members can be equal or greater than minimum members.";
-            } else
-            if(empty($e_c_fee_e) && ((int)$e_c_fee_e) < 1){
-                $comp_error = "External fee can be 1 or greater.";
-            } else
-            if(empty($e_c_fee_i) && ((int)$e_c_fee_i) < 1){
-                $comp_error = "Internal fee can be 1 or greater.";
-            }
+            $e_desc = normal($_POST['e_desc']);
+            $e_winning = normal($_POST['e_winning']);
+            $e_rules = normal($_POST['e_rules']);
 
             if(empty($comp_error)){
 
-                $competitionQuery = "UPDATE `competitions` SET `competition_name`='$e_cname',
-                `competition_min`='$e_c_min', `competition_max` = '$e_c_max', `category_ID` = '$e_c_cat', 
-                `competition_limit`='$e_c_limit', `competition_e_fee`='$e_c_fee_e', `competition_i_fee`='$e_c_fee_i'
-                WHERE `competition_ID`='".$comp['competition_ID']."'";
+                $competitionQuery = "UPDATE `competition_details` SET `details_description`='$e_desc',
+                `details_winning`='$e_winning', `details_rules` = '$e_rules' WHERE `competition_ID`='".$comp['competition_ID']."'";
 
                 $stmt = $db->prepare($competitionQuery);
 
@@ -184,7 +131,7 @@
 <?php 
     $categories = getCategories();
     $competitions = getCompetitions();
-    include 'views/admin/competitions.php'; 
+    include 'views/admin/competition_details.php'; 
 
 ?>
 <?php include 'views/admin/layout/footer.php'; ?>

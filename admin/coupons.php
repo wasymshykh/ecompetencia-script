@@ -8,22 +8,28 @@
     $error='';
 
     if(isset($_GET['toggle'])){
-        $toggle = (int)normal($_GET['toggle']);
-        $theCoupon = getCoupon($toggle);
-        if(!empty($theCoupon)) {
-            if($theCoupon['coupon_status'] == 'E'){
-                $status = 'D';
-            } else{
-                $status = 'E';
+        if(!($_SESSION['management']['management_type'] === 'A')){
+            header('location: '.ADMIN_URL.'/coupons.php');
+        }
+        else {
+            $toggle = (int)normal($_GET['toggle']);
+            $theCoupon = getCoupon($toggle);
+            if(!empty($theCoupon)) {
+                if($theCoupon['coupon_status'] == 'E'){
+                    $status = 'D';
+                } else{
+                    $status = 'E';
+                }
+    
+                $query = "UPDATE `coupons` SET `coupon_status` = '$status' WHERE `coupon_ID`=$toggle";
+                $stmt = $db->prepare($query);
+                if($stmt->execute()){
+                    header('location: coupons.php');
+                } else {
+                    $error_update = "Sorry, couldn't toggle the coupon status!";
+                }
             }
-
-            $query = "UPDATE `coupons` SET `coupon_status` = '$status' WHERE `coupon_ID`=$toggle";
-            $stmt = $db->prepare($query);
-            if($stmt->execute()){
-                header('location: coupons.php');
-            } else {
-                $error_update = "Sorry, couldn't toggle the coupon status!";
-            }
+            
         }
 
     }

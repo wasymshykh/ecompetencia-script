@@ -7,6 +7,14 @@
         return '';
     }
 
+    function back($data)
+    {
+        if(gettype($data) !== "array"){
+            return htmlspecialchars_decode($data, ENT_QUOTES);
+        }
+        return '';
+    }
+
     // returns true if page is disabled
     function isPageDisabled($page) {
         global $db;
@@ -380,6 +388,18 @@
         $s = $db->prepare($q);
         $s->execute(['catid'=>$cat_id]);
         return $s->fetchAll();
+    }
+
+    // Get competition with category/comp details
+    function getCompetitionDetailsByCategoryId($comp_id)
+    {
+        global $db;
+        $q = "SELECT * FROM `competitions` co INNER JOIN `categories` ca 
+        ON co.category_ID = ca.category_ID
+        LEFT JOIN `competition_details` cd ON co.competition_ID = cd.competition_ID WHERE co.competition_ID = :catid AND co.competition_deleted='F'";
+        $s = $db->prepare($q);
+        $s->execute(['catid'=>$comp_id]);
+        return $s->fetch();
     }
 
 

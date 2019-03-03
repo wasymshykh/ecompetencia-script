@@ -27,7 +27,7 @@
                 $db->exec($q1);
 
                 // Add record to transaction details
-                $q2 = "INSERT INTO `transaction_details` (`transaction_ID`, `paid_to`, `details_receiver_ID`) VALUE ('".$part['transaction_ID']."', 'M', '".$admin['management_ID']."')";
+                $q2 = "INSERT INTO `transaction_details` (`transaction_ID`, `paid_to`, `details_receiver_ID`) VALUE ('".$part['transaction_ID']."', 'M', '".$_SESSION['management']['management_ID']."')";
                 $db->exec($q2);
 
                 $db->commit();

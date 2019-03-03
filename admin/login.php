@@ -25,6 +25,7 @@
       if(empty($errors)){
         $_SESSION['admin'] = true;
         $_SESSION['admin_id'] = $user_id;
+        $_SESSION['management'] = getManagementDetailsById($user_id);
         header('location: index.php');
       }
 
