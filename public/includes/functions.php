@@ -362,4 +362,25 @@
     }
 
 
+    // Get all non deleted categories
+    function getCategories()
+    {
+        global $db;
+        $q = "SELECT * FROM `categories` WHERE `is_deleted`='N'";
+        $s = $db->prepare($q);
+        $s->execute();
+        return $s->fetchAll();
+    }
+
+
+    function getCompetitionsByCategoryId($cat_id)
+    {
+        global $db;
+        $q = "SELECT * FROM `competitions` WHERE `category_ID` = :catid AND `competition_deleted`='F'";
+        $s = $db->prepare($q);
+        $s->execute(['catid'=>$cat_id]);
+        return $s->fetchAll();
+    }
+
+
 ?>
