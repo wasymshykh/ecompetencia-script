@@ -124,7 +124,7 @@
                 <!-- Log out-->
                 <li class="nav-item">
                   <a href="logout.php" class="nav-link logout">
-                    <span class="d-none d-sm-inline-block">Logout</span><i class="fa fa-sign-out"  aria-hidden="true"></i>
+                    <span class="d-none d-sm-inline-block">Logout</span><i class="fas fa-sign-out-alt"></i>
                   </a>
                 </li>
               </ul>
