@@ -9,7 +9,7 @@
 
 <section>
     <div class="container-fluid">
-
+    <?php if($_SESSION['management']['management_type'] === 'A'): ?>
         <?php if(!empty($errors)): ?>
         <div class="row mt-4">
             <div class="col-lg-12">
@@ -21,8 +21,10 @@
             </div>
         </div>
         <?php endif; ?>
+    <?php endif; ?>
 
         <div class="row mt-4">
+            <?php if($_SESSION['management']['management_type'] === 'A'): ?>
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header d-flex align-items-center">
@@ -64,6 +66,52 @@
                     </div>
                 </div>
             </div>
+            <?php endif; ?>
+
+
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header d-flex align-items-center">
+                        <h4>Password Reset</h4>
+                    </div>
+                    <div class="card-body">
+                        <p>Reset your current password</p>
+                        <?php if($success_password): ?>
+                            <div class="alert alert-success">
+                                <?=$success_password;?>
+                            </div>
+                        <?php endif; ?>
+                        <?php if($error_password): ?>
+                            <div class="alert alert-danger">
+                                <?=$error_password;?>
+                            </div>
+                        <?php endif; ?>
+                        <form action="" method="POST">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="npass">New Password</label>
+                                        <input type="password" id="npass" name="password" class="form-control" placeholder="*********">
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="npass_c">New Password Confirm</label>
+                                        <input type="password" id="npass_c" name="password_c" class="form-control" placeholder="*********">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="line"></div>
+                            <div class="form-group row">
+                                <div class="col-sm-12 text-center">
+                                    <button type="submit" name="save_password" class="btn btn-primary">Save changes</button>
+                                </div>
+                            </div>
+                       </form>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </section>

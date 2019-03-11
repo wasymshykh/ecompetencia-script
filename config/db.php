@@ -15,6 +15,8 @@
     define('URL', 'http://localhost/ecompetencia-script');
     // admin directory url
     define('ADMIN_URL', URL.'/admin');
+    // ambassador directory url
+    define('AM_URL', URL.'/ambassador');
 
 
     try {

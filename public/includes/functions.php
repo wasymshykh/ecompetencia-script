@@ -174,7 +174,7 @@
     function getAmbassadorDetailsByID($id)
     {
         global $db;
-        $q = "SELECT * FROM `ambassador_applicant` WHERE `ambassador_ID`=:id";
+        $q = "SELECT * FROM `ambassadors` WHERE `ambassador_ID`=:id";
         $s = $db->prepare($q);
         $s->execute(['id'=>$id]);
         if($s->rowCount()>0){
@@ -348,7 +348,7 @@
     function getInstituteAmbassadors($ins_id)
     {
         global $db;
-        $q = "SELECT * FROM `ambassador_applicant` WHERE `institute_ID` = :insid";
+        $q = "SELECT * FROM `ambassadors` WHERE `institute_ID` = :insid";
         $s = $db->prepare($q);
         $s->execute(['insid'=>$ins_id]);
         
@@ -359,7 +359,7 @@
     function verifyAmbassador($am_id)
     {
         global $db;
-        $q = "SELECT * FROM `ambassador_applicant` WHERE `ambassador_ID` = :amid";
+        $q = "SELECT * FROM `ambassadors` WHERE `ambassador_ID` = :amid";
         $s = $db->prepare($q);
         $s->execute(['amid'=>$am_id]);
         

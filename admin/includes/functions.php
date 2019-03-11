@@ -114,7 +114,7 @@
 
     
     // Get all ambassador applicants
-    function getAmbassadorApplicants($sortBy = 'ambassador_ID', $sortType = 'asc')
+    function getAmbassadorApplicants($sortBy = 'id', $sortType = 'asc')
     {
         global $db;
         $q = "SELECT * FROM `ambassador_applicant` ORDER BY $sortBy $sortType";
@@ -127,7 +127,7 @@
     function getAmbassadorApplicant($id)
     {
         global $db;
-        $q = "SELECT * FROM `ambassador_applicant` WHERE `ambassador_ID`=:id";
+        $q = "SELECT * FROM `ambassador_applicant` WHERE `id`=:id";
         $s = $db->prepare($q);
         $s->execute(['id'=>$id]);
         return $s->fetch();
@@ -137,7 +137,19 @@
     function isAmbassadorApplicant($id)
     {
         global $db;
-        $q = "SELECT * FROM `ambassador_applicant` WHERE `ambassador_ID`=:id";
+        $q = "SELECT * FROM `ambassador_applicant` WHERE `id`=:id";
+        $s = $db->prepare($q);
+        $s->execute(['id'=>$id]);
+        if($s->rowCount() === 1){
+            return true;
+        }
+        return false;
+    }
+    // Is ambassador applicant exists
+    function isAmbassadorApplicantConfirm($id)
+    {
+        global $db;
+        $q = "SELECT * FROM `ambassador_applicant` WHERE `id`=:id AND `status`='S'";
         $s = $db->prepare($q);
         $s->execute(['id'=>$id]);
         if($s->rowCount() === 1){
@@ -344,7 +356,7 @@
     function getUsersDetails()
     {
         global $db;
-        $q = 'SELECT * FROM `users` u INNER JOIN `institutes` i ON u.institute_ID = i.institute_ID LEFT JOIN `ambassador_applicant` a ON u.ambassador_ID = a.ambassador_ID';
+        $q = 'SELECT * FROM `users` u INNER JOIN `institutes` i ON u.institute_ID = i.institute_ID LEFT JOIN `ambassadors` a ON u.ambassador_ID = a.ambassador_ID';
         $s = $db->prepare($q);
         $s->execute();
         return $s->fetchAll();
@@ -354,7 +366,7 @@
     function getUserDetailsById($user_id)
     {
         global $db;
-        $q = 'SELECT * FROM `users` u INNER JOIN `institutes` i ON u.institute_ID = i.institute_ID LEFT JOIN `ambassador_applicant` a ON u.ambassador_ID = a.ambassador_ID WHERE `user_ID`=:userid';
+        $q = 'SELECT * FROM `users` u INNER JOIN `institutes` i ON u.institute_ID = i.institute_ID LEFT JOIN `ambassadors` a ON u.ambassador_ID = a.ambassador_ID WHERE `user_ID`=:userid';
         $s = $db->prepare($q);
         $s->execute(['userid'=>$user_id]);
         return $s->fetch();

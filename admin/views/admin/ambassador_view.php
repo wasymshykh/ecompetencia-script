@@ -6,7 +6,7 @@
                     <div class="card-header">
                         <div class="row">
                             <div class="col-md-10">
-                                <h4><?=$applicant['ambassador_fname']?> <?=$applicant['ambassador_lname']?> <span style="font-weight:normal">- Application<span></h4>
+                                <h4><?=$applicant['fname']?> <?=$applicant['lname']?> <span style="font-weight:normal">- Application<span></h4>
                             </div>
 
                             <div class="col-md-2 text-right">
@@ -19,24 +19,24 @@
 
                         <div class="row">
                             <div class="col-md-4">
-                                <img src="http://ecompetencia19.com/inductions/applicants/ambassador/<?=$applicant['ambassador_avatar']?>" style="width: 100%;height:auto;display:block">
+                                <img src="http://ecompetencia19.com/inductions/applicants/ambassador/<?=$applicant['avatar']?>" style="width: 100%;height:auto;display:block">
                             </div>
                             <div class="col-md-8">
                                 <table class="table table-striped">
                                     <tbody>
                                         <tr>
                                             <th>First Name</th>
-                                            <td><?=$applicant['ambassador_fname']?></td>
+                                            <td><?=$applicant['fname']?></td>
                                             <th style="border-left:1px solid #e0e0e0;">Last Name</th>
-                                            <td><?=$applicant['ambassador_lname']?></td>
+                                            <td><?=$applicant['lname']?></td>
                                         </tr>
                                         <tr>
                                             <th>Email</th>
-                                            <td colspan="3"><?=$applicant['ambassador_email']?></td>
+                                            <td colspan="3"><?=$applicant['email']?></td>
                                         </tr>
                                         <tr>
                                             <th>Phone</th>
-                                            <td colspan="3"><?=$applicant['ambassador_phoneno']?></td>
+                                            <td colspan="3"><?=$applicant['phoneno']?></td>
                                         </tr>
                                         <tr>
                                             <th>Insitute</th>
@@ -45,8 +45,8 @@
                                         <tr>
                                             <th>Experience</th>
                                             <td colspan="3">
-                                                <?php if($applicant['ambassador_experience'] != "NULL"): ?>
-                                                    <?=$applicant['ambassador_experience']?>
+                                                <?php if($applicant['experience'] != "NULL"): ?>
+                                                    <?=$applicant['experience']?>
                                                 <?php else: ?>
                                                     <i>No</i>
                                                 <?php endif; ?>

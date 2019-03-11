@@ -9,6 +9,7 @@
     <meta name="robots" content="all,follow">
     <!-- Bootstrap CSS-->
     <link rel="stylesheet" href="<?=ADMIN_URL?>/assets/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?=ADMIN_URL?>/assets/css/datatables.min.css">
     <!-- Font Awesome CSS-->
     <link rel="stylesheet" href="<?=ADMIN_URL?>/assets/vendor/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="<?=URL?>/assets/fontawesome/css/all.min.css">
@@ -29,7 +30,7 @@
     <script src="<?=ADMIN_URL?>/assets/vendor/jquery/jquery.min.js"></script>
     <script src="<?=ADMIN_URL?>/assets/vendor/popper.js/umd/popper.min.js"> </script>
     <script src="<?=ADMIN_URL?>/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
-
+    <script src="<?=ADMIN_URL?>/assets/js/datatables.min.js"></script>
     <!-- Favicon-->
     <link rel="shortcut icon" href="<?=URL?>/favicon.ico">
     <!-- Tweaks for older IEs--><!--[if lt IE 9]>
@@ -44,7 +45,9 @@
         <div class="sidenav-header d-flex align-items-center justify-content-center">
           <!-- User Info-->
           <div class="sidenav-header-inner text-center"><img src="<?=ADMIN_URL?>/assets/img/avatar.png" alt="person" class="img-fluid rounded-circle">
-            <h2 class="h5"><?=$admin['management_fname']?> <?=$admin['management_lname']?></h2><span>administrator</span>
+            <h2 class="h5"><?=$_SESSION['management']['management_fname']?> <?=$_SESSION['management']['management_lname']?></h2><span><?php if($_SESSION['management']['management_type']=='A'):?>
+                                        Administrator
+                                        <?php elseif($_SESSION['management']['management_type']=='R'): ?>Registration<?php endif;?></span>
           </div>
           <!-- Small Brand information, appears on minimized sidebar-->
           <div class="sidenav-header-logo"><a href="index.html" class="brand-small text-center"> <strong>E</strong><strong class="text-primary">C</strong></a></div>
@@ -62,8 +65,8 @@
                 <li><a href="competition_details.php"><i class="icon-form"></i> Details</a></li>
               </ul>
             </li>
-            <?php endif; ?>
             <li><a href="coupons.php"><i class="icon-form"></i> Coupons</a></li>
+            <?php endif; ?>
             <li><a href="#usersdropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i> Users</a>
               <ul id="usersdropdownDropdown" class="collapse list-unstyled ">
                 <li><a href="users.php"><i class="icon-user"></i> Manage Users</a></li>
@@ -71,6 +74,9 @@
                 <li><a href="unconfirmed.php"><i class="icon-form"></i> Unconfirmed Participants</a></li>
               </ul>
             </li>
+            <?php if($_SESSION['management']['management_type'] === 'R'): ?>
+            <li><a href="settings.php"><i class="icon-flask"></i> Settings</a></li>
+            <?php endif; ?>
           </ul>
         </div>
         <?php if($_SESSION['management']['management_type'] === 'A'): ?>
@@ -85,6 +91,7 @@
             </li>
           </ul>
         </div>
+        
         <div class="admin-menu">
           <h5 class="sidenav-heading">Website</h5>
           <ul class="side-menu list-unstyled">
