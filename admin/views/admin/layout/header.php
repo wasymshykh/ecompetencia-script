@@ -74,6 +74,11 @@
                 <li><a href="unconfirmed.php"><i class="icon-form"></i> Unconfirmed Participants</a></li>
               </ul>
             </li>
+            <li><a href="#emaildropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i> Email</a>
+              <ul id="emaildropdownDropdown" class="collapse list-unstyled ">
+                <li><a href="email_unconfirmed.php"><i class="icon-mail"></i> Unconfirmed Participants</a></li>
+              </ul>
+            </li>
             <?php if($_SESSION['management']['management_type'] === 'R'): ?>
             <li><a href="settings.php"><i class="icon-flask"></i> Settings</a></li>
             <?php endif; ?>

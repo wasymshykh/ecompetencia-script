@@ -6,6 +6,14 @@
   $showEdit = false;
   $user_success = false;
   $user_error = false;
+  $showView = false;
+
+  if(isset($_GET['view']) && !empty($_GET['edit']) && is_numeric($_GET['edit'])){
+    $part = getPartDetailsById(normal($_GET['edit']));
+    if(is_array($part) && count($part) > 0) {
+        $showView = true;
+    }
+  }
 
   if(isset($_GET['edit']) && !empty($_GET['edit']) && is_numeric($_GET['edit'])){
 
@@ -159,7 +167,11 @@
   include 'views/admin/layout/header.php'; 
 ?>
 <?php 
-    $participants = getParticipantsDetails();
-    include 'views/admin/participants.php'; 
+    if($showView){
+        include 'views/admin/participant_view.php'; 
+    } else {
+        $participants = getParticipantsDetails();
+        include 'views/admin/participants.php'; 
+    }
 ?>
 <?php include 'views/admin/layout/footer.php'; ?>

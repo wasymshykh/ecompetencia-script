@@ -448,6 +448,26 @@
         return $s->fetch();
     }
 
+    function getUnconfirmedPartDetailsByComp($comp_id)
+    {
+        global $db;
+        $q = "SELECT * FROM `participants` p INNER JOIN `users` u ON p.user_ID = u.user_ID INNER JOIN `transactions` t ON p.participant_ID = t.participant_ID INNER JOIN `competitions` c ON p.competition_ID = c.competition_ID WHERE t.transaction_status='U' AND c.competition_ID=:compid";
+        $s = $db->prepare($q);
+        $s->execute(['compid'=>$comp_id]);
+        
+        return $s->fetchAll();
+    }
+
+    function getConfirmedPartDetailsByComp($comp_id)
+    {
+        global $db;
+        $q = "SELECT * FROM `participants` p INNER JOIN `users` u ON p.user_ID = u.user_ID INNER JOIN `transactions` t ON p.participant_ID = t.participant_ID INNER JOIN `competitions` c ON p.competition_ID = c.competition_ID WHERE t.transaction_status='P' AND c.competition_ID=:compid";
+        $s = $db->prepare($q);
+        $s->execute(['compid'=>$comp_id]);
+        
+        return $s->fetchAll();
+    }
+
     function getMembersOfParticipant($part_id)
     {
         global $db;

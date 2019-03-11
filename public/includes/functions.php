@@ -403,4 +403,19 @@
     }
 
 
+    // Get Ordered Institute by name 
+
+    function getOrderedInstitutes()
+    {
+        global $db;
+        $q = "SELECT * FROM `institutes` WHERE `institute_status`='E' ORDER BY `institute_name` ASC";
+        $s = $db->prepare($q);
+        $s->execute();
+        if($s->rowCount()>0){
+            return $s->fetchAll();
+        }
+        return false;
+    }
+
+
 ?>

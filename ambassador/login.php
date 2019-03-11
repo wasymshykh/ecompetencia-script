@@ -9,8 +9,6 @@
     $user_id = normal($_POST['user']);
     $password = normal($_POST['password']);
 
-    var_dump($_POST);
-
     if(!isAmbassador($user_id)){
       $errors[] = "Ambassador either not found or disabled!";
     }
