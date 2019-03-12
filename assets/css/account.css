@@ -124,7 +124,7 @@ h1,h2,h3,h4,h5,h6,p{
     display: flex;
     flex-wrap: wrap;
     margin-top: 15px;
-    margin-bottom: 25px;
+    margin-bottom: 0;
 }
 
 .d-detail-box {
@@ -760,6 +760,35 @@ h1,h2,h3,h4,h5,h6,p{
 }
 
 .d-msg-progress p a {
+    font-weight: 400;
+    color: #0b1921;
+    border-bottom: 1px solid #0b1921;
+}
+
+.d-msg-progress ul {
+    margin: 0;
+    padding: 0 2em;
+    list-style: none;
+}
+.d-msg-progress ul li {
+    font-size: 1.2em;
+    font-weight: 300;
+    letter-spacing: 1px;
+    color: #0b1921;
+    margin: 1em 0;
+    position: relative;
+}
+.d-msg-progress ul li::before {
+    content: "";
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: #85ab30;
+    position: absolute;
+    top: 6px;
+    left: -1em;
+}
+.d-msg-progress ul li a {
     font-weight: 400;
     color: #0b1921;
     border-bottom: 1px solid #0b1921;

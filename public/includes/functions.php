@@ -344,6 +344,17 @@
         return false;
     }
 
+    // Get all ambassadors 
+    function getAmbassadors()
+    {
+        global $db;
+        $q = "SELECT * FROM `ambassadors` a INNER JOIN `institutes` i ON a.institute_ID = i.institute_ID WHERE a.`ambassador_status` = 'E'";
+        $s = $db->prepare($q);
+        $s->execute();
+        
+        return $s->fetchAll();
+    }
+
     // Get all ambassadors of institute 
     function getInstituteAmbassadors($ins_id)
     {

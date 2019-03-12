@@ -18,15 +18,11 @@
         // verify selected ambassador exists 
         if(verifyAmbassador($selectedAmbassador)){
             $ambassador_details = getAmbassadorDetailsByID($selectedAmbassador);
-            if($user['institute_ID'] == $ambassador_details['institute_ID']){
-                if(setUserAmbassador($user['user_ID'], $ambassador_details['ambassador_ID'])){
-                    logger("User ID: ".$user['user_ID']." [".$user['user_fname']." ".$user['user_lname']."] just set up a ambassador ID: ".$ambassador_details['ambassador_ID']." [".$ambassador_details['ambassador_fname']." ".$ambassador_details['ambassador_lname']."].");
-                    header('location: '.URL.'/public/account.php');
-                } else {
-                    header('location: '.URL.'/public/account.php?error=update_ambassador');
-                }
+            if(setUserAmbassador($user['user_ID'], $ambassador_details['ambassador_ID'])){
+                logger("User ID: ".$user['user_ID']." [".$user['user_fname']." ".$user['user_lname']."] just set up a ambassador ID: ".$ambassador_details['ambassador_ID']." [".$ambassador_details['ambassador_fname']." ".$ambassador_details['ambassador_lname']."].");
+                header('location: '.URL.'/public/account.php');
             } else {
-                header('location: '.URL.'/public/account.php?error=invalid_ambassador');
+                header('location: '.URL.'/public/account.php?error=update_ambassador');
             }
         } else {
             header('location: '.URL.'/public/account.php');
@@ -35,7 +31,8 @@
     }
 
     if($user['ambassador_ID'] == NULL){
-        $ambassadors = getInstituteAmbassadors($user['institute_ID']);
+        //$ambassadors = getInstituteAmbassadors($user['institute_ID']);
+        $ambassadors = getAmbassadors();
     }
 
     $participations = getUserParticipation($_SESSION['user_id']);

@@ -54,7 +54,14 @@
                         $ambassador = getAmbassadorDetailsByID($user['ambassador_ID']);
                     ?>
                         <?=$ambassador['ambassador_fname'] . ' ' . $ambassador['ambassador_lname'] ?>
-                        <i><?=$ambassador['ambassador_phoneno']?></i>
+                        <i>
+                        <?php if($ambassador['ambassador_show'] == 'P'): ?>
+                            <?=$ambassador['ambassador_phoneno']?>
+                        <?php endif; ?>
+                        <?php if($ambassador['ambassador_show'] == 'E'): ?>
+                            <?=$ambassador['ambassador_email']?>
+                        <?php endif; ?>
+                        </i>
                         <a href="<?=URL?>/public/account.php?rm=ambassador">remove</a>
                     <?php else: ?>
                         <i>none</i>
@@ -63,9 +70,9 @@
                             <?php if(count($ambassadors) > 0): ?>
                             <form action="" method="POST" id="changeamm">
                                 <select name="selected_am" id="selectamm">
-                                    <option value=""></option>
+                                    <option value="">Select Ambassador...</option>
                                     <?php foreach($ambassadors as $ambassador): ?>
-                                    <option value="<?=$ambassador['ambassador_ID']?>"><?=$ambassador['ambassador_fname'].' '.$ambassador['ambassador_lname']?></option>
+                                    <option value="<?=$ambassador['ambassador_ID']?>"><?=$ambassador['ambassador_fname'].' '.$ambassador['ambassador_lname']. ' ['.$ambassador['institute_name'].']'?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </form>
@@ -90,6 +97,21 @@
 
     </div>
 
+    <div class="d-row">
+
+        <div class="d-title">
+            <h1><b>Payment</b> Procedure</h1>
+            <p>Confirm your participation as soon as possible</p>
+        </div>
+        <div class="d-msg-progress">
+            <ul>
+                <li>Submit your payment to <a href="<?=URL?>/ambassador.php" target="blank">ambassador</a> (first, set ambassador in your account).</li>
+                <li>Submit your payment at our desk (placed at Iqra University EDC Campus, KHI).</li>
+                <li>Submit your payment using jazz cash (03092681560) (kindly send the screenshot of trasaction ID/message on ecompetencia2019@gmail.com (Subject: Transaction)</li>
+            </ul>
+        </div>
+
+    </div>
 
     <div class="d-row">
 
