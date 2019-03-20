@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Ecompetencia Admin</title>
+    <title>Ecompetencia Ambassador</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
     <link rel="stylesheet" href="<?=AM_URL?>/assets/vendor/bootstrap/css/bootstrap.min.css">
@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="<?=AM_URL?>/assets/css/style.sea.css" id="theme-stylesheet">
 
-    <link rel="shortcut icon" href="<?=AM_URL?>/assets/img/favicon.ico">
+    <link rel="shortcut icon" href="<?=URL?>/favicon.ico">
     <!-- Tweaks for older IEs--><!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->

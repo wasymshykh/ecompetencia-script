@@ -344,17 +344,6 @@
         return false;
     }
 
-    // Get all ambassadors 
-    function getAmbassadors()
-    {
-        global $db;
-        $q = "SELECT * FROM `ambassadors` a INNER JOIN `institutes` i ON a.institute_ID = i.institute_ID WHERE a.`ambassador_status` = 'E'";
-        $s = $db->prepare($q);
-        $s->execute();
-        
-        return $s->fetchAll();
-    }
-
     // Get all ambassadors of institute 
     function getInstituteAmbassadors($ins_id)
     {
@@ -362,6 +351,25 @@
         $q = "SELECT * FROM `ambassadors` WHERE `institute_ID` = :insid";
         $s = $db->prepare($q);
         $s->execute(['insid'=>$ins_id]);
+        
+        return $s->fetchAll();
+    }
+    function getInstituteActiveAmbassadors($ins_id)
+    {
+        global $db;
+        $q = "SELECT * FROM `ambassadors` WHERE `institute_ID` = :insid AND `ambassador_status`='E'";
+        $s = $db->prepare($q);
+        $s->execute(['insid'=>$ins_id]);
+        
+        return $s->fetchAll();
+    }
+    // Get all ambassadors 
+    function getAmbassadors()
+    {
+        global $db;
+        $q = "SELECT * FROM `ambassadors` a INNER JOIN `institutes` i ON a.institute_ID = i.institute_ID WHERE a.`ambassador_status` = 'E'";
+        $s = $db->prepare($q);
+        $s->execute();
         
         return $s->fetchAll();
     }
@@ -412,10 +420,9 @@
         $s->execute(['catid'=>$comp_id]);
         return $s->fetch();
     }
-
+    
 
     // Get Ordered Institute by name 
-
     function getOrderedInstitutes()
     {
         global $db;

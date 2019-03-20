@@ -20,7 +20,7 @@
 
         <div class="row">
             <?php if($showEdit): ?>
-            <div class="col-lg-12 mb-5">
+            <div class="col-lg-8 mb-5">
                 <div class="card">
                     <div class="card-header">
                         <h4>Edit Participation</h4>
@@ -64,6 +64,52 @@
                     </div>
                 </div>
             </div>
+
+
+
+            <div class="col-lg-4 mb-5">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Edit Members</h4>
+                        <p style="margin-bottom:0;">
+                            <small>Leave blank for no member<br>
+                            <b>Currently selected</b> <span class="badge badge-dark"><?=$part['competition_name']?></span><br>
+                            <b>Minimum</b> <span class="badge badge-dark"><?=$part['competition_min']-1?></span> <small>members (excluding leader)</small><br>
+                            <b>Maximum</b> <span class="badge badge-dark"><?=$part['competition_max']-1?></span> <small>members (excluding leader)</small>
+                            </small>
+                        </p>
+                    </div>
+                    <div class="card-body">
+                        <?php if(!empty($member_error)):?>
+                        <div class="alert alert-danger">
+                            <?=$member_error;?>
+                        </div>
+                        <?php endif; ?>
+                        <?php if(!empty($member_success)):?>
+                        <div class="alert alert-success">
+                            <?=$member_success;?>
+                        </div>
+                        <?php endif; ?>
+                        <form action="" method="POST">
+                            <?php for($i = 0; $i < $part['competition_max']-1; $i++): ?>
+                            <div class="form-group">
+                                <label for="e_teammember_<?=$i?>">Team Member [<?=$i+1?>]</label>
+                                <input type="text" name="e_teammembers[]" id="e_teammember_<?=$i?>" class="form-control" placeholder="e.g. Ahmed Ali" 
+                                value="<?php
+                                        if(($i < count($teammember))) {
+                                            echo $teammember[$i]['member_name'];
+                                        }
+                                    ?>">
+                            </div>
+                            <?php endfor; ?>
+                            <div class="form-group mt-4">
+                                <input type="submit" value="Save" name="edit_members" class="btn btn-primary">
+                                <a href="<?=ADMIN_URL?>/participants.php" class="btn btn-default">Cancel</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
             <?php endif; ?>
 
 
@@ -74,7 +120,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-striped table-hover display nowrap" id="dtb">
+                            <table class="table table-striped table-hover table-sm dt-responsive display nowrap " id="dtb" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
                                         <th>Name</th>

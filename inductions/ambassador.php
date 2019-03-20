@@ -74,7 +74,7 @@
                 $experiencetext = NULL;
             }
 
-            $sqlQuery="INSERT INTO `ambassador_applicant` (`ambassador_fname`, `ambassador_lname`, `ambassador_email`, `ambassador_phoneno`, `ambassador_experience`, `institute_ID`, `ambassador_avatar`) 
+            $sqlQuery="INSERT INTO `ambassador_applicant` (`fname`, `lname`, `email`, `phoneno`, `experience`, `institute_ID`, `avatar`) 
             VALUES('$fname','$lname','$email','$phonenumber','$experiencetext',$institute,'$avatar_name')";
             $stmt = $db->prepare($sqlQuery);
             if($stmt->execute() === true){

@@ -124,7 +124,7 @@ h1,h2,h3,h4,h5,h6,p{
     display: flex;
     flex-wrap: wrap;
     margin-top: 15px;
-    margin-bottom: 0;
+    margin-bottom: 25px;
 }
 
 .d-detail-box {

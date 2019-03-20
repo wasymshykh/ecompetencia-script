@@ -132,7 +132,6 @@
         $s->execute(['id'=>$id]);
         return $s->fetch();
     }
-
     // Is ambassador applicant exists
     function isAmbassadorApplicant($id)
     {
@@ -145,6 +144,39 @@
         }
         return false;
     }
+    
+    // Get all ambassador approved applicants
+    function getAmbassadorsApproved($sortBy = 'ambassador_ID', $sortType = 'asc')
+    {
+        global $db;
+        $q = "SELECT * FROM `ambassadors` ORDER BY $sortBy $sortType";
+        $s = $db->prepare($q);
+        $s->execute();
+        return $s->fetchAll();
+    }
+
+    // Get a ambassador applicant
+    function getAmbassadorApproved($id)
+    {
+        global $db;
+        $q = "SELECT * FROM `ambassadors` WHERE `ambassador_ID`=:id";
+        $s = $db->prepare($q);
+        $s->execute(['id'=>$id]);
+        return $s->fetch();
+    }
+    // Is ambassador applicant exists
+    function isAmbassadorApproved($id)
+    {
+        global $db;
+        $q = "SELECT * FROM `ambassadors` WHERE `ambassador_ID`=:id";
+        $s = $db->prepare($q);
+        $s->execute(['id'=>$id]);
+        if($s->rowCount() === 1){
+            return true;
+        }
+        return false;
+    }
+    
     // Is ambassador applicant exists
     function isAmbassadorApplicantConfirm($id)
     {
@@ -430,6 +462,15 @@
         return $s->fetchAll();
     }
 
+    function getConfirmedParticipantsDetails()
+    {
+        global $db;
+        $q = "SELECT * FROM `participants` p INNER JOIN `users` u ON p.user_ID = u.user_ID INNER JOIN `transactions` t ON p.participant_ID = t.participant_ID INNER JOIN `competitions` c ON p.competition_ID = c.competition_ID WHERE t.transaction_status='P'";
+        $s = $db->prepare($q);
+        $s->execute();
+        return $s->fetchAll();
+    }
+
     function getPartDetailsById($part_id)
     {
         global $db;
@@ -447,7 +488,7 @@
         $s->execute(['partid'=>$part_id]);
         return $s->fetch();
     }
-
+    
     function getUnconfirmedPartDetailsByComp($comp_id)
     {
         global $db;

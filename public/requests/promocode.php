@@ -4,7 +4,6 @@
     header('Content-Type: application/json');
     session_start();
     if(isset($_SESSION['logged'])){
-
         // Handling here
         if(isset($_GET['promo'])){
 

@@ -6,14 +6,8 @@
   $showEdit = false;
   $user_success = false;
   $user_error = false;
-  $showView = false;
-
-  if(isset($_GET['view']) && !empty($_GET['edit']) && is_numeric($_GET['edit'])){
-    $part = getPartDetailsById(normal($_GET['edit']));
-    if(is_array($part) && count($part) > 0) {
-        $showView = true;
-    }
-  }
+  $member_success = false;
+  $member_error = false;
 
   if(isset($_GET['edit']) && !empty($_GET['edit']) && is_numeric($_GET['edit'])){
 
@@ -22,6 +16,90 @@
     if(is_array($part) && count($part) > 0) {
         $showEdit = true;
         $competitions = getCompetitions();
+        $teammember = getMembersOfParticipant($part['participant_ID']);
+
+        if(isset($_POST['edit_members'])){
+            $membersRaw = $_POST['e_teammembers'];
+            $members = [];
+            // calculating submitted members
+            foreach ($membersRaw as $memberRaw) {
+                if(!empty(normal($memberRaw))){
+                    $members[] = normal($memberRaw);
+                }
+            }
+
+            // checking min members
+            if(count($members) < ($part['competition_min']-1)){
+                $member_error = "Minimum ".($part['competition_min']-1)." members allowed";
+            }
+            if(!$member_error && (count($members) > ($part['competition_max']-1))){
+                $member_error = "Maximum ".($part['competition_max']-1)." members allowed";
+            }
+            if(!$member_error && $part['transaction_status'] == 'P'){
+                $member_error = "User has already paid for the competition!";
+            }
+
+            if(!$member_error){
+                $user_details = getUserDetailsById($part['user_ID']);
+                $amount = 0;
+                $discount = 0;
+                if($user_details['institute_type'] == 'E'){
+                    $amount = $part['competition_e_fee'] * (count($members)+1);
+                } else {
+                    $amount = $part['competition_i_fee'] * (count($members)+1);
+                }
+                $total = $amount;
+
+                $couponCheckQuery = "SELECT * FROM `coupon_used` u INNER JOIN `coupons` c ON u.coupon_ID = c.coupon_ID WHERE u.transaction_ID=".$part['transaction_ID'];
+                $stmt = $db->prepare($couponCheckQuery);
+                $stmt->execute();
+                $coupon_used = $stmt->fetch();
+
+                if(!empty($coupon_used)){
+                    if($coupon_used['coupon_type'] == 'P'){
+                        $discount = $amount * ($coupon_used['coupon_discount']/100);
+                        $total = $amount - $discount;
+                    } else {
+                        $discount = $coupon_used['coupon_discount'];
+                        $total = $amount - $discount;
+                    }
+                }
+
+                try {
+                    
+                    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                    $db->beginTransaction();
+
+                    // Removing members
+                    $q1 = "DELETE FROM `members` WHERE participant_ID=".$part['participant_ID'];
+                    $db->exec($q1);
+                    
+                    // Adding new members if any
+                    if(count($members) > 0){
+                        foreach ($members as $member) {
+                            $membersQuery = "INSERT INTO `members`(`member_name`, `participant_ID`) VALUE ('$member', '".$part['participant_ID']."')";
+                            $db->exec($membersQuery);
+                        }
+                    }
+
+                    // Transaction table updating
+                    $q2 = "UPDATE `transactions` SET `transaction_amount`=$amount, `transaction_discount`=$discount, `transaction_total`=$total WHERE participant_ID=".$part['participant_ID'];
+                    $db->exec($q2);
+
+                    $db->commit();
+
+                    $member_success = "Successfully updated the members!";
+                    $part = getPartDetailsById(normal($_GET['edit']));
+                    $teammember = getMembersOfParticipant($part['participant_ID']);
+
+                } catch(Exception $e){
+                    $member_error = "Sorry, we couldn't complete your request. Try again.";
+                }
+
+            }
+
+
+        }
 
         if(isset($_POST['edit_participant'])){
             $e_teamname = normal($_POST['e_teamname']);
@@ -167,11 +245,7 @@
   include 'views/admin/layout/header.php'; 
 ?>
 <?php 
-    if($showView){
-        include 'views/admin/participant_view.php'; 
-    } else {
-        $participants = getParticipantsDetails();
-        include 'views/admin/participants.php'; 
-    }
+    $participants = getParticipantsDetails();
+    include 'views/admin/participants.php'; 
 ?>
 <?php include 'views/admin/layout/footer.php'; ?>

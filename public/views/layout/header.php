@@ -7,7 +7,7 @@
     <title>Ecompetencia 2019</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
-
+    <link rel="shortcut icon" href="<?=URL?>/favicon.ico">
     <link rel="stylesheet" href="<?=URL?>/assets/css/slick.css">
     <link rel="stylesheet" href="<?=URL?>/assets/css/slick-theme.css">
 
@@ -47,8 +47,8 @@
                 <div class="nav-ul">
                     <ul class="nav-l">
                         <li><a id="aboutNav">About</a></li>
-                        <li><a href="<?=URL?>/inductions/team.php">Apply As Member</a></li>
-                        <li><a href="<?=URL?>/inductions/ambassador.php">Apply As Ambassador</a></li>
+                        <li><a href="<?=URL?>/team.php" id="r-3">Team</a></li>
+                        <li><a href="<?=URL?>/ambassador.php">Ambassador</a></li>
                         <li class="hasDrops">
                             <a>Competitions <i class="fas fa-caret-down"></i></a>
                             <ul>

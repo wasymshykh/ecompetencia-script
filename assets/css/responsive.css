@@ -56,6 +56,9 @@
         background-color: rgba(11, 25, 33,0.95);
         padding-bottom: 2em;
     }
+    #i-p .nav-ul.n-active  {
+        position: fixed;
+    }
     .nav-ul .nav-l {
         overflow: scroll;
     }

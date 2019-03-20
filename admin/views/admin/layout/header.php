@@ -58,23 +58,24 @@
           <ul id="side-main-menu" class="side-menu list-unstyled">                  
             <li><a href="index.php"><i class="icon-home"></i>Home</a></li>
             <?php if($_SESSION['management']['management_type'] === 'A'): ?>
-            <li><a href="#compdropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i> Competitions</a>
+            <li><a href="#compdropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-page"></i> Competitions</a>
               <ul id="compdropdownDropdown" class="collapse list-unstyled ">
                 <li><a href="competition_categories.php"><i class="icon-form"></i> Categories</a></li>
                 <li><a href="competitions.php"><i class="icon-form"></i> Competitions</a></li>
                 <li><a href="competition_details.php"><i class="icon-form"></i> Details</a></li>
               </ul>
             </li>
-            <li><a href="coupons.php"><i class="icon-form"></i> Coupons</a></li>
+            <li><a href="<?=ADMIN_URL?>/coupons.php"><i class="icon-grid"></i> Coupons</a></li>
+            <li><a href="ambassadors.php"><i class="icon-user"></i> Ambassadors</a></li>
             <?php endif; ?>
             <li><a href="#usersdropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i> Users</a>
               <ul id="usersdropdownDropdown" class="collapse list-unstyled ">
-                <li><a href="users.php"><i class="icon-user"></i> Manage Users</a></li>
-                <li><a href="participants.php"><i class="icon-form"></i> Manage Participants</a></li>
-                <li><a href="unconfirmed.php"><i class="icon-form"></i> Unconfirmed Participants</a></li>
+                <li><a href="users.php"><i class="icon-user"></i> Users</a></li>
+                <li><a href="participants.php"><i class="icon-flask"></i> Participants</a></li>
+                <li><a href="unconfirmed.php"><i class="icon-bill"></i> Unconfirmed</a></li>
               </ul>
             </li>
-            <li><a href="#emaildropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i> Email</a>
+            <li><a href="#emaildropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-mail"></i> Email</a>
               <ul id="emaildropdownDropdown" class="collapse list-unstyled ">
                 <li><a href="email_unconfirmed.php"><i class="icon-mail"></i> Unconfirmed Participants</a></li>
               </ul>

@@ -44,6 +44,7 @@
     width: 100%;
     display: flex;
     flex-wrap: wrap;
+    align-items: flex-start;
 }
 
 .content-d-teambox {
@@ -131,6 +132,31 @@
     text-align: center;
     background-color: #f26322;
 }
+
+@media screen and (max-width: 980px) {
+
+    .content-d-teambox {
+        flex: 29%;
+        max-width: 29%;
+        margin: 2em 2%;
+        padding: 2em 0;
+    }
+
+}
+@media screen and (max-width: 668px) {
+
+    .content-d-teambox {
+        flex: 48%;
+        max-width: 46%;
+        margin: 1em 2%;
+        padding: 1em 0;
+    }
+
+    .content-d-heading h1 {
+        font-size: 1.6em;
+    }
+
+}
     
 </style>
 
@@ -138,7 +164,7 @@
             
         <?php 
         foreach ($institutes as $institute):
-            $ambassadors = getInstituteAmbassadors($institute['institute_ID']);
+            $ambassadors = getInstituteActiveAmbassadors($institute['institute_ID']);
             if(!empty($ambassadors) && count($ambassadors) > 0):
             ?>
             <div class="content-department">
@@ -166,22 +192,6 @@
             endif; 
         endforeach;
         ?>
-            
-            <div class="content-department">
-                <div class="content-d-heading">
-                    <h1>Dawood University of Engineering and Technology</h1>
-                </div>
-                <div class="content-d-team">
-                    <div class="content-d-teambox">
-                        <img src="<?=URL?>/assets/img/ambassador/1551111011_eco.jpg">
-                        <div class="content-d-teambox-text">
-                            <h3>Amna Rasid</h3>
-                            <p>rashidamna603@gmail.com</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
             
             
         </div>

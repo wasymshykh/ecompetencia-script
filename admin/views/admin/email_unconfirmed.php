@@ -32,7 +32,7 @@
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label for="npass">To</label>
-                                        <input type="text" id="npass" class="form-control" placeholder="All Unconfirmed Participants" readonly>
+                                        <input type="text" id="npass" class="form-control" placeholder="<?=count(getUnconfirmedParticipantsDetails())?> Unconfirmed Participants" readonly>
                                     </div>
                                 </div>
                                 <div class="col-sm-12">

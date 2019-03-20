@@ -55,7 +55,13 @@
 
         <div class="c_content-right">
             <div class="cc-r-body">
-                <a href="<?=URL?>/register.php">Register Team</a>
+                <?php
+                    if(!isset($_SESSION['logged']) || empty($_SESSION['logged']) || !$_SESSION['logged']):
+                ?>
+                    <a href="<?=URL?>/register.php">Register Team</a>
+                <?php else: ?>
+                    <a href="<?=URL?>/public/participate.php">Participate</a>
+                <?php endif; ?>
                 <div class="cc-r-row">
                     <span><?=$competition['competition_min']?></span> Minimum Member(s)
                 </div>

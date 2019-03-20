@@ -66,6 +66,41 @@
     <div id="modal5" class="modal">
         <div class="modal-content">
             <h5 style="font-weight:300"><span style="font-weight:700;">Contact Us</span></h5>
+            <br /><br />
+            <table>
+                <tr>
+                    <th>Name</th>
+                     <th>Department</th> 
+                     <th>Mobile</th>
+                    </tr>
+                          <tr>
+                    <th>Jawwad</th>
+                     <th>Registration</th> 
+                     <th>0321-2134503 </th>
+                    </tr>
+                               <tr>
+                    <th>Abdul Rauf</th>
+                     <th>Registration</th> 
+                     <th>0343-2611737</th>
+                    </tr>
+                             <tr>
+                    <th>Anum Shakeel</th>
+                     <th>Registration</th>
+                     <th>0300-2751551</th> 
+
+                    </tr>
+                    <tr>
+                    <th>Sanaullah Asghar</th>
+                     <th>Registration</th> 
+                     <th>0304-3869953</th>
+                    </tr>
+                  <tr>
+                    <th>Aman Khan</th>
+                     <th>Marketing & Promotion</th> 
+                     <th>0311-2764682</th>
+                    </tr>
+          
+            </table>
         </div>
         <div class="modal-footer">
             <a href="https://www.facebook.com/IUEcompetencia/" target="blank" class="waves-effect btn" style="background:#85ab30"><i class="fab fa-facebook-f" style="font-size:0.9em;margin-right: 1em;"></i> Follow Us</a>

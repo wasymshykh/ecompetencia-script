@@ -163,7 +163,7 @@
                     <p>Participate and get a chance to Win prizes of worth up to <span>1.3 Lac</span></p>
                 </div>
                 <div class="heading-button">
-                    <a href="#">View More</a>
+                    <a href="<?=URL?>/competitions.php">View More</a>
                 </div>
             </div>
 
@@ -172,28 +172,28 @@
                     <div class="competition-title">
                         <h1>Computer Science</h1>
                     </div>
-                    <a href="#" class="comp-btn">Check <i class="fas fa-arrow-right"></i></a>
+                    <a href="<?=URL?>/competitions.php" class="comp-btn">Check <i class="fas fa-arrow-right"></i></a>
                 </div>
 
                 <div class="competition-box gaming-comp">
                     <div class="competition-title">
                         <h1>Gaming</h1>
                     </div>
-                    <a href="#" class="comp-btn">Check <i class="fas fa-arrow-right"></i></a>
+                    <a href="<?=URL?>/competitions.php" class="comp-btn">Check <i class="fas fa-arrow-right"></i></a>
                 </div>
             
                 <div class="competition-box electronics-comp">
                     <div class="competition-title">
                         <h1>Engineering</h1>
                     </div>
-                    <a href="#" class="comp-btn">Check <i class="fas fa-arrow-right"></i></a>
+                    <a href="<?=URL?>/competitions.php" class="comp-btn">Check <i class="fas fa-arrow-right"></i></a>
                 </div>
             
                 <div class="competition-box creative-comp">
                     <div class="competition-title">
                         <h1>Business & General</h1>
                     </div>
-                    <a href="#" class="comp-btn">Check <i class="fas fa-arrow-right"></i></a>
+                    <a href="<?=URL?>/competitions.php" class="comp-btn">Check <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
 
@@ -261,22 +261,11 @@
                     <div class="item">
                         <div class="team-box">
                             <div class="team-img">
-                                <img src="<?=URL?>/assets/img/team-4.jpg" alt="Khurram Abbas Sarani">
-                            </div>
-                            <div class="team-sub sub-team-4">
-                                <h3>Khurram Abbas</h3>
-                                <p>Marketing Head</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="team-box">
-                            <div class="team-img">
                                 <img src="<?=URL?>/assets/img/team-5.jpg" alt="Hina Khan">
                             </div>
                             <div class="team-sub sub-team-5">
                                 <h3>Hina Khan</h3>
-                                <p>Marketing Co-Head</p>
+                                <p>General Secretary</p>
                             </div>
                         </div>
                     </div>
@@ -328,6 +317,22 @@
                                     <div class="testi-content">
                                         <p>It was a wonderful way with 
                                                 ecompetencia last year. I worked as a team member but still learned soo much about new technologies and management. Go ecompetencia to the higher mounts of technologies & learnings.</p>
+                                    </div>
+                                </div>
+                            </div>
+                                       <div class="item">
+                                <div class="testi-box">
+                                    <div class="testi-img">
+                                        <img src="<?=URL?>/assets/img/testimony-img-11.jpg">
+                                    </div>
+                                    <div class="testi-name">
+                                        <h1>Hamees Shakil</h1>
+                                        <h3>Team Member Ecompetencia'18</h3>
+                                    </div>
+                                    <div class="testi-content">
+                                        <p>I worked as a member in ecompetencia 2018.Its was a great experience to work in a place where you can learn new things and also meet with different people of different professions.
+                                        .Inshalllah this time  Ecompentica 2019  is  bigger than the  last one.
+Thank you</p>
                                     </div>
                                 </div>
                             </div>

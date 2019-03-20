@@ -143,7 +143,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-striped table-hover display nowrap" id="dtb">
+                            <table class="table table-striped table-hover table-sm dt-responsive display nowrap " id="dtb" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
                                         <th>Name</th>
