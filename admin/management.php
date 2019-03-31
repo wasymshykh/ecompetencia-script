@@ -6,7 +6,39 @@
     $showNewModal = false;
     $showEdit = false;
     $error = false;
+    
+    $page_success = false;
+    $page_error = false;
 
+
+    if(isset($_POST['go_action'])){
+        if(isset($_POST['action']) && !empty(normal($_POST['action']))){
+            
+            $selects = $_POST['selected'];
+            
+            $status = 'E';
+            if(normal($_POST['action']) == 'ban'){
+                $status = 'D';
+            }
+            
+            $countSuccess = 0;
+            foreach($selects as $select){
+                $updateQuery = "UPDATE `management` SET 
+                `management_status`='$status' WHERE `management_ID`=".$select;
+                $stmt = $db->prepare($updateQuery);
+                if($stmt->execute()){
+                    $countSuccess++;
+                }
+            }
+            
+            if($countSuccess == count($selects)){
+                $page_success = "Hurrah! updated records. Successfully updated: $countSuccess records.";
+            } else {
+                $page_error = "Error! couldn't update some records. Successfully updated: $countSuccess records. Failed to update: ". (count($selects) - $countSuccess) ." records. " . count($select);
+            }
+            
+        }
+    }
 
 
     if(isset($_GET['toggle']) && !empty($_GET['toggle']) && is_numeric($_GET['toggle'])){

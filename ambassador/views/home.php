@@ -29,7 +29,7 @@
                     <div class="number">
                         <?php 
                             $amount = 0;
-                            $confirmed = getUnconfirmedParticipants($ambassador['ambassador_ID']);
+                            $confirmed = getConfirmedParticipants($ambassador['ambassador_ID']);
                             foreach ($confirmed as $c) {
                                 $amount += $c['transaction_total'];
                             }

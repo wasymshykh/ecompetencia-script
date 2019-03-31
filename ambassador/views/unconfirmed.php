@@ -71,7 +71,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h4>Assigned Unconfirmed Participants</h4>
-                        <p>List of participants those selected you as ambassador.</p>
+                        <p>List of those participants who selected you as ambassador.</p>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -85,7 +85,7 @@
                                         <th>Email</th>
                                         <th>Phone</th>
                                         <th>Due</th>
-                                        <th></th>
+                                        <th class="no-sort"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -106,6 +106,16 @@
                                     </tr>
                                     <?php endforeach; ?>
                                 </tbody>
+                                <tfoot>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <td></td>
+                                </tfoot>
                             </table>
                         </div>
                     </div>
@@ -120,8 +130,24 @@
 
 <script>
 $(document).ready(function() {
-    $('#dtb').DataTable({
-        "scrollX": true
+    $('#dtb tfoot th').each( function () {
+        var title = $('#dtb thead th').eq( $(this).index() ).text();
+        $(this).html( '<input type="text" class="form-control" placeholder="Search '+title+'" />' );
+    });
+    
+    var table = $('#dtb').DataTable({
+        "scrollX": true,
+        "columnDefs": [{
+          "targets": 'no-sort',
+          "orderable": false,
+        }]
+    });
+    
+    table.columns().every(function () {
+        var that = this;
+        $('input', this.footer()).on('keyup change', function() {
+            that.search(this.value).draw();
+        });
     });
 });
 </script>

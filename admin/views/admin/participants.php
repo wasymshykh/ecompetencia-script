@@ -126,27 +126,53 @@
                                         <th>Name</th>
                                         <th>Team Name</th>
                                         <th>Competition</th>
+                                        <th>Institute</th>
                                         <th>Registered On</th>
-                                        <th>Is Paid</th>
+                                        <th>Amount</th>
+                                        <th>Status</th>
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php foreach($participants as $participant): ?>
                                     <tr>
-                                        <td><?=$participant['user_fname'].' '.$participant['user_lname']?></td>
-                                        <td><?=$participant['participant_team']?><span class="badge badge-info"><?=count(getMembersOfParticipant($participant['participant_ID']))?> Members</span></td>
+                                        <td><?=$participant['user_fname'].' '.$participant['user_lname']?><br><?=$participant['user_phone']?></td>
+                                        <td><?=$participant['participant_team']?> <span class="badge badge-info"><?=count(getMembersOfParticipant($participant['participant_ID']))?> Members</span></td>
                                         <td><?=$participant['competition_name']?></td>
-                                        <td><?=$participant['participant_time']?></td>
-                                        <td><?=$participant['transaction_status']=='P'?$participant['transaction_total'].'PKR <span class="badge badge-success">PAID</span>':$participant['transaction_total'].'PKR <span class="badge badge-warning">NOT PAID</span>'?></td>
-                                        <td style="text-align:center">
+                                        <td><?=$participant['institute_name']?></td>
+                                        <td><?=normalTime($participant['participant_time'])?></td>
+                                        <td><?=$participant['transaction_total'].'PKR'?></td>
+                                        <td>
+                                            <?=$participant['transaction_status']=='P'?'<span class="badge badge-success">PAID</span>':'<span class="badge badge-warning">NOT PAID</span>'?>
+                                            <?=$participant['is_deleted']=='F'?'<span class="badge badge-success">Active</span>':'<span class="badge badge-danger">Deleted</span>'?>
+                                        </td>
+                                        <td class="no-sort" style="text-align:center">
                                             <a href="<?=ADMIN_URL?>/participants.php?edit=<?=$participant['participant_ID']?>" class="btn btn-primary btn-sm m-1">
                                                 <i class="fas fa-edit mr-2"></i> Edit
                                             </a>
+                                            <?php if($participant['is_deleted']=='F'): ?>
+                                            <a href="<?=ADMIN_URL?>/participants.php?delete=<?=$participant['participant_ID']?>" class="btn btn-danger btn-sm m-1">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </a>
+                                            <?php else: ?>
+                                            <a href="<?=ADMIN_URL?>/participants.php?activate=<?=$participant['participant_ID']?>" class="btn btn-success btn-sm m-1">
+                                                <i class="fas fa-check-circle"></i>
+                                            </a>
+                                            <?php endif; ?>
                                         </td>
                                     </tr>
                                     <?php endforeach; ?>
                                 </tbody>
+                                <tfoot>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <td></td>
+                                </tfoot>
                             </table>
                         </div>
                     </div>
@@ -162,8 +188,24 @@
 
 <script>
 $(document).ready(function() {
-    $('#dtb').DataTable({
-        "scrollX": true
+    $('#dtb tfoot th').each( function () {
+        var title = $('#dtb thead th').eq( $(this).index() ).text();
+        $(this).html( '<input type="text" class="form-control" placeholder="Search '+title+'" />' );
+    });
+    
+    var table = $('#dtb').DataTable({
+        "scrollX": true,
+        "columnDefs": [{
+          "targets": 'no-sort',
+          "orderable": false,
+        }]
+    });
+    
+    table.columns().every(function () {
+        var that = this;
+        $('input', this.footer()).on('keyup change', function() {
+            that.search(this.value).draw();
+        });
     });
 });
 </script>

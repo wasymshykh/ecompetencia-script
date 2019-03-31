@@ -206,6 +206,17 @@
                     <h4>Existing Users</h4>
                 </div>
                 <div class="card-body">
+                    <?php if(!empty($page_error)):?>
+                        <div class="alert alert-danger">
+                            <?=$page_error;?>
+                        </div>
+                    <?php endif; ?>
+                    <?php if(!empty($page_success)):?>
+                        <div class="alert alert-success">
+                            <?=$page_success;?>
+                        </div>
+                    <?php endif; ?>
+                    <form action="" method="POST">
                     <div class="table-responsive">
                         <table class="table table-striped table-hover">
                             <thead>
@@ -215,7 +226,10 @@
                                     <th>Email</th>
                                     <th>Phone</th>
                                     <th>Type</th>
-                                    <th></th>
+                                    <th colspan="2" class="text-right">
+                                        <button type="button" onclick='selectAll()' class="btn btn-sm btn-primary">select</button>
+		                                <button type="button" onclick='UnSelectAll()' class="btn btn-sm btn-secondary">unselect</button>
+	                                </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -234,28 +248,74 @@
 
                                     <td style="text-align:center">
                                         <a href="<?=ADMIN_URL?>/management.php?edit=<?=$management['management_ID']?>" class="btn btn-primary btn-sm m-1">
-                                            <i class="fas fa-edit mr-2"></i> Edit
+                                            <i class="fas fa-edit"></i>
                                         </a>
                                         <?php if($management['management_type'] != 'A'): ?>
                                             <?php if($management['management_status'] == 'D'): ?>
                                             <a href="<?=ADMIN_URL?>/management.php?toggle=<?=$management['management_ID']?>" class="btn btn-success btn-sm m-1">
-                                                <i class="fas fa-check-double mr-2"></i> Unban
+                                                <i class="fas fa-check-double"></i>
                                             </a>
                                             <?php else: ?>
                                             <a href="<?=ADMIN_URL?>/management.php?toggle=<?=$management['management_ID']?>" class="btn btn-danger btn-sm m-1">
-                                                <i class="fas fa-ban mr-2"></i> Ban
+                                                <i class="fas fa-ban"></i>
                                             </a>
                                             <?php endif; ?>
                                         <?php endif; ?>
                                     </td>
+                                    <td>
+                                        <input type="checkbox" id="eCheck" name="selected[]" value="<?=$management['management_ID']?>" style="width: 20px;height: 20px;">
+                                    </td>
                                 </tr>
                                 <?php endforeach; ?>
                             </tbody>
+                            <tfoot>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td colspan="2">
+                                    <div class="row">
+                                        <div class="col-sm-9 p-0">
+                                            <select name="action" class="form-control col-sm-12" required>
+                                                <option value="">--bulk action--</option>
+                                                <option value="ban">Ban</option>
+                                                <option value="unban">Unban</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-3 p-0">
+                                            <input type="submit" name="go_action" value="Go" class="btn btn-primary col-sm-12">
+                                        </div>
+                                    </div>
+                                </td>
+                            </tfoot>
                         </table>
                     </div>
+                    </form>
                 </div>
             </div>
         </div>
 
     </div>
 </section>
+
+
+<script type="text/javascript">
+
+    function selectAll() {
+        var items = document.getElementsByName('selected[]');
+        for (var i = 0; i < items.length; i++) {
+            if (items[i].type == 'checkbox')
+                items[i].checked = true;
+        }
+    }
+
+    function UnSelectAll() {
+        var items = document.getElementsByName('selected[]');
+        for (var i = 0; i < items.length; i++) {
+            if (items[i].type == 'checkbox')
+                items[i].checked = false;
+        }
+    }	
+
+</script>

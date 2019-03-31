@@ -227,26 +227,116 @@
                     </div>
                 </div>
             </div>
+                        <div class="content-department">
+                <div class="content-d-heading">
+                    <h1>Core Members</h1>
+                </div>
+                <div class="content-d-team">
+                    <div class="content-d-teambox">
+                        <img src="<?=URL?>/assets/img/team/faisal.jpeg">
+                        <div class="content-d-teambox-text">
+                            <h3>Faisal Ilyas</h3>
+                            <p>Registration Head</p>
+                        </div>
+                    </div>
+          
+                       <div class="content-d-teambox">
+                        <img src="<?=URL?>/assets/img/team/mujahid.jpg">
+                        <div class="content-d-teambox-text">
+                            <h3>Mujahid Siddiqui</h3>
+                            <p>Management Head</p>
+                        </div>
+                    </div>
+                    <div class="content-d-teambox">
+                        <img src="<?=URL?>/assets/img/team/shujaa.jpg">
+                        <div class="content-d-teambox-text">
+                            <h3>Shujaa Ahmed</h3>
+                            <p>Management Head</p>
+                        </div>
+                    </div>
+                       <div class="content-d-teambox">
+                        <img src="<?=URL?>/assets/img/team/ather.jpg">
+                        <div class="content-d-teambox-text">
+                            <h3>Ather Imam Danish</h3>
+                            <p>Management Head</p>
+                        </div>
+                    </div>
+               
+                       <div class="content-d-teambox">
+                        <img src="<?=URL?>/assets/img/team/waris.jpeg">
+                        <div class="content-d-teambox-text">
+                            <h3>Waris Khan</h3>
+                            <p>Management Head</p>
+                        </div>
+                    </div>
+                    
+                       <div class="content-d-teambox">
+                        <img src="<?=URL?>/assets/img/team/naina.jpeg">
+                        <div class="content-d-teambox-text">
+                            <h3>Nayab Kanwal Shah</h3>
+                            <p>Ambassador Head</p>
+                        </div>
+                    </div>
+                          <div class="content-d-teambox">
+                        <img src="<?=URL?>/assets/img/team/osama.jpg">
+                        <div class="content-d-teambox-text">
+                            <h3>Osama Mohsin</h3>
+                            <p>Ambassador Head</p>
+                        </div>
+                    </div>
+                              <div class="content-d-teambox">
+                        <img src="<?=URL?>/assets/img/team/jawwad.jpg">
+                        <div class="content-d-teambox-text">
+                            <h3>Jawwad</h3>
+                            <p>Registration Lead</p>
+                        </div>
+                    </div>
             
+                         <div class="content-d-teambox">
+                        <img src="<?=URL?>/assets/img/team/rauf.jpg">
+                        <div class="content-d-teambox-text">
+                            <h3>Abdul Rauf</h3>
+                            <p>Registraion Co-Lead</p>
+                        </div>
+                    </div>
+                          <div class="content-d-teambox">
+                        <img src="<?=URL?>/assets/img/team/sunny.jpg">
+                        <div class="content-d-teambox-text">
+                            <h3>Sanaullah Asghar</h3>
+                            <p>Ambassador Co-ordinator</p>
+                        </div>
+                    </div>
+                         <div class="content-d-teambox">
+                        <img src="<?=URL?>/assets/img/team/hamzac.jpg">
+                        <div class="content-d-teambox-text">
+                            <h3>Hamza C. Ali</h3>
+                            <p>Ambassador Co-ordinator</p>
+                        </div>
+                    </div>
+                           <div class="content-d-teambox">
+                        <img src="<?=URL?>/assets/img/team/sarah.jpg">
+                        <div class="content-d-teambox-text">
+                            <h3>Sarah Anwer</h3>
+                            <p>Marketing Head</p>
+                        </div>
+                    </div>
+                         <div class="content-d-teambox">
+                        <img src="<?=URL?>/assets/img/team/aman.jpg">
+                        <div class="content-d-teambox-text">
+                            <h3>Aman Khan</h3>
+                            <p>Marketing Co-Head</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="content-department">
                 <div class="content-d-heading">
                     <h1>Marketing & Promotion</h1>
                 </div>
                 <div class="content-d-team">
-                    <div class="content-d-teambox">
-                        <img src="<?=URL?>/assets/img/team/team-1-lead.jpg">
-                        <div class="content-d-teambox-text">
-                            <h3>Sarah Anwar</h3>
-                            <p>Lead</p>
-                        </div>
-                    </div>
-                    <div class="content-d-teambox">
-                        <img src="<?=URL?>/assets/img/team/team-1-colead.jpg">
-                        <div class="content-d-teambox-text">
-                            <h3>Aman Khan Rikki</h3>
-                            <p>Co Lead</p>
-                        </div>
-                    </div>
+             
+            
                     <div class="content-d-teammember">
                         <div class="content-d-teammember-box">
                             <h3>Hira Tariq</h3>
@@ -268,10 +358,7 @@
                             <h3>Areesha Khateeb</h3>
                             <p>member</p>
                         </div>
-                        <div class="content-d-teammember-box">
-                            <h3>Din Muhammad</h3>
-                            <p>member</p>
-                        </div>
+                  
                         <div class="content-d-teammember-box">
                             <h3>Mutahar Jamal</h3>
                             <p>member</p>
@@ -283,34 +370,16 @@
                     </div>
                 </div>
                 <div class="content-d-teammembermore">
-                    <div class="content-d-teammember-box">
-                        <h3>Muhammad Muzammil</h3>
-                        <p>member</p>
-                    </div>
-                            <div class="content-d-teammember-box">
-                        <h3>Mehroz Rahi</h3>
-                        <p>member</p>
-                    </div>
-                    <div class="content-d-teammember-box">
-                        <h3>Maryam Naz</h3>
-                        <p>member</p>
-                    </div>
-                    <div class="content-d-teammember-box">
-                        <h3>Faraz Rathore</h3>
-                        <p>member</p>
-                    </div>
+             
+          
+             
+               
                     <div class="content-d-teammember-box">
                         <h3>Siraj Khan</h3>
                         <p>member</p>
                     </div>
-                    <div class="content-d-teammember-box">
-                        <h3>Daniel Noel</h3>
-                        <p>member</p>
-                    </div>
-                    <div class="content-d-teammember-box">
-                        <h3>Tazeen Alam</h3>
-                        <p>member</p>
-                    </div>
+              
+       
                           <div class="content-d-teammember-box">
                         <h3>Asma Arif</h3>
                         <p>member</p>
@@ -323,47 +392,22 @@
                         <h3>Moaish Pasha</h3>
                         <p>member</p>
                     </div>
-                    <div class="content-d-teammember-box">
-                        <h3>Sajida(Erifa)</h3>
-                        <p>member</p>
-                    </div>
-                    <div class="content-d-teammember-box">
-                        <h3>Sharjeel Naz</h3>
-                        <p>member</p>
-                    </div>
+           
+             
                     <div class="content-d-teammember-box">
                         <h3>Syed Mehtab Shah</h3>
                         <p>member</p>
                     </div>
-                    <div class="content-d-teammember-box">
-                        <h3>Sumbul Wasi</h3>
-                        <p>member</p>
-                    </div>
-                    <div class="content-d-teammember-box">
-                        <h3>Hannan Khan</h3>
-                        <p>member</p>
-                    </div>
-                    
-                    <div class="content-d-teammember-box">
-                        <h3>Salim Khan</h3>
-                        <p>member</p>
-                    </div>
+
+         
+           
                     <div class="content-d-teammember-box">
                         <h3>Ahmed Majid</h3>
                         <p>member</p>
                     </div>
-                    <div class="content-d-teammember-box">
-                        <h3>Fanila Javed</h3>
-                        <p>member</p>
-                    </div>
-                    <div class="content-d-teammember-box">
-                        <h3>Muhammad Noman</h3>
-                        <p>member</p>
-                    </div>
-                    <div class="content-d-teammember-box">
-                        <h3>Hassan Tariq Ahmed</h3>
-                        <p>member</p>
-                    </div>
+          
+          
+          
                     <div class="content-d-teammember-box">
                         <h3>Abdul Rehman</h3>
                         <p>member</p>
@@ -372,14 +416,7 @@
                         <h3>Basit Siddiqui</h3>
                         <p>member</p>
                     </div>
-                    <div class="content-d-teammember-box">
-                        <h3>Kainat Rizwan</h3>
-                        <p>member</p>
-                    </div>
-                    <div class="content-d-teammember-box">
-                        <h3>Shehroz Lodhi</h3>
-                        <p>member</p>
-                    </div>
+          
                 </div>
             </div>
             
@@ -435,10 +472,7 @@
                         <h3>Yawar</h3>
                         <p>member</p>
                     </div>
-                    <div class="content-d-teammember-box">
-                        <h3>Abdul Rehman Khan</h3>
-                        <p>member</p>
-                    </div>
+          
                     <div class="content-d-teammember-box">
                         <h3>Sufiyan Anis</h3>
                         <p>member</p>
@@ -459,10 +493,7 @@
                         <h3>Omair Akram</h3>
                         <p>member</p>
                     </div>
-                    <div class="content-d-teammember-box">
-                        <h3>Waqas Abbas</h3>
-                        <p>member</p>
-                    </div>
+               
                     <div class="content-d-teammember-box">
                         <h3>Faisal Amin</h3>
                         <p>member</p>
@@ -481,28 +512,9 @@
                     <h1>Registration</h1>
                 </div>
                 <div class="content-d-team content-3d-team">
-                    <div class="content-d-teambox">
-                        <img src="<?=URL?>/assets/img/team/team-3-lead.jpg">
-                        <div class="content-d-teambox-text">
-                            <h3>Mohd Jawwad</h3>
-                            <p>Lead</p>
-                        </div>
-                    </div>
-                    <div class="content-d-teambox">
-                        <img src="<?=URL?>/assets/img/team/team-3-colead1.jpg">
-                        <div class="content-d-teambox-text">
-                            <h3>Anum Shakeel</h3>
-                            <p>Co Lead</p>
-                        </div>
-                    </div>
-                    <div class="content-d-teambox">
-                        <img src="<?=URL?>/assets/img/team/team-3-colead2.jpg">
-                        <div class="content-d-teambox-text">
-                            <h3>Abdul Rauf</h3>
-                            <p>Co Lead</p>
-                        </div>
-                    </div>
-                    <div class="content-d-teammember">
+               
+          
+                                  <div class="content-d-teammember">
                         <div class="content-d-teammember-box">
                             <h3>Nandia Kumari</h3>
                             <p>member</p>
@@ -518,10 +530,7 @@
                     </div>
                 </div>
                 <div class="content-d-teammembermore">
-                    <div class="content-d-teammember-box">
-                        <h3>Shams Hashmi</h3>
-                        <p>member</p>
-                    </div>
+            
                     <div class="content-d-teammember-box">
                         <h3>Aqsa Ibrahim</h3>
                         <p>member</p>
@@ -534,34 +543,15 @@
                         <h3>Lajeen Khan</h3>
                         <p>member</p>
                     </div>
-                    <div class="content-d-teammember-box">
-                        <h3>Atif Ayaz</h3>
-                        <p>member</p>
-                    </div>
-                    <div class="content-d-teammember-box">
-                        <h3>Chander Prakash</h3>
-                        <p>member</p>
-                    </div>
-                    <div class="content-d-teammember-box">
-                        <h3>Hamza C. Ali</h3>
-                        <p>member</p>
-                    </div>
-                    <div class="content-d-teammember-box">
-                        <h3>Sharjeel Naz</h3>
-                        <p>member</p>
-                    </div>
+            
+            
+            
                     <div class="content-d-teammember-box">
                         <h3>Adil Ahmed Khan</h3>
                         <p>member</p>
                     </div>
-                    <div class="content-d-teammember-box">
-                        <h3>Farrukh Channa</h3>
-                        <p>member</p>
-                    </div>
-                    <div class="content-d-teammember-box">
-                        <h3>Babar Shawn</h3>
-                        <p>member</p>
-                    </div>
+          
+
                     <div class="content-d-teammember-box">
                         <h3>Anoshi Pehwani</h3>
                         <p>member</p>
@@ -570,10 +560,7 @@
                         <h3>Amjad Hassan</h3>
                         <p>member</p>
                     </div>
-                    <div class="content-d-teammember-box">
-                        <h3>Sana Ullah Asghar</h3>
-                        <p>member</p>
-                    </div>
+             
                     <div class="content-d-teammember-box">
                         <h3>Muskan Wadwani</h3>
                         <p>member</p>
@@ -586,14 +573,8 @@
                         <h3>Arshman Naeem</h3>
                         <p>member</p>
                     </div>
-                    <div class="content-d-teammember-box">
-                        <h3>Affan Siddiqui</h3>
-                        <p>member</p>
-                    </div>
-                    <div class="content-d-teammember-box">
-                        <h3>Waleed Ahmed</h3>
-                        <p>member</p>
-                    </div>
+            
+            
                 </div>
             </div>
             
@@ -602,29 +583,12 @@
                     <h1>Management & Logistics</h1>
                 </div>
                 <div class="content-d-team">
-                    <div class="content-d-teambox">
-                        <img src="<?=URL?>/assets/img/team/team-4-lead.jpg">
-                        <div class="content-d-teambox-text">
-                            <h3>Ather Imam</h3>
-                            <p>Lead</p>
-                        </div>
-                    </div>
-                    <div class="content-d-teambox">
-                        <img src="<?=URL?>/assets/img/team/team-4-colead.jpg">
-                        <div class="content-d-teambox-text">
-                            <h3>Shujaa Ahmed</h3>
-                            <p>Co Lead</p>
-                        </div>
-                    </div>
-                    <div class="content-d-teammember">
+                                <div class="content-d-teammember">
                         <div class="content-d-teammember-box">
                             <h3>Humail Nadeem</h3>
                             <p>member</p>
                         </div>
-                        <div class="content-d-teammember-box">
-                            <h3>Baqar Ansari</h3>
-                            <p>member</p>
-                        </div>
+              
                         <div class="content-d-teammember-box">
                             <h3>Akshay Kumar</h3>
                             <p>member</p>
@@ -633,14 +597,8 @@
                             <h3>Arsalan Mehboob</h3>
                             <p>member</p>
                         </div>
-                        <div class="content-d-teammember-box">
-                            <h3>Arish Lakhani</h3>
-                            <p>member</p>
-                        </div>
-                        <div class="content-d-teammember-box">
-                            <h3>Umair Akram</h3>
-                            <p>member</p>
-                        </div>
+                
+                
                     </div>
                 </div>
                 <div class="content-d-teammembermore">
@@ -648,42 +606,21 @@
                         <h3>Hadiqa Khan</h3>
                         <p>member</p>
                     </div>
-                    <div class="content-d-teammember-box">
-                        <h3>Danish Naqvi</h3>
-                        <p>member</p>
-                    </div>
-                    <div class="content-d-teammember-box">
-                        <h3>Fahad Shamim</h3>
-                        <p>member</p>
-                    </div>
-                    <div class="content-d-teammember-box">
-                        <h3>Shahmeer Khan</h3>
-                        <p>member</p>
-                    </div>
+
+             
+             
                     <div class="content-d-teammember-box">
                         <h3>Sahar Shakeel</h3>
                         <p>member</p>
                     </div>
-                    <div class="content-d-teammember-box">
-                        <h3>Sanan Noorani</h3>
-                        <p>member</p>
-                    </div>
+           
                     <div class="content-d-teammember-box">
                         <h3>Arbaz Shahid</h3>
                         <p>member</p>
                     </div>
-                    <div class="content-d-teammember-box">
-                        <h3>Din Muhammad</h3>
-                        <p>member</p>
-                    </div>
-                    <div class="content-d-teammember-box">
-                        <h3>Muhammad Ahsan Khalid</h3>
-                        <p>member</p>
-                    </div>
-                    <div class="content-d-teammember-box">
-                        <h3>Hamza Niaz</h3>
-                        <p>member</p>
-                    </div>
+           
+         
+           
                     <div class="content-d-teammember-box">
                         <h3>Muhammad Rahim</h3>
                         <p>member</p>
@@ -700,10 +637,7 @@
                         <h3>Hasnain Abbas</h3>
                         <p>member</p>
                     </div>
-                    <div class="content-d-teammember-box">
-                        <h3>M. Aswad Shiekh</h3>
-                        <p>member</p>
-                    </div>
+
                     <div class="content-d-teammember-box">
                         <h3>Ammar Siddiqui</h3>
                         <p>member</p>
@@ -716,10 +650,7 @@
                         <h3>Ahmed Shiwani</h3>
                         <p>member</p>
                     </div>
-                    <div class="content-d-teammember-box">
-                        <h3>Ibrahim Irtiza</h3>
-                        <p>member</p>
-                    </div>
+               
                     <div class="content-d-teammember-box">
                         <h3>Obaid Ur Rehman</h3>
                         <p>member</p>

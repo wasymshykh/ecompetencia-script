@@ -7,6 +7,10 @@
     </div>
 </div>
 
+<?php 
+    $emailtono = count(getUnconfirmedParticipantsDetails());
+?>
+
 <section>
     <div class="container-fluid">
         <div class="row mt-4">
@@ -27,12 +31,13 @@
                                 <?=$error_mail;?>
                             </div>
                         <?php endif; ?>
-                        <form action="" method="POST">
+                        <form action="" method="POST" id="emailsubmit">
+                            <input type="hidden" name="send_mail" value="true">
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label for="npass">To</label>
-                                        <input type="text" id="npass" class="form-control" placeholder="<?=count(getUnconfirmedParticipantsDetails())?> Unconfirmed Participants" readonly>
+                                        <input type="text" id="npass" class="form-control" placeholder="<?=$emailtono?> Unconfirmed Participants" readonly>
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
@@ -56,13 +61,25 @@
                             <div class="line"></div>
                             <div class="form-group row">
                                 <div class="col-sm-12 text-center">
-                                    <button type="submit" name="send_mail" class="btn btn-primary">Send Email</button>
+                                    <button type="submit" name="sen_mail" class="btn btn-primary" id="sndma">Send Email</button>
                                 </div>
                             </div>
                        </form>
                     </div>
                 </div>
             </div>
+            
+            <script>
+                document.querySelector('#sndma').addEventListener('click', (e)=> {
+                    e.preventDefault();
+                    if(confirm('Are you sure?')){
+                        let msg = prompt('Email will be sent to <?=$emailtono?>. Please type "YES" in the box to start operation.')
+                        if(msg == "YES"){
+                            document.querySelector('#emailsubmit').submit();
+                        }
+                    }
+                })
+            </script>
 
             <div class="col-lg-6">
                 <div class="card">

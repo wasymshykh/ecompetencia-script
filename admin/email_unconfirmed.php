@@ -57,27 +57,27 @@
                 </table>
             ';
             
-            // if(mail($to, $subject, $message, implode("\r\n", $headers))){
-            //     $log_content = normal($content);
-            //     $log_comment = "Subject: ".normal($subject)." - Email sent in bulk. Sending was initiated by: ".$_SESSION['management']['management_fname'] . ' '. $_SESSION['management']['management_lname'] . ' (ID: '.$_SESSION['management']['management_ID'].')';
-            //     $query = "INSERT INTO `email_logs` (`log_email`, `log_content`, `log_comment`, `log_type`) VALUE ($to, $log_content, $log_comment, 'S')";
-            //     $stmt = $db->prepare($query);
-            //     $stmt->execute();
-            //     $success_count++;
-            // } else {
-            //   $log_content = normal($content);
-            //   $log_comment = "Subject: ".normal($subject)." - Email failed while sending in bulk. Sending was initiated by: ".$_SESSION['management']['management_fname'] . ' '. $_SESSION['management']['management_lname'] . ' (ID: '.$_SESSION['management']['management_ID'].')';
-            //   $query = "INSERT INTO `email_logs` (`log_email`, `log_content`, `log_comment`, `log_type`) VALUE ($to, $log_content, $log_comment, 'F')";
-            //   $stmt = $db->prepare($query);
-            //   $stmt->execute();
-            //   $error_count++;
-            // }
+            if(mail($to, $subject, $message, implode("\r\n", $headers))){
+                 $log_content = normal($content);
+                 $log_comment = "Subject: ".normal($subject)." - Email sent in bulk. Sending was initiated by: ".$_SESSION['management']['management_fname'] . ' '. $_SESSION['management']['management_lname'] . ' (ID: '.$_SESSION['management']['management_ID'].')';
+                 $query = "INSERT INTO `email_logs` (`log_email`, `log_content`, `log_comment`, `log_type`) VALUE ($to, $log_content, $log_comment, 'S')";
+                 $stmt = $db->prepare($query);
+                 $stmt->execute();
+                 $success_count++;
+            } else {
+               $log_content = normal($content);
+               $log_comment = "Subject: ".normal($subject)." - Email failed while sending in bulk. Sending was initiated by: ".$_SESSION['management']['management_fname'] . ' '. $_SESSION['management']['management_lname'] . ' (ID: '.$_SESSION['management']['management_ID'].')';
+               $query = "INSERT INTO `email_logs` (`log_email`, `log_content`, `log_comment`, `log_type`) VALUE ($to, $log_content, $log_comment, 'F')";
+               $stmt = $db->prepare($query);
+               $stmt->execute();
+               $error_count++;
+            }
             
         }
 
-        // $success_mail = "Total Sent: <b>$success_count</b>";
-        // $error_mail = "Not sent: <b>$error_count</b>";
-        $error_mail = "OPTION IS CURRENTLY DISABLED. CONTACT DEVELOPER.";
+        $success_mail = "Total Sent: <b>$success_count</b>";
+        $error_mail = "Not sent: <b>$error_count</b>";
+        //$error_mail = "OPTION IS CURRENTLY DISABLED. CONTACT DEVELOPER.";
 
     }
 

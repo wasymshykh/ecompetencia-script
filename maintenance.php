@@ -15,13 +15,13 @@
 
     <div id="centermain">
         <h1>Maintenance!</h1>
-        <h3>Team <span>Ecompetencia</span> is updating script. Stay tuned!</h3>
+        <h3>Team <span>Ecompetencia</span> performinng data maintenance. Be right back.</h3>
         <div class="social">
             <div class="social-box">
                 <a href="https://www.facebook.com/IUEcompetencia"><i class="fab fa-facebook-f"></i></a>
             </div>
             <div class="social-box">
-                <a href="https://www.instagram.com/iuacm/"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.instagram.com/ecompetencia.iu/"><i class="fab fa-instagram"></i></a>
             </div>
 
         </div>

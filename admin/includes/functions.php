@@ -7,6 +7,12 @@
         }
         return '';
     }
+    // normalize time
+    function normalTime($dbT) {
+        $d=strtotime($dbT);
+        
+        return date("d/m/Y h:ia", $d);
+    }
 
     function back($data)
     {
@@ -150,6 +156,15 @@
     {
         global $db;
         $q = "SELECT * FROM `ambassadors` ORDER BY $sortBy $sortType";
+        $s = $db->prepare($q);
+        $s->execute();
+        return $s->fetchAll();
+    }
+    // Get all ambassador approved applicants
+    function getAmbassadorsApprovedDetails($sortBy = 'ambassador_ID', $sortType = 'asc')
+    {
+        global $db;
+        $q = "SELECT * FROM `ambassadors` a JOIN `institutes` i ON a.institute_ID = i.institute_ID ORDER BY $sortBy $sortType";
         $s = $db->prepare($q);
         $s->execute();
         return $s->fetchAll();
@@ -403,6 +418,15 @@
         $s->execute(['userid'=>$user_id]);
         return $s->fetch();
     }
+    // Get specific user details by id
+    function getUserDetailsById2($user_id)
+    {
+        global $db;
+        $q = 'SELECT * FROM `users` u JOIN `institutes` i ON u.institute_ID = i.institute_ID WHERE `user_ID`=:userid';
+        $s = $db->prepare($q);
+        $s->execute(['userid'=>$user_id]);
+        return $s->fetch();
+    }
 
     // Get specific management details by id
     function getManagementDetailsById($user_id)
@@ -447,7 +471,7 @@
     function getParticipantsDetails()
     {
         global $db;
-        $q = 'SELECT * FROM `participants` p INNER JOIN `users` u ON p.user_ID = u.user_ID INNER JOIN `transactions` t ON p.participant_ID = t.participant_ID INNER JOIN `competitions` c ON p.competition_ID = c.competition_ID';
+        $q = 'SELECT * FROM `participants` p INNER JOIN `users` u ON p.user_ID = u.user_ID INNER JOIN `transactions` t ON p.participant_ID = t.participant_ID INNER JOIN `competitions` c ON p.competition_ID = c.competition_ID INNER JOIN `institutes` i ON u.institute_ID = i.institute_ID';
         $s = $db->prepare($q);
         $s->execute();
         return $s->fetchAll();
@@ -461,11 +485,20 @@
         $s->execute();
         return $s->fetchAll();
     }
-
+    
     function getConfirmedParticipantsDetails()
     {
         global $db;
         $q = "SELECT * FROM `participants` p INNER JOIN `users` u ON p.user_ID = u.user_ID INNER JOIN `transactions` t ON p.participant_ID = t.participant_ID INNER JOIN `competitions` c ON p.competition_ID = c.competition_ID WHERE t.transaction_status='P'";
+        $s = $db->prepare($q);
+        $s->execute();
+        return $s->fetchAll();
+    }
+    
+    function getConfirmedParticipantsDetailsPage()
+    {
+        global $db;
+        $q = "SELECT * FROM `participants` p INNER JOIN `users` u ON p.user_ID = u.user_ID INNER JOIN `transactions` t ON p.participant_ID = t.participant_ID INNER JOIN `transaction_details` td ON t.transaction_ID = td.transaction_ID INNER JOIN `competitions` c ON p.competition_ID = c.competition_ID WHERE t.transaction_status='P'";
         $s = $db->prepare($q);
         $s->execute();
         return $s->fetchAll();

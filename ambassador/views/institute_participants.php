@@ -95,7 +95,7 @@
                                         <td><?=$participant['user_email']?></td>
                                         <td><?=$participant['user_phone']?></td>
                                         <td><?=$participant['transaction_total'].' PKR'?></td>
-                                        <td style="text-align:center">
+                                        <td style="text-align:center" class="no-sort">
                                             <a href="<?=AM_URL?>/institute_participants.php?confirm=<?=$participant['participant_ID']?>" class="btn btn-primary btn-sm m-1">
                                                 <i class="fas fa-check mr-2"></i> Confirm
                                             </a>
@@ -103,6 +103,17 @@
                                     </tr>
                                     <?php endforeach; ?>
                                 </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Team Name</th>
+                                        <th>Competition</th>
+                                        <th>Email</th>
+                                        <th>Phone</th>
+                                        <th>Due</th>
+                                        <th></th>
+                                    </tr>
+                                </tfoot>
                             </table>
                         </div>
                     </div>
@@ -117,8 +128,24 @@
 
 <script>
 $(document).ready(function() {
-    $('#dtb').DataTable({
-        "scrollX": true
+    $('#dtb tfoot th').each( function () {
+        var title = $('#dtb thead th').eq( $(this).index() ).text();
+        $(this).html( '<input type="text" class="form-control" placeholder="Search '+title+'" />' );
+    });
+    
+    var table = $('#dtb').DataTable({
+        "scrollX": true,
+        "columnDefs": [{
+          "targets": 'no-sort',
+          "orderable": false,
+        }]
+    });
+    
+    table.columns().every(function () {
+        var that = this;
+        $('input', this.footer()).on('keyup change', function() {
+            that.search(this.value).draw();
+        });
     });
 });
 </script>

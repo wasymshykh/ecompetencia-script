@@ -31,12 +31,12 @@
 
   if(isset($_GET['edit']) && !empty($_GET['edit']) && is_numeric($_GET['edit'])){
 
-    $user_details = getUserDetailsById(normal($_GET['edit']));
+    $user_details = getUserDetailsById2(normal($_GET['edit']));
     if(is_array($user_details) && count($user_details) > 0) {
         $showEdit = true;
 
         $institutes = getInstitutes();
-        $ambassadors = getAmbassadorsDetails();
+        $ambassadors = getAmbassadorsApprovedDetails();
 
 
         if(isset($_POST['edit_user'])){
@@ -67,14 +67,22 @@
             }
 
             if(empty($user_error)){
-                $updateQuery = "UPDATE `users` SET 
-                `user_fname`='$e_fname', `user_lname`='$e_lname', `user_email`='$e_email', 
-                `user_phone`='$e_phone', `institute_ID`='$e_institute',`ambassador_ID`='$e_ambassador' WHERE `user_ID`=".$user_details['user_ID'];
+                if($e_ambassador != 'NULL'){
+                    $updateQuery = "UPDATE `users` SET 
+                    `user_fname`='$e_fname', `user_lname`='$e_lname', `user_email`='$e_email', 
+                    `user_phone`='$e_phone', `institute_ID`='$e_institute',`ambassador_ID`='$e_ambassador' WHERE `user_ID`=".$user_details['user_ID'];
+                } else {
+                    $updateQuery = "UPDATE `users` SET 
+                    `user_fname`='$e_fname', `user_lname`='$e_lname', `user_email`='$e_email', 
+                    `user_phone`='$e_phone', `institute_ID`='$e_institute',`ambassador_ID`=NULL WHERE `user_ID`=".$user_details['user_ID'];
+                }
+                
+                
                 $stmt = $db->prepare($updateQuery);
 
                 if($stmt->execute()){
                     $user_success = "Data updated successfully!";
-                    $user_details = getUserDetailsById(normal($_GET['edit']));
+                    $user_details = getUserDetailsById2(normal($_GET['edit']));
                 } else {
                     $user_error = "Sorry, can't update user data!";
                 }

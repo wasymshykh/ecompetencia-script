@@ -8,6 +8,38 @@
   $user_error = false;
   $member_success = false;
   $member_error = false;
+  
+  if(isset($_GET['delete']) && !empty($_GET['delete']) && is_numeric($_GET['delete'])){
+      $part = getPartDetailsById(normal($_GET['delete']));
+      if(is_array($part) && count($part) > 0) {
+          
+          $q = "UPDATE `participants` SET `is_deleted` = 'T' WHERE `participant_ID`=".$part['participant_ID'];
+          $stmt = $db->prepare($q);
+          if($stmt->execute()){
+              header('Location:participants.php?success=true');
+          } else  {
+              header('Location:participants.php?error=true');
+          }
+          
+      }
+  }
+  
+  
+  if(isset($_GET['activate']) && !empty($_GET['activate']) && is_numeric($_GET['activate'])){
+      $part = getPartDetailsById(normal($_GET['activate']));
+      if(is_array($part) && count($part) > 0) {
+          
+          $q = "UPDATE `participants` SET `is_deleted` = 'F' WHERE `participant_ID`=".$part['participant_ID'];
+          $stmt = $db->prepare($q);
+          if($stmt->execute()){
+              header('Location:participants.php?success=true');
+          } else  {
+              header('Location:participants.php?error=true');
+          }
+          
+      }
+  }
+  
 
   if(isset($_GET['edit']) && !empty($_GET['edit']) && is_numeric($_GET['edit'])){
 
