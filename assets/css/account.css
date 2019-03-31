@@ -367,7 +367,7 @@ h1,h2,h3,h4,h5,h6,p{
 
 
 .comp-status-paid {
-    background: linear-gradient(#4b9033, #f5ec08);
+    background: linear-gradient(#f5ec08, #4b9033);
 }
 .comp-status-paid .d-c-icon {
     background: linear-gradient(#ffffff, #ffffff);
@@ -380,6 +380,23 @@ h1,h2,h3,h4,h5,h6,p{
 }
 .comp-status-paid p,
 .comp-status-paid h1 {
+    color: #ffffff;
+}
+
+.comp-status-credit {
+    background: linear-gradient(#cc4c4c, #791818);
+}
+.comp-status-credit .d-c-icon {
+    background: linear-gradient(#ffffff, #ffffff);
+}
+.comp-status-credit .d-c-icon i {
+    color: #791818;
+}
+.comp-status-credit h1 {
+    font-weight: 700;
+}
+.comp-status-credit p,
+.comp-status-credit h1 {
     color: #ffffff;
 }
 

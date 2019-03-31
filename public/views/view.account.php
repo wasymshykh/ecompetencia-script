@@ -1,6 +1,20 @@
+<?php if($showWarning): ?>
+    <?php 
+        $institutes = getInstitutes();
+        include 'institute_warning.php'; 
+    ?>
+<?php else: ?>
 <div class="d-container">
 
     <div class="d-row">
+
+    <?php if(!empty($m_error[0]) && $m_error[0]): ?>
+    <div class="form-error">
+        <div class="form-error-text">
+            <p><b>Error!</b> <?=$m_error[1];?></p>
+        </div>
+    </div>
+    <?php endif; ?>
 
         <div class="d-title">
             <h1>Your <b>Details</b></h1>
@@ -158,14 +172,15 @@
                     </div>
                 </div>
 
-                <div class="d-comp-box comp-status-<?=($participation['transaction_status']=='U')?'unpaid':'paid';?>">
+                <div class="d-comp-box comp-status-<?=($participation['transaction_status']=='U')?'unpaid':'';?><?=($participation['transaction_status']=='P')?'paid':'';?><?=($participation['transaction_status']=='C')?'credit':'';?>">
                     <div class="d-comp-b-content">
                         <div class="d-c-icon">
                             <i class="fas fa-vote-yea"></i>
                         </div>
                         <div class="d-c-data">
                             <p>status</p>
-                            <h1><?=($participation['transaction_status']=='U')?'Unpaid':'Paid';?></h1>
+                            <h1><?=($participation['transaction_status']=='U')?'Unpaid':'';?><?=($participation['transaction_status']=='P')?'Paid':'';?><?=($participation['transaction_status']=='C')?'Unconfirmed':'';?></h1>
+                            <p>Contact Team</p>
                         </div>
                     </div>
                 </div>
@@ -176,8 +191,17 @@
                             <i class="fas fa-coins"></i>
                         </div>
                         <div class="d-c-data">
-                            <p>Cash <?=($participation['transaction_status']=='U')?'Due':'Paid';?></p>
-                            <h1><?=$participation['transaction_total'];?> <span>PKR</span></h1>
+                            <?php if($participation['transaction_status']=='C'): 
+                                $due = (getCreditsByTransactionId($participation['transaction_ID']))['credit_amount'];
+                                ?>
+                                <p>Cash Paid</p>
+                                <h1><?=$participation['transaction_total']-$due;?> <span>PKR</span></h1>
+                                <p>Cash Due</p>
+                                <h1><?=$due;?> <span>PKR</span></h1>
+                            <?php else: ?>
+                                <p>Cash <?=($participation['transaction_status']=='U')?'Due':'Paid';?></p>
+                                <h1><?=$participation['transaction_total'];?> <span>PKR</span></h1>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
@@ -188,3 +212,4 @@
     </div>
 
 </div>
+<?php endif; ?>

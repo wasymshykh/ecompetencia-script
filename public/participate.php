@@ -44,7 +44,7 @@
 
     }
 
-    if(isset($_POST['step_2'])){
+    if(isset($_POST['step_2']) && $_SESSION['process_step']==2){
 
         // Getting selected competition in step 1 
         $competition_id = normal($_SESSION['process_competition']);
@@ -115,7 +115,7 @@
     }
 
 
-    if(isset($_POST['step_3'])){
+    if(isset($_POST['step_3']) && $_SESSION['process_step']==3){
 
         // Getting selected competition from step 1 
         $competition_id = normal($_SESSION['process_competition']);
@@ -207,6 +207,7 @@
                 logger("User ID: ".$user['user_ID']." [".$user['user_fname']." ".$user['user_lname']."] registered for 
                     Competition ID: ".$comp_id." [".$competition_details['competition_name']."]");
 
+                $_SESSION['process_step'] = 1;
                 header('location: '.URL.'/public/account.php?success=participation');
 
             } catch(Exception $e){

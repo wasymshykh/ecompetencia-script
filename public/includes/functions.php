@@ -122,6 +122,14 @@
         }
         return false;
     }
+    // returns true if valid institute id is passed
+    function getInstituteById($id) {
+        global $db;
+        $q = "SELECT * FROM `institutes` WHERE `institute_status`='E' AND `institute_ID`=:id";
+        $s = $db->prepare($q);
+        $s->execute(['id'=>$id]);
+        return $s->fetch();
+    }
 
     function userLoginDetailsCheck($entered_email, $entered_password) {
         $user = getUserByEmail($entered_email);
@@ -253,6 +261,15 @@
         $s->execute(['coupid'=>$promo]);
         return $s->fetch();
     }
+    // Get coupon details
+    function getPromoById($coup_id)
+    {
+        global $db;
+        $q = "SELECT * FROM `coupons` WHERE `coupon_ID` = :coupid";
+        $s = $db->prepare($q);
+        $s->execute(['coupid'=>$coup_id]);
+        return $s->fetch();
+    }
     // Returns total number of times coupon is used.
     function numberTimeCouponUsed($coup_id)
     {
@@ -261,6 +278,15 @@
         $s = $db->prepare($q);
         $s->execute(['id'=>$coup_id]);
         return $s->rowCount();
+    }
+    // Get coupon used by transaction id
+    function getCouponUsedByTransactionId($trans_id)
+    {
+        global $db;
+        $q = "SELECT * FROM `coupon_used` WHERE `transaction_ID` = :trans_id";
+        $s = $db->prepare($q);
+        $s->execute(['trans_id'=>$trans_id]);
+        return $s->fetch();
     }
 
     // Returns false if user hasn't participated in given competition
@@ -320,6 +346,31 @@
         return $s->fetchAll();
     }
 
+    // Get participation details 
+    function getParticipationDetails($part_id)
+    {
+        global $db;
+        $q = "SELECT * FROM `participants` p 
+            INNER JOIN `transactions` t ON p.participant_ID = t.participant_ID 
+            INNER JOIN `competitions` c ON p.competition_ID = c.competition_ID
+            WHERE p.participant_ID = :partid";
+        $s = $db->prepare($q);
+        $s->execute(['partid'=>$part_id]);
+
+        return $s->fetch();
+    }
+    
+    // Get participation details 
+    function getCreditsByTransactionId($trans_id)
+    {
+        global $db;
+        $q = "SELECT * FROM `credits_left` WHERE `transaction_ID` = :trans_id";
+        $s = $db->prepare($q);
+        $s->execute(['trans_id'=>$trans_id]);
+
+        return $s->fetch();
+    }
+
     // Get fellow members of participant
     function getMembersOfParticipant($part_id)
     {
@@ -329,6 +380,16 @@
         $s->execute(['partid'=>$part_id]);
         
         return $s->fetchAll();
+    }
+    // Get member details of participant
+    function getMemberDetails($member_id)
+    {
+        global $db;
+        $q = "SELECT * FROM `members` WHERE `member_ID` = :member_id";
+        $s = $db->prepare($q);
+        $s->execute(['member_id'=>$member_id]);
+
+        return $s->fetch();
     }
 
     // Remove ambassador ID of participant
