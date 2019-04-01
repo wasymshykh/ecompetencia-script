@@ -180,7 +180,7 @@
                         <div class="d-c-data">
                             <p>status</p>
                             <h1><?=($participation['transaction_status']=='U')?'Unpaid':'';?><?=($participation['transaction_status']=='P')?'Paid':'';?><?=($participation['transaction_status']=='C')?'Unconfirmed':'';?></h1>
-                            <p>Contact Team</p>
+                            <?=($participation['transaction_status']=='C')?'<p>Contact Team</p>':'';?>
                         </div>
                     </div>
                 </div>
@@ -192,7 +192,7 @@
                         </div>
                         <div class="d-c-data">
                             <?php if($participation['transaction_status']=='C'): 
-                                $due = (getCreditsByTransactionId($participation['transaction_ID']))['credit_amount'];
+                                $due = getCreditsByTransactionId($participation['transaction_ID'])['credit_amount'];
                                 ?>
                                 <p>Cash Paid</p>
                                 <h1><?=$participation['transaction_total']-$due;?> <span>PKR</span></h1>

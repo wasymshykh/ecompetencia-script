@@ -64,6 +64,11 @@
                             <input type="text" name="phone" id="phonenumber" placeholder="e.g. 03000000000" value="<?=isset($phone)?$phone:'';?>" maxlength="11">
                             <div class="activate"></div>
                         </div>
+                        <div class="form-row-box">
+                            <label for="cnic">CNIC</label>
+                            <input type="text" name="cnic" id="cnic" placeholder="e.g. 42501-7000000-1" value="<?=isset($cnic)?$cnic:'';?>" maxlength="15">
+                            <div class="activate"></div>
+                        </div>
                     </div>
                     <div class="form-row">
                         <div class="form-row-box">

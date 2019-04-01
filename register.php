@@ -11,6 +11,7 @@
         $first_name = normal($_POST['firstname']);
         $last_name = normal($_POST['lastname']);
         $phone = normal($_POST['phone']);
+        $cnic = normal($_POST['cnic']);
         $institute = normal($_POST['institute']);
 
         $email = normal($_POST['email']);
@@ -30,12 +31,16 @@
         if(empty($phone) || strlen($phone) < 11){
             $error = "Kindly write your phone number properly.";
         } else
+        if(empty($cnic) || !preg_match("/[0-9+]{5}-[0-9+]{7}-[0-9]{1}/", $cnic)) {
+            $error = "Cnic entered is in incorrect format. Format must be like NNNNN-NNNNNNN-N";
+        } else
         if(empty($email) || strlen($email) < 4) {
             $error = "Kindly write your email properly.";
         } else
         if(empty($password) || strlen($password) < 4) {
             $error = "Kindly write your password properly. Password must be atleast 4 characters long.";
         }
+        
 
         if(empty($error) && $password != $password_c){
             // check password match
@@ -56,9 +61,9 @@
 
             // inserting user
             $userQuery = "INSERT INTO 
-                `users`(`user_fname`,`user_lname`,`user_email`,`user_password`,`user_phone`,`institute_ID`)
+                `users`(`user_fname`,`user_lname`,`user_email`,`user_password`,`user_phone`,`user_cnic`,`institute_ID`)
             VALUE
-                ('$first_name', '$last_name', '$email', '$hashed_password', '$phone', '$institute')
+                ('$first_name', '$last_name', '$email', '$hashed_password', '$phone', '$cnic', '$institute')
             ";
 
             $stmt = $db->prepare($userQuery);

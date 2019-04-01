@@ -3,6 +3,24 @@
     include 'includes/functions.php'; 
     include '../config/auth_user.php';
 
+    // checking members institute selected
+    $participations = getUserParticipation($_SESSION['user_id']);
+    $showWarning = false;
+    foreach($participations as $participation){
+        // checking members institute
+        $members = getMembersOfParticipant($participation['participant_ID']);
+        foreach ($members as $member) {
+            if($member["institute_ID"] == NULL){
+                $showWarning = true;
+            }
+        }
+    }
+
+    if($showWarning):
+        header('location: '.URL.'/public/account.php');
+
+    else:
+
     $step_1 = true;
     $step_2 = false;
     $step_3 = false;
@@ -234,4 +252,8 @@
     $competitions = getCompetitions();
     include 'views/view.participate.php'; 
 ?>
-<?php include 'views/layout/account_footer.php'; ?>
+<?php 
+
+    include 'views/layout/account_footer.php'; 
+
+    endif; ?>
