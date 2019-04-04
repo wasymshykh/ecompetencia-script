@@ -10,16 +10,19 @@
     if(isset($_POST['add_participant'])){
 
         // Getting all the data to variable
-        $e_fname = $_POST['e_fname'];
-        $e_lname = $_POST['e_lname'];
-        $e_mobile = $_POST['e_mobile'];
-        $e_comp = $_POST['e_comp'];
-        $e_members = $_POST['e_members'];
-        $e_university = $_POST['e_university'];
-        $e_amount = $_POST['e_amount'];
-        $e_discount = $_POST['e_discount'];
-        $e_coupon = $_POST['e_coupon'];
-        $e_collected = $_POST['e_collected'];
+        $e_fname = normal($_POST['e_fname']);
+        $e_lname = normal($_POST['e_lname']);
+        $e_mobile = normal($_POST['e_mobile']);
+        $e_email = normal($_POST['e_email']);
+        $e_ambassador = normal($_POST['e_ambassador']);
+        $e_comp = normal($_POST['e_comp']);
+        $e_team = normal($_POST['e_team']);
+        $e_members = normal($_POST['e_members']);
+        $e_university = normal($_POST['e_university']);
+        $e_amount = normal($_POST['e_amount']);
+        $e_discount = normal($_POST['e_discount']);
+        $e_coupon = normal($_POST['e_coupon']);
+        $e_collected = normal($_POST['e_collected']);
 
 
         if(empty($e_fname)){
@@ -28,6 +31,8 @@
             $user_error = "Please fill last name properly.";
         } else if(empty($e_mobile)){
             $user_error = "Please fill mobile number properly.";
+        } else if(empty($e_team)){
+            $user_error = "Please fill team name properly.";
         } else if(empty($e_comp) || !is_numeric($e_comp)){
             $user_error = "Please select the competition properly.";
         } else if(!is_numeric($e_members) || $e_members < 0){
@@ -37,7 +42,7 @@
         } else if(empty($e_amount) || !is_numeric($e_amount) || $e_amount < 1){
             $user_error = "Please fill amount properly, it must be greater than zero & a number.";
         } else if(empty($e_collected)){
-            $user_error = "Please select the competition properly.";
+            $user_error = "Please select the collected by properly.";
         }
 
 
@@ -45,6 +50,10 @@
             if(empty($e_coupon)) {
                 $user_error = "You've offered discount, under which coupon?";
             }
+        }
+
+        if(empty($e_ambassador)) {
+            $e_ambassador = NULL;
         }
 
         // check for exisiting participant with same data
@@ -55,6 +64,16 @@
             $result = $stmt->fetch();
             if(!empty($result)){
                 $user_error = "A user with same details already exists in ".$result['competition_name']." & have same mobile number as you've entered [".$result['user_phone']."]";
+            }
+        }
+        // check for exisiting participant with same data
+        if(empty($user_error)) {
+            $q = "SELECT * FROM `participants` p INNER JOIN `users` u ON p.user_ID = u.user_ID INNER JOIN `competitions` c ON p.competition_ID = c.competition_ID WHERE u.user_email = :u_mail";
+            $stmt = $db->prepare($q);
+            $stmt->execute(['u_mail'=>$e_email]);
+            $result = $stmt->fetch();
+            if(!empty($result)){
+                $user_error = "A user with same details already exists & have same email as you've entered [".$result['user_email']."]";
             }
         }
 
@@ -80,7 +99,6 @@
             $e_member_type = $e_collected_s[0];
             $e_member_id = $e_collected_s[1];
             $e_password = strtolower($e_fname).'123';
-            $e_team = "Generic Team - $e_mobile";
             if(!empty($e_discount)){
                 $e_db_amount = $e_discount + $e_amount;
             } else {
@@ -90,14 +108,13 @@
 
             $e_password_hash = password_hash($e_password, PASSWORD_BCRYPT);
 
-            $e_email = strtolower($e_fname).strtolower($e_lname).$e_mobile.'@gmail.com';
 
             try {
-
+                $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 $db->beginTransaction();
 
                 // user insert
-                $user_query = "INSERT INTO `users`(`user_fname`, `user_lname`, `user_email`, `user_password`, `user_phone`, `institute_ID`) VALUE ('$e_fname', '$e_lname', '$e_email', '$e_password_hash', '$e_mobile', '$e_university')";
+                $user_query = "INSERT INTO `users`(`user_fname`, `user_lname`, `user_email`, `user_password`, `user_phone`, `institute_ID`, `ambassador_ID`) VALUE ('$e_fname', '$e_lname', '$e_email', '$e_password_hash', '$e_mobile', '$e_university'".(!empty($e_ambassador)?",'$e_ambassador'":", NULL").")";
                 $db->exec($user_query);
                 $user_id = $db->lastInsertId();
 
@@ -128,12 +145,18 @@
                 $details_query = "INSERT INTO `transaction_details`(`transaction_ID`, `paid_to`, `details_receiver_ID`) VALUE ('$transaction_id', '". strtoupper($e_member_type) ."', '$e_member_id')";
                 $db->exec($details_query);
                 
+                
+                $db->commit();
+                
                 $user_success = "Successfully inserted the participant data.";
 
                 // unsetting the variables
                 unset($e_fname);
                 unset($e_lname);
                 unset($e_mobile);
+                unset($e_team);
+                unset($e_email);
+                unset($e_ambassador);
                 unset($e_comp);
                 unset($e_members);
                 unset($e_university);
@@ -142,10 +165,7 @@
                 unset($e_coupon);
                 unset($e_collected);
 
-                $db->commit();
-                
-
-            } catch(PDOExpection $e) {
+            } catch(Exception $e) {
                 $user_error = "Couldn't complete the request. Submit again.";
             }
 

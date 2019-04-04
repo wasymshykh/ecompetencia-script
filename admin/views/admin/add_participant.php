@@ -89,6 +89,23 @@
                                         <input type="text" name="e_mobile" id="e_mobile" class="form-control" placeholder="e.g. 03022733301" value="<?=isset($e_mobile)?$e_mobile:''?>">
                                     </div>
                                 </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label for="e_email">Email</label>
+                                        <input type="email" name="e_email" id="e_email" class="form-control" placeholder="e.g. mail@email.com" value="<?=isset($e_email)?$e_email:''?>">
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label for="e_ambassador">Select Ambassador</label>
+                                        <select name="e_ambassador" id="e_ambassador" class="form-control">
+                                            <option value="">--select ambassador--</option>
+                                            <?php foreach($ambassadors as $ambassador): ?>
+                                                <option value="<?=$ambassador['ambassador_ID']?>" <?=(isset($e_ambassador) && $e_ambassador == $ambassador['ambassador_ID'])?'selected':''?>><?=$ambassador['ambassador_fname'].' '.$ambassador['ambassador_lname'].' ['.$ambassador['institute_name'].']'?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="participant-title">
@@ -108,11 +125,17 @@
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="form-group">
+                                        <label for="e_team">Team name</label>
+                                        <input type="text" name="e_team" id="e_team" class="form-control" placeholder="e.g. Evolution" value="<?=isset($e_team)?$e_team:''?>">
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
                                         <label for="e_members">No. of team members</label>
                                         <input type="text" name="e_members" id="e_members" class="form-control" placeholder="e.g. 3" value="<?=isset($e_members)?$e_members:''?>">
                                     </div>
                                 </div>
-                                <div class="col-sm-4">
+                                <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="e_university">University</label>
                                         <select name="e_university" id="e_university" class="form-control">
