@@ -606,5 +606,127 @@
     }
 
 
+    // Get all rooms
+
+    function getRooms()
+    {
+        global $db;
+        $q = 'SELECT * FROM `rooms`';
+        $s = $db->prepare($q);
+        $s->execute();
+        return $s->fetchAll();
+    }
+
+    function getRoomByName($room_name)
+    {
+        global $db;
+        $q = 'SELECT * FROM `rooms` WHERE `room_name`=:name';
+        $s = $db->prepare($q);
+        $s->execute(["name"=>$room_name]);
+        return $s->fetch();
+    }
+
+    function getRoomById($room_id)
+    {
+        global $db;
+        $q = 'SELECT * FROM `rooms` WHERE `room_ID`=:r_id';
+        $s = $db->prepare($q);
+        $s->execute(["r_id"=>$room_id]);
+        return $s->fetch();
+    }
+
+    // Get all slots
+
+    function getSlots()
+    {
+        global $db;
+        $q = 'SELECT * FROM `slots`';
+        $s = $db->prepare($q);
+        $s->execute();
+        return $s->fetchAll();
+    }
+
+    function getSlotsDetails()
+    {
+        global $db;
+        $q = 'SELECT * FROM `slots` s INNER JOIN `rooms` r ON s.room_ID = r.room_ID INNER JOIN `competitions` c ON s.competition_ID = c.competition_ID';
+        $s = $db->prepare($q);
+        $s->execute();
+        return $s->fetchAll();
+    }
+
+    function getSlotById($slot_id)
+    {
+        global $db;
+        $q = 'SELECT * FROM `slots` WHERE `slot_ID`=:s_id';
+        $s = $db->prepare($q);
+        $s->execute(["s_id"=>$slot_id]);
+        return $s->fetch();
+    }
+    function getSlotByName($slot_name)
+    {
+        global $db;
+        $q = 'SELECT * FROM `slots` WHERE `slot_name`=:name';
+        $s = $db->prepare($q);
+        $s->execute(["name"=>$slot_name]);
+        return $s->fetch();
+    }
+    function getSlotsByRoom($room_id)
+    {
+        global $db;
+        $q = 'SELECT * FROM `slots` WHERE `room_ID`=:r_id';
+        $s = $db->prepare($q);
+        $s->execute(["r_id"=>$room_id]);
+        return $s->fetchAll();
+    }
+
+
+    // Date difference
+    function dateDifference($start, $end, $r = "minutes")
+    {
+        $start = (new DateTime($start))->format('Y-m-d H:i:s');
+        $end = (new DateTime($end))->format('Y-m-d H:i:s');
+
+        $startTime = strtotime($start);
+        $endTime = strtotime($end);
+
+        $diff = $endTime - $startTime;
+
+        if($diff <= 0) {
+            return ["notice"=>-1, "value"=>$diff];
+        }
+
+        $years = floor($diff / (365*60*60*24));
+        $months = floor(($diff - $years * 365*60*60*24) / (30*60*60*24));
+        $days = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24)); 
+
+        $hours = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24 - $days*60*60*24) / (60*60));  
+        $minutes = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24 - $days*60*60*24 - $hours*60*60)/ 60);
+        $seconds = floor(($diff - $years * 365*60*60*24  - $months*30*60*60*24 - $days*60*60*24 - $hours*60*60 - $minutes*60));
+
+        return ["notice"=>1, "value"=>[
+            "diff"=>$diff,
+            "years"=>$years,
+            "months"=>$months,
+            "days"=>$days,
+            "hours"=>$hours,
+            "minutes"=>$minutes,
+            "seconds"=>$seconds,
+        ]];
+    }
+
+
+    function inTimeRange($start, $end, $toCheckDate)
+    {
+        $start = (new DateTime($start))->format('Y-m-d H:i:s');
+        $end = (new DateTime($end))->format('Y-m-d H:i:s');
+
+        $start_time = strtotime($start);
+        $end_time = strtotime($end);
+        $check_time = strtotime($toCheckDate);
+
+        return (($check_time >= $start_time) && ($check_time <= $end_time));
+    }
+
 
 ?>

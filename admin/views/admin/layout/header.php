@@ -114,6 +114,7 @@
                 <li><a href="logs.php"><i class="icon-form"></i> Web Logs</a></li>
               </ul>
             </li>
+            <li><a href="rooms_slots.php"><i class="icon-home"></i> Room & Slots</a></li>
           </ul>
         </div>
         <?php endif; ?>
