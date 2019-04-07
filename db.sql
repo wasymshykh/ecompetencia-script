@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Mar 02, 2019 at 02:27 AM
+-- Generation Time: Apr 07, 2019 at 11:17 AM
 -- Server version: 5.7.25-0ubuntu0.18.10.2
--- PHP Version: 7.3.2-3+ubuntu18.10.1+deb.sury.org+1
+-- PHP Version: 7.3.3-1+ubuntu18.10.1+deb.sury.org+1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,26 +17,27 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `test`
+-- Database: `ecom`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ambassador_applicant`
+-- Table structure for table `ambassadors`
 --
 
-CREATE TABLE `ambassador_applicant` (
+CREATE TABLE `ambassadors` (
   `ambassador_ID` int(11) NOT NULL,
+  `ambassador_password` varchar(255) NOT NULL,
   `ambassador_fname` varchar(255) NOT NULL,
   `ambassador_lname` varchar(255) NOT NULL,
   `ambassador_email` varchar(255) NOT NULL,
   `ambassador_phoneno` varchar(255) NOT NULL,
-  `ambassador_experience` text NOT NULL,
+  `ambassador_show` enum('P','E') DEFAULT 'P',
   `institute_ID` int(11) NOT NULL,
   `ambassador_avatar` varchar(512) NOT NULL,
-  `ambassador_status` enum('A','R','S') NOT NULL DEFAULT 'S' COMMENT 'S - Submitted, A - Approved, R - Rejected',
-  `submission_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+  `ambassador_status` enum('E','D') DEFAULT 'E' COMMENT 'E - Enabled, D - Disabled',
+  `accepted_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -117,6 +118,35 @@ CREATE TABLE `coupon_used` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `credits_left`
+--
+
+CREATE TABLE `credits_left` (
+  `credit_ID` int(11) NOT NULL,
+  `credit_amount` int(11) NOT NULL,
+  `transaction_ID` int(11) NOT NULL,
+  `credit_added` datetime DEFAULT CURRENT_TIMESTAMP,
+  `credit_updated` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `email_logs`
+--
+
+CREATE TABLE `email_logs` (
+  `log_ID` int(11) NOT NULL,
+  `log_email` varchar(255) NOT NULL,
+  `log_content` text NOT NULL,
+  `log_comment` text NOT NULL,
+  `log_type` enum('S','F') NOT NULL,
+  `log_recorded` datetime DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `institutes`
 --
 
@@ -137,13 +167,13 @@ INSERT INTO `institutes` (`institute_ID`, `institute_name`, `institute_status`, 
 (3, 'Aga Khan University', 'E', 'E'),
 (4, 'Aligarh Institute of Technology AIT', 'E', 'E'),
 (5, 'Aptech Computer Education', 'E', 'E'),
-(6, 'Asian Institute of Fashion Design AIFD', 'E', 'E'),
-(7, 'BAMM PECHS Government College For Women', 'E', 'E'),
+(6, 'Asian Institute of Fashion Design AIFD', 'E', 'I'),
+(7, 'BAMM PECHS Government College For Women', 'D', 'E'),
 (8, 'Bahauddin Zakariya University BZU', 'E', 'E'),
 (9, 'Bahria University BU', 'E', 'E'),
 (10, 'Baqai Medical University', 'E', 'E'),
 (11, 'Barrett Hodgson University', 'E', 'E'),
-(12, 'Beconhouse School', 'E', 'E'),
+(12, 'Beconhouse School', 'D', 'E'),
 (13, 'Benazir Bhutto Shaheed University', 'E', 'E'),
 (14, 'D.J. Sindh Government Science College', 'E', 'E'),
 (15, 'DHA Suffa University DSU', 'E', 'E'),
@@ -172,7 +202,7 @@ INSERT INTO `institutes` (`institute_ID`, `institute_name`, `institute_status`, 
 (38, 'Khadim Ali Shah Bukhari Institute of Technology KASBIT', 'E', 'E'),
 (39, 'Mehran University of Engineering & Technology', 'E', 'E'),
 (40, 'Mohammad Ali Jinnah University MAJU', 'E', 'E'),
-(41, 'NCR-CET College', 'E', 'E'),
+(41, 'NCR-CET College', 'D', 'E'),
 (42, 'NED University of Engineering and Technology', 'E', 'E'),
 (43, 'National University of Computer and Emerging Sciences, FAST-NUCES', 'E', 'E'),
 (44, 'National University of Sciences and Technology NUST', 'E', 'E'),
@@ -185,13 +215,17 @@ INSERT INTO `institutes` (`institute_ID`, `institute_name`, `institute_status`, 
 (51, 'Sir Syed University of Engineering and Technology SSUET', 'E', 'E'),
 (52, 'Tabani\'s School of Accountancy TSA', 'E', 'E'),
 (53, 'Textile Institute of Pakistan', 'E', 'E'),
-(54, 'The Academy School', 'E', 'E'),
-(55, 'The City School', 'E', 'E'),
-(56, 'The Educators', 'E', 'E'),
+(54, 'The Academy School', 'D', 'E'),
+(55, 'The City School', 'D', 'E'),
+(56, 'The Educators', 'D', 'E'),
 (57, 'University of Karachi UoK UBIT KU', 'E', 'E'),
 (58, 'Usman Institute of Technology UIT', 'E', 'E'),
 (59, 'Virtual University VU', 'E', 'E'),
-(60, 'Ziauddin University', 'E', 'E');
+(60, 'Ziauddin University', 'E', 'E'),
+(61, 'Monotech Institute', 'E', 'E'),
+(62, 'Arena Multimedia', 'E', 'E'),
+(63, 'Awaz Institute of Media and Management Sciences (AIMS)', 'E', 'E'),
+(64, 'Altamash Institute of Dental Medicine', 'E', 'E');
 
 -- --------------------------------------------------------
 
@@ -218,16 +252,9 @@ CREATE TABLE `management` (
   `management_password` varchar(50) DEFAULT NULL,
   `management_email` varchar(30) DEFAULT NULL,
   `management_mobile` varchar(20) DEFAULT NULL,
-  `management_status` varchar(30) DEFAULT NULL,
-  `management_type` varchar(30) DEFAULT NULL
+  `management_status` enum('E','D') DEFAULT 'E',
+  `management_type` enum('A','R') DEFAULT 'R'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `management`
---
-
-INSERT INTO `management` (`management_ID`, `management_fname`, `management_lname`, `management_password`, `management_email`, `management_mobile`, `management_status`, `management_type`) VALUES
-(11, 'Hassan', 'Latif', '12345', 'hassanl.buttofficial@gmail.com', '03212508437', 'E', 'A');
 
 -- --------------------------------------------------------
 
@@ -238,30 +265,10 @@ INSERT INTO `management` (`management_ID`, `management_fname`, `management_lname
 CREATE TABLE `members` (
   `member_ID` int(11) NOT NULL,
   `member_name` varchar(255) NOT NULL,
-  `participant_ID` int(11) NOT NULL
+  `participant_ID` int(11) NOT NULL,
+  `institute_ID` int(11) DEFAULT NULL,
+  `member_cnic` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `member_applicant`
---
-
-CREATE TABLE `member_applicant` (
-  `id` int(11) NOT NULL,
-  `fname` varchar(100) NOT NULL,
-  `lname` varchar(100) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `phoneno` varchar(100) NOT NULL,
-  `program` varchar(100) NOT NULL,
-  `semester` varchar(100) NOT NULL,
-  `regno` varchar(100) NOT NULL,
-  `skill` varchar(100) NOT NULL,
-  `experience` varchar(1300) NOT NULL,
-  `experienceyes` varchar(100) NOT NULL,
-  `submission_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `avatar` varchar(100) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -274,7 +281,8 @@ CREATE TABLE `participants` (
   `participant_team` varchar(255) NOT NULL,
   `user_ID` int(11) NOT NULL,
   `competition_ID` int(11) NOT NULL,
-  `participant_time` datetime DEFAULT CURRENT_TIMESTAMP
+  `participant_time` datetime DEFAULT CURRENT_TIMESTAMP,
+  `is_deleted` enum('F','T') DEFAULT 'F'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -295,6 +303,17 @@ CREATE TABLE `reset_requests` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `rooms`
+--
+
+CREATE TABLE `rooms` (
+  `room_ID` int(11) NOT NULL,
+  `room_name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `site_settings`
 --
 
@@ -308,8 +327,37 @@ CREATE TABLE `site_settings` (
 --
 
 INSERT INTO `site_settings` (`setting_name`, `setting_value`) VALUES
-('ambassador_applicants', 'true'),
-('team_applicants', 'true');
+('ambassador_applicants', 'false'),
+('team_applicants', 'false');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `slots`
+--
+
+CREATE TABLE `slots` (
+  `slot_ID` int(11) NOT NULL,
+  `slot_name` varchar(255) NOT NULL,
+  `slot_pre` int(11) DEFAULT NULL,
+  `room_ID` int(11) NOT NULL,
+  `competition_ID` int(11) NOT NULL,
+  `slot_start` datetime NOT NULL,
+  `slot_end` datetime NOT NULL,
+  `slot_limit` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `slot_participants`
+--
+
+CREATE TABLE `slot_participants` (
+  `slot_ID` int(11) NOT NULL,
+  `participant_ID` int(11) NOT NULL,
+  `round_status` enum('S','Q','R','W') NOT NULL DEFAULT 'S' COMMENT 'S - selected, Q - qualified, R - runnerup, W - winner'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -324,7 +372,7 @@ CREATE TABLE `transactions` (
   `transaction_discount` int(11) NOT NULL,
   `transaction_total` int(11) NOT NULL,
   `transaction_date` datetime DEFAULT CURRENT_TIMESTAMP,
-  `transaction_status` enum('P','U') DEFAULT 'U',
+  `transaction_status` enum('P','U','C') DEFAULT 'U',
   `transaction_update` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 
@@ -355,6 +403,7 @@ CREATE TABLE `users` (
   `user_email` varchar(255) NOT NULL,
   `user_password` varchar(255) NOT NULL,
   `user_phone` varchar(100) NOT NULL,
+  `user_cnic` varchar(255) DEFAULT NULL,
   `institute_ID` int(11) NOT NULL,
   `ambassador_ID` int(11) DEFAULT NULL,
   `user_status` enum('E','D') DEFAULT 'E' COMMENT 'E - enabled, D - disabled'
@@ -365,9 +414,9 @@ CREATE TABLE `users` (
 --
 
 --
--- Indexes for table `ambassador_applicant`
+-- Indexes for table `ambassadors`
 --
-ALTER TABLE `ambassador_applicant`
+ALTER TABLE `ambassadors`
   ADD PRIMARY KEY (`ambassador_ID`),
   ADD KEY `institute_ID` (`institute_ID`);
 
@@ -409,6 +458,19 @@ ALTER TABLE `coupon_used`
   ADD KEY `transaction_ID` (`transaction_ID`);
 
 --
+-- Indexes for table `credits_left`
+--
+ALTER TABLE `credits_left`
+  ADD PRIMARY KEY (`credit_ID`),
+  ADD KEY `transaction_ID` (`transaction_ID`);
+
+--
+-- Indexes for table `email_logs`
+--
+ALTER TABLE `email_logs`
+  ADD PRIMARY KEY (`log_ID`);
+
+--
 -- Indexes for table `institutes`
 --
 ALTER TABLE `institutes`
@@ -432,13 +494,8 @@ ALTER TABLE `management`
 --
 ALTER TABLE `members`
   ADD PRIMARY KEY (`member_ID`),
-  ADD KEY `participant_ID` (`participant_ID`);
-
---
--- Indexes for table `member_applicant`
---
-ALTER TABLE `member_applicant`
-  ADD PRIMARY KEY (`id`);
+  ADD KEY `participant_ID` (`participant_ID`),
+  ADD KEY `institute_ID` (`institute_ID`);
 
 --
 -- Indexes for table `participants`
@@ -457,10 +514,31 @@ ALTER TABLE `reset_requests`
   ADD KEY `user_email` (`user_email`);
 
 --
+-- Indexes for table `rooms`
+--
+ALTER TABLE `rooms`
+  ADD PRIMARY KEY (`room_ID`);
+
+--
 -- Indexes for table `site_settings`
 --
 ALTER TABLE `site_settings`
   ADD UNIQUE KEY `setting_name` (`setting_name`);
+
+--
+-- Indexes for table `slots`
+--
+ALTER TABLE `slots`
+  ADD PRIMARY KEY (`slot_ID`),
+  ADD KEY `room_ID` (`room_ID`),
+  ADD KEY `competition_ID` (`competition_ID`);
+
+--
+-- Indexes for table `slot_participants`
+--
+ALTER TABLE `slot_participants`
+  ADD KEY `slot_ID` (`slot_ID`,`participant_ID`),
+  ADD KEY `participant_ID` (`participant_ID`);
 
 --
 -- Indexes for table `transactions`
@@ -489,10 +567,10 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT for table `ambassador_applicant`
+-- AUTO_INCREMENT for table `ambassadors`
 --
-ALTER TABLE `ambassador_applicant`
-  MODIFY `ambassador_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+ALTER TABLE `ambassadors`
+  MODIFY `ambassador_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 --
 -- AUTO_INCREMENT for table `categories`
 --
@@ -502,81 +580,96 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `competitions`
 --
 ALTER TABLE `competitions`
-  MODIFY `competition_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `competition_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT for table `competition_details`
 --
 ALTER TABLE `competition_details`
-  MODIFY `details_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `details_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 --
 -- AUTO_INCREMENT for table `coupons`
 --
 ALTER TABLE `coupons`
-  MODIFY `coupon_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `coupon_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 --
 -- AUTO_INCREMENT for table `coupon_used`
 --
 ALTER TABLE `coupon_used`
-  MODIFY `used_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `used_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
+--
+-- AUTO_INCREMENT for table `credits_left`
+--
+ALTER TABLE `credits_left`
+  MODIFY `credit_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `email_logs`
+--
+ALTER TABLE `email_logs`
+  MODIFY `log_ID` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `institutes`
 --
 ALTER TABLE `institutes`
-  MODIFY `institute_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `institute_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 --
 -- AUTO_INCREMENT for table `loggers`
 --
 ALTER TABLE `loggers`
-  MODIFY `logger_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `logger_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=817;
 --
 -- AUTO_INCREMENT for table `management`
 --
 ALTER TABLE `management`
-  MODIFY `management_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `management_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 --
 -- AUTO_INCREMENT for table `members`
 --
 ALTER TABLE `members`
-  MODIFY `member_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
---
--- AUTO_INCREMENT for table `member_applicant`
---
-ALTER TABLE `member_applicant`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=160;
+  MODIFY `member_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=194;
 --
 -- AUTO_INCREMENT for table `participants`
 --
 ALTER TABLE `participants`
-  MODIFY `participant_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `participant_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=231;
 --
 -- AUTO_INCREMENT for table `reset_requests`
 --
 ALTER TABLE `reset_requests`
-  MODIFY `reset_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `reset_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+--
+-- AUTO_INCREMENT for table `rooms`
+--
+ALTER TABLE `rooms`
+  MODIFY `room_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `slots`
+--
+ALTER TABLE `slots`
+  MODIFY `slot_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 --
 -- AUTO_INCREMENT for table `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `transaction_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `transaction_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=230;
 --
 -- AUTO_INCREMENT for table `transaction_details`
 --
 ALTER TABLE `transaction_details`
-  MODIFY `details_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `details_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `user_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=455;
 --
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table `ambassador_applicant`
+-- Constraints for table `ambassadors`
 --
-ALTER TABLE `ambassador_applicant`
-  ADD CONSTRAINT `ambassador_applicant_ibfk_1` FOREIGN KEY (`institute_ID`) REFERENCES `institutes` (`institute_ID`);
+ALTER TABLE `ambassadors`
+  ADD CONSTRAINT `ambassadors_ibfk_1` FOREIGN KEY (`institute_ID`) REFERENCES `institutes` (`institute_ID`);
 
 --
 -- Constraints for table `competitions`
@@ -598,10 +691,17 @@ ALTER TABLE `coupon_used`
   ADD CONSTRAINT `coupon_used_ibfk_2` FOREIGN KEY (`transaction_ID`) REFERENCES `transactions` (`transaction_ID`);
 
 --
+-- Constraints for table `credits_left`
+--
+ALTER TABLE `credits_left`
+  ADD CONSTRAINT `credits_left_ibfk_1` FOREIGN KEY (`transaction_ID`) REFERENCES `transactions` (`transaction_ID`);
+
+--
 -- Constraints for table `members`
 --
 ALTER TABLE `members`
-  ADD CONSTRAINT `members_ibfk_1` FOREIGN KEY (`participant_ID`) REFERENCES `participants` (`participant_ID`);
+  ADD CONSTRAINT `members_ibfk_1` FOREIGN KEY (`participant_ID`) REFERENCES `participants` (`participant_ID`),
+  ADD CONSTRAINT `members_ibfk_2` FOREIGN KEY (`institute_ID`) REFERENCES `institutes` (`institute_ID`);
 
 --
 -- Constraints for table `participants`
@@ -617,6 +717,20 @@ ALTER TABLE `reset_requests`
   ADD CONSTRAINT `reset_requests_ibfk_1` FOREIGN KEY (`user_email`) REFERENCES `users` (`user_email`);
 
 --
+-- Constraints for table `slots`
+--
+ALTER TABLE `slots`
+  ADD CONSTRAINT `slots_ibfk_1` FOREIGN KEY (`room_ID`) REFERENCES `rooms` (`room_ID`),
+  ADD CONSTRAINT `slots_ibfk_2` FOREIGN KEY (`competition_ID`) REFERENCES `competitions` (`competition_ID`);
+
+--
+-- Constraints for table `slot_participants`
+--
+ALTER TABLE `slot_participants`
+  ADD CONSTRAINT `slot_participants_ibfk_1` FOREIGN KEY (`slot_ID`) REFERENCES `slots` (`slot_ID`),
+  ADD CONSTRAINT `slot_participants_ibfk_2` FOREIGN KEY (`participant_ID`) REFERENCES `participants` (`participant_ID`);
+
+--
 -- Constraints for table `transactions`
 --
 ALTER TABLE `transactions`
@@ -627,7 +741,7 @@ ALTER TABLE `transactions`
 --
 ALTER TABLE `users`
   ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`institute_ID`) REFERENCES `institutes` (`institute_ID`),
-  ADD CONSTRAINT `users_ibfk_2` FOREIGN KEY (`ambassador_ID`) REFERENCES `ambassador_applicant` (`ambassador_ID`);
+  ADD CONSTRAINT `users_ibfk_2` FOREIGN KEY (`ambassador_ID`) REFERENCES `ambassadors` (`ambassador_ID`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
