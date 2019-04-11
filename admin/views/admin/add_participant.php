@@ -129,10 +129,17 @@
                                         <input type="text" name="e_team" id="e_team" class="form-control" placeholder="e.g. Evolution" value="<?=isset($e_team)?$e_team:''?>">
                                     </div>
                                 </div>
-                                <div class="col-sm-4">
-                                    <div class="form-group">
-                                        <label for="e_members">No. of team members</label>
-                                        <input type="text" name="e_members" id="e_members" class="form-control" placeholder="e.g. 3" value="<?=isset($e_members)?$e_members:''?>">
+                                <div class="col-sm-4" id="afterTeam">
+                                    <div class="row">
+                                        <div class="col-sm-6 p-0">
+                                            <div class="form-group">
+                                                <label for="e_members">No. of team members</label>
+                                                <input type="number" name="e_members" id="e_members" class="form-control" placeholder="e.g. 3" value="<?=isset($e_members)?$e_members:''?>">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 p-0">
+                                            <button type="button" id="addmembers" class="btn btn-primary btn-sm btn-block" style="margin-top: 35px">Add Names</button>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
@@ -147,6 +154,39 @@
                                     </div>
                                 </div>
                             </div>
+                            
+                            <script>
+                                document.querySelector('#addmembers').addEventListener('click', function(e){
+                                    e.preventDefault();
+                                    
+                                    let totalmembers = document.querySelector('#e_members').value.trim();
+                                    
+                                    if(totalmembers != "") {
+                                        totalmembers = Number(totalmembers)
+                                        if(Number.isInteger(totalmembers)){
+                                            
+                                            document.querySelectorAll('input[name="e_tmembers[]').forEach(function(item){
+                                                item.parentElement.parentElement.remove();
+                                            })
+                                            
+                                            for(let i = 0; i < totalmembers; i++) {
+                                                ht = `<div class="form-group">
+                                                            <label for="e_member-${i}">Member [${totalmembers - i}]</label>
+                                                            <input type="text" name="e_tmembers[]" id="e_member-${i}" class="form-control" placeholder="e.g. Ahmed" value="">
+                                                        </div>`
+                                                let di = document.createElement('div');
+                                                di.setAttribute('class', 'col-sm-4')
+                                                di.innerHTML = ht;
+                                                
+                                                let aT = document.querySelector('#afterTeam')
+                                                aT.parentNode.insertBefore(di, aT.nextSibling)
+                                            }
+                                            
+                                        }
+                                    }
+                                    
+                                })
+                            </script>
 
                             <div class="participant-title">
                                 <h1>Transaction</h1>

@@ -1,13 +1,22 @@
-<link rel="stylesheet" href="assets/css/bootstrap-datetimepicker.min.css">
-
 <div class="breadcrumb-holder">
     <div class="container-fluid">
         <ul class="breadcrumb">
         <li class="breadcrumb-item"><a href="index.php">Dashboard</a></li>
-        <li class="breadcrumb-item active">Rooms & Slots</li>
+        <li class="breadcrumb-item active">Enroll Participants</li>
         </ul>
     </div>
 </div>
+
+<?php
+/*
+
+    User selects slot
+    User gets list of participants unregistered
+
+    
+
+*/
+?>
 
 <section>
     <div class="container-fluid">
@@ -20,10 +29,10 @@
 
                         <div class="card">
                             <div class="card-header d-flex align-items-center">
-                                <h4>Add Room</h4>
+                                <h4>Enroll New Participant</h4>
                             </div>
                             <div class="card-body">
-                                <small><p>Make sure the room name is proper & unique</p></small>
+                                <small><p>Make sure to select the slot first</p></small>
                                 <?php if($success_room): ?>
                                     <div class="alert alert-success">
                                         <?=$success_room;?>
@@ -255,112 +264,3 @@
         </div>
     </div>
 </section>
-
-
-<?php if($showRoomEdit): ?>
-
-    <div class="modal fade" id="roomEdit" tabindex="-1" role="dialog" aria-labelledby="roomEditLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <form action="" method="POST">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="roomEditLabel">Edit Room</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <?php if($success_room_e): ?>
-                        <div class="alert alert-success">
-                            <?=$success_room_e;?>
-                        </div>
-                    <?php endif; ?>
-                    <?php if($error_room_e): ?>
-                        <div class="alert alert-danger">
-                            <?=$error_room_e;?>
-                        </div>
-                    <?php endif; ?>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="form-group">
-                                <label for="e_room_name">Room Name</label>
-                                <input type="text" id="e_room_name" name="e_room_name" class="form-control" placeholder="E-501" value="<?=isset($room_name)?$room_name:$edit_room['room_name']?>">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" name="edit_r" class="btn btn-primary">Save changes</button>
-                </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        $('#roomEdit').modal('show');
-        $('#roomEdit').on('hide.bs.modal', function (e) {
-            window.location.href = "<?=ADMIN_URL?>/rooms_slots.php";
-        })
-    </script>
-
-<?php endif; ?>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.21.0/moment.min.js"></script>
-<script src="assets/js/bootstrap-datetimepicker.min.js"></script>
-
-
-<script>
-$(function () {
-    $('#slot_start').datetimepicker();
-    $('#slot_end').datetimepicker();
-});
-
-</script>
-
-
-<script>
-    $(document).ready(function() {
-        $('#dtb tfoot th').each( function () {
-            var title = $('#dtb thead th').eq( $(this).index() ).text();
-            $(this).html( '<input type="text" class="form-control" placeholder="Search '+title+'" />' );
-        });
-        var table = $('#dtb').DataTable({
-            "scrollX": true,
-            paging: false,
-            searching: false,
-            "columnDefs": [{
-            "targets": 'no-sort',
-            "orderable": false,
-            }]
-        });
-        table.columns().every(function () {
-            var that = this;
-            $('input', this.footer()).on('keyup change', function() {
-                that.search(this.value).draw();
-            });
-        });
-
-
-        $('#dtb2 tfoot th').each( function () {
-            var title = $('#dtb2 thead th').eq( $(this).index() ).text();
-            $(this).html( '<input type="text" class="form-control" placeholder="Search '+title+'" />' );
-        });
-        var table2 = $('#dtb2').DataTable({
-            "scrollX": true,
-            "columnDefs": [{
-            "targets": 'no-sort',
-            "orderable": false,
-            }]
-        });
-        table2.columns().every(function () {
-            var that = this;
-            $('input', this.footer()).on('keyup change', function() {
-                that.search(this.value).draw();
-            });
-        });
-    });
-</script>

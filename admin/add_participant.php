@@ -125,8 +125,13 @@
 
 
 
+                $members = $_POST['e_tmembers'];
                 for($i = 0; $i < $e_members; $i++){
-                    $member_query = "INSERT INTO `members`(`member_name`, `participant_ID`) VALUE ('member_".($i+1)."', '$participant_id')";
+                    if(empty($members[$i])){
+                        $member_query = "INSERT INTO `members`(`member_name`, `participant_ID`) VALUE ('member_".$i."', '$participant_id')";
+                    } else {
+                        $member_query = "INSERT INTO `members`(`member_name`, `participant_ID`) VALUE ('".$members[$i]."', '$participant_id')";
+                    }
                     $db->exec($member_query);
                 }
 
