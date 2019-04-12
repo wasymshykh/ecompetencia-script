@@ -7,8 +7,10 @@
                 <h1>User <span>Registration</span></h1>
                 <h3>Easy <span>2 steps</span> handy registration!</h3>
             </div>
-
-            <div class="c-form-content">
+            <div class="c-form-content" style="min-height: 50vh;">
+                <h2 style="text-transform: uppercase; font-weight: 900; letter-spacing: 2px; font-size: 3em; padding: 2em 0 0 0; text-align:center;">Registrations are closed!</h2>
+                <p style="text-transform: uppercase; font-weight: 400; letter-spacing: 2px; font-size: 2.4em; padding: 0 0 2em 0; text-align:center;">No slots left, it's full house!</p>
+<?php /* ?>
                 
                 <?php if(isset($showConfirmed) && $showConfirmed): ?>
                 <div class="registration-confirmed">
@@ -125,12 +127,193 @@
 
                 <?php endif; ?>
 
+<?php */ ?>
             </div>
-
         </div>
     </form>
     </div>
 </section>
+
+
+<style>
+
+#pageFull {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: 0.5s all ease-in-out;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#pageFull.active {
+    background: rgba(255, 255, 255, 0.5);
+    z-index: 100;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: all;
+}
+
+.pageFull-modal {
+    padding: 5em 5px;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: 0.6s all ease-in-out;
+    position: relative;
+    width: 90%;
+    max-width: 600px;
+}
+
+#pF-m-close {
+    display: block;
+    width: 50px;
+    height: 50px;
+    border: 1px solid #000;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    text-align: center;
+    background: #fff;
+    cursor: pointer;
+    opacity: 0;
+    transition: 1s all ease-in-out;
+}
+#pF-m-close i {
+    font-size: 2em;
+    line-height: 50px;
+}
+
+#pageFull.active #pF-m-close {
+    opacity: 1;
+}
+
+#pageFull.active .pageFull-modal {
+    padding: 10em 25px;
+}
+
+.pageFull-modal h1 {
+    font-size: 5em;
+    font-weight: 900;
+    text-align: center;
+    color: #0b1921;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+    opacity: 0;
+}
+
+.pageFull-modal h1::before {
+    content: "";
+    width: 30%;
+    background-color: #0080c4;
+    height: 5px;
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.pageFull-modal h3 {
+    font-size: 2.4em;
+    font-weight: 400;
+    color: #0b1921;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 3px;
+    margin-top: 0.5em;
+    opacity: 0;
+}
+
+.pageFull-modal p {
+    font-size: 1.4em;
+    font-weight: 900;
+    color: #85ab30;
+    border-bottom: 1px solid #85ab30;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 5px;
+    opacity: 0;
+    margin: 0 auto;
+    display: table;
+    margin-top: 1em;
+    padding: 0.1em 1em;
+}
+
+.pageFull-modal h1,
+.pageFull-modal h3,
+.pageFull-modal p {
+    transition: 0.8s all ease-in-out 50ms;
+    transform: scale(3);
+}
+#pageFull.active .pageFull-modal h1,
+#pageFull.active .pageFull-modal h3,
+#pageFull.active .pageFull-modal p {
+    opacity: 1;
+    transform: scale(1);
+}
+
+
+@media screen and (max-width: 620px) {
+    .pageFull-modal h1 {
+        font-size: 3em;
+    }
+
+
+    .pageFull-modal h1::before {
+        height: 3px;
+    }
+
+    .pageFull-modal h3 {
+        font-size: 1.4em;
+    }
+
+    .pageFull-modal p {
+        font-size: 1em;
+    }
+
+
+}
+
+
+
+
+</style>
+
+
+<div id="pageFull">
+    <div class="pageFull-modal">
+        <div id="pF-m-close">
+            <i class="fas fa-times"></i>
+        </div>
+        <h1>House Full!</h1>
+        <h3>Registrations Closed</h3>
+        <p>Hope to see there!</p>
+    </div>
+</div>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function(){
+        document.querySelector('#pageFull').classList.add('active');
+    })
+
+    document.querySelector('#pF-m-close').addEventListener('click', function() {
+        document.querySelector('#pageFull').classList.remove('active');
+    })
+
+    document.querySelector('#pageFull').addEventListener('click', function (e) {
+        if(e.target.classList.contains('active')) {
+            document.querySelector('#pageFull').classList.remove('active');
+        }
+    })
+</script>
+
 
 <script>
 

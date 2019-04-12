@@ -67,35 +67,35 @@
             if(!$member_error && (count($members) > ($part['competition_max']-1))){
                 $member_error = "Maximum ".($part['competition_max']-1)." members allowed";
             }
-            if(!$member_error && $part['transaction_status'] == 'P'){
-                $member_error = "User has already paid for the competition!";
-            }
+            // if(!$member_error && $part['transaction_status'] == 'P'){
+            //     $member_error = "User has already paid for the competition!";
+            // }
 
             if(!$member_error){
-                $user_details = getUserDetailsById($part['user_ID']);
-                $amount = 0;
-                $discount = 0;
-                if($user_details['institute_type'] == 'E'){
-                    $amount = $part['competition_e_fee'] * (count($members)+1);
-                } else {
-                    $amount = $part['competition_i_fee'] * (count($members)+1);
-                }
-                $total = $amount;
+                // $user_details = getUserDetailsById($part['user_ID']);
+                // $amount = 0;
+                // $discount = 0;
+                // if($user_details['institute_type'] == 'E'){
+                //     $amount = $part['competition_e_fee'] * (count($members)+1);
+                // } else {
+                //     $amount = $part['competition_i_fee'] * (count($members)+1);
+                // }
+                // $total = $amount;
 
-                $couponCheckQuery = "SELECT * FROM `coupon_used` u INNER JOIN `coupons` c ON u.coupon_ID = c.coupon_ID WHERE u.transaction_ID=".$part['transaction_ID'];
-                $stmt = $db->prepare($couponCheckQuery);
-                $stmt->execute();
-                $coupon_used = $stmt->fetch();
+                // $couponCheckQuery = "SELECT * FROM `coupon_used` u INNER JOIN `coupons` c ON u.coupon_ID = c.coupon_ID WHERE u.transaction_ID=".$part['transaction_ID'];
+                // $stmt = $db->prepare($couponCheckQuery);
+                // $stmt->execute();
+                // $coupon_used = $stmt->fetch();
 
-                if(!empty($coupon_used)){
-                    if($coupon_used['coupon_type'] == 'P'){
-                        $discount = $amount * ($coupon_used['coupon_discount']/100);
-                        $total = $amount - $discount;
-                    } else {
-                        $discount = $coupon_used['coupon_discount'];
-                        $total = $amount - $discount;
-                    }
-                }
+                // if(!empty($coupon_used)){
+                //     if($coupon_used['coupon_type'] == 'P'){
+                //         $discount = $amount * ($coupon_used['coupon_discount']/100);
+                //         $total = $amount - $discount;
+                //     } else {
+                //         $discount = $coupon_used['coupon_discount'];
+                //         $total = $amount - $discount;
+                //     }
+                // }
 
                 try {
                     
@@ -115,8 +115,8 @@
                     }
 
                     // Transaction table updating
-                    $q2 = "UPDATE `transactions` SET `transaction_amount`=$amount, `transaction_discount`=$discount, `transaction_total`=$total WHERE participant_ID=".$part['participant_ID'];
-                    $db->exec($q2);
+                    // $q2 = "UPDATE `transactions` SET `transaction_amount`=$amount, `transaction_discount`=$discount, `transaction_total`=$total WHERE participant_ID=".$part['participant_ID'];
+                    // $db->exec($q2);
 
                     $db->commit();
 

@@ -252,6 +252,21 @@
         return $s->fetch();
     }
 
+    function ajaxConfirmedParticipants($comp_id)
+    {
+        global $db;
+
+        $q = "SELECT `participant_ID` as `_i`, `user_fname` as `first_name`, `user_lname` as `last_name`, 
+            `participant_team` as `team_name`, i.`institute_name` as `university`
+            FROM `participants` p INNER JOIN `users` u ON p.user_ID = u.user_ID 
+            INNER JOIN `institutes` i ON u.institute_ID = i.institute_ID WHERE `competition_ID` = :compid";
+        $s = $db->prepare($q);
+        $s->execute(['compid'=>$comp_id]);
+
+        return $s->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+
     // Get coupon details
     function getPromoByName($promo)
     {
