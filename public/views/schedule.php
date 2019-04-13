@@ -265,32 +265,49 @@
                         const res = JSON.parse(this.responseText);
                         if(res.success != undefined && res.success === true){
                             
-                            console.log(res);
                             display_div = document.querySelector('#display');
-                            display_div.innerHTML = "";
+                            let tbl = `<table class="striped table-responsive">
+                                    <thead>
+                                        <tr>
+                                        <th>Name</th>
+                                        <th>Team Name</th>
+                                        <th>Members</th>
+                                        <th>University</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>`;
                             data = res.data;
 
                             for(let i = 0; i < data.length; i++) {
-                                display_div.innerHTML += `
-                                    <div class="participant_box">
-                                        <div class="participant_name">
-                                            <p>Team Leader</p>
-                                            <h1>${data[i].first_name} ${data[i].last_name}</h1>
-                                            <h3><span>Team Name</span> <span>${data[i].team_name}</span></h3>
-                                        </div>
-                                        <div class="participant_university">
-                                            <p>University</p>
-                                            <h3>${data[i].university}</h3>
-                                        </div>
-                                    </div>
-                                    
-                                `;
+                                tbl += `<tr>
+                                        <td>${data[i].first_name} ${data[i].last_name}</td>
+                                        <td>${data[i].team_name}</td>
+                                        <td>
+                                            <b>${data[i].members.length}</b>`;
+                                    for(let j = 0; j < data[i].members.length; j++){
+                                        tbl += `
+                                            <span style="padding: 0.15em 0.5em;margin:0.1em;text-transform: uppercase;display:inline-block;font-size: 0.8em; letter-spacing: 1px; color: #333;background-color:rgba(0,0,0,0.1);">${data[i].members[j]}</span>
+                                        `;
+                                    }
+                                tbl += `</td>
+                                        <td>${data[i].university}</td>
+                                    </tr>`;
                             }
+                            
+                            tbl += `</tbody>
+                                </table>`;
+                                
+                            display_div.innerHTML = "";
+                            display_div.innerHTML = tbl;
 
                             lodr.classList.remove('active');
                             
 
                         } else {
+                xhttp.open("GET", "<?=URL?>/public/requests/participants.php?comp="+competition_id, true);
+                xhttp.send(); 
+                xhttp.open("GET", "<?=URL?>/public/requests/participants.php?comp="+competition_id, true);
+                xhttp.send(); 
                             
                             lodr.classList.remove('active');
 

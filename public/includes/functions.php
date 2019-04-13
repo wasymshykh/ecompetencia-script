@@ -396,6 +396,16 @@
         
         return $s->fetchAll();
     }
+    // Get fellow members of participant for AJAX REQUEST
+    function ajaxMembersOfParticipant($part_id)
+    {
+        global $db;
+        $q = "SELECT `member_name` FROM `members` WHERE `participant_ID` = :partid";
+        $s = $db->prepare($q);
+        $s->execute(['partid'=>$part_id]);
+        
+        return $s->fetchAll(PDO::FETCH_ASSOC);
+    }
     // Get member details of participant
     function getMemberDetails($member_id)
     {

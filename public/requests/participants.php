@@ -10,6 +10,14 @@
 
             $data = ajaxConfirmedParticipants($competition['competition_ID']);
 
+            //var_dump($data);
+            for($i = 0; $i < count($data); $i++){
+                $members = ajaxMembersOfParticipant($data[$i]['_i']);
+                $data[$i]['members'] = [];
+                foreach($members as $member) {
+                    $data[$i]['members'][] = $member['member_name'];
+                }
+            }
 
             if(!empty($data)){
                 $toSend = [
