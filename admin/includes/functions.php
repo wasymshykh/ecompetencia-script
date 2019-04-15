@@ -14,6 +14,13 @@
         return date("d/m/Y h:ia", $d);
     }
 
+    // normalize room time
+    function roomTime($dbT) {
+        $d=strtotime($dbT);
+        
+        return date("h:ia", $d);
+    }
+
     function back($data)
     {
         if(gettype($data) !== "array"){
@@ -678,6 +685,23 @@
         $s = $db->prepare($q);
         $s->execute(["r_id"=>$room_id]);
         return $s->fetchAll();
+    }
+
+    function getParticipantsInSlot($slot_id)
+    {
+        global $db;
+        $q = 'SELECT * FROM `slot_participants` WHERE `slot_ID`=:s_id';
+        $s = $db->prepare($q);
+        $s->execute(["s_id"=>$slot_id]);
+        return $s->fetchAll();
+    }
+    function getSlotDetails($s_id)
+    {
+        global $db;
+        $q = 'SELECT * FROM `slots` s INNER JOIN `rooms` r ON s.room_ID = r.room_ID INNER JOIN `competitions` c ON s.competition_ID = c.competition_ID WHERE `slot_ID`=:s_id';
+        $s = $db->prepare($q);
+        $s->execute(['s_id'=>$s_id]);
+        return $s->fetch();
     }
 
 

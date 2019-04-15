@@ -132,6 +132,23 @@
     pointer-events: all;
 }
 
+.table-title {
+    width: 100%;
+    display: block;
+    font-size: 2em;
+    font-weight: 400;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.btn-p {
+    color: #111;
+    background: linear-gradient(rgb(220,220,220),rgb(240,240,240));
+    padding: 0.5em 1em;
+}
+
 
 </style>
 
@@ -161,6 +178,9 @@
                     </div>
                 </div>
 
+                <a href="javascript:void(0);" onclick="printPage();" class="btn-p"><i class="fa fa-print"></i> Print</a> 
+
+
                 <div id="display"></div>
 
                 <div class="form-loader">
@@ -174,6 +194,61 @@
 
     </div>
 </div>
+
+<script type="text/javascript">
+ function printPage(){
+
+        var tableData = '<table>'+document.getElementsByTagName('table')[0].innerHTML+'</table>';
+
+        var data = `
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="http://localhost/ecompetencia-script/assets/css/style.css">
+            <link rel="stylesheet" type="text/css" media="screen" href="http://localhost/ecompetencia-script/assets/css/inner.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="http://localhost/ecompetencia-script/assets/css/responsive.css">
+
+    
+    <link rel="stylesheet" href="http://localhost/ecompetencia-script/assets/fontawesome/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700,900" rel="stylesheet">
+
+
+        <style>
+        body {
+            background: #fff;
+        }
+        .table-title {
+            width: 100%;
+            display: block;
+            font-size: 2em;
+            font-weight: 400;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        table td {
+            padding: 0.5em;
+            font-size: 0.8em;
+        }
+        </style>
+
+        <button onclick="window.print()" style="padding:0.4em 0.5em"><i class="fas fa-print"></i> Print</button>
+
+        <h4 class="table-title">${document.querySelector('.table-title').innerText}</h4>
+
+        `;
+
+        data += tableData;       
+        myWindow=window.open('','','width=800,height=600');
+        myWindow.innerWidth = screen.width;
+        myWindow.innerHeight = screen.height;
+        myWindow.screenX = 0;
+        myWindow.screenY = 0;
+        myWindow.document.write(data);
+        myWindow.focus();
+    };
+ </script>​​​​​​
+
 
 
 <script>
@@ -263,7 +338,10 @@
                         if(res.success != undefined && res.success === true){
                             
                             display_div = document.querySelector('#display');
-                            let tbl = `<table class="striped table-responsive">
+                            let tbl = `
+                            <h1 class="table-title">${selectedItem}</h1>
+                            
+                            <table class="table-responsive">
                                     <thead>
                                         <tr>
                                         <th>Name</th>
@@ -277,23 +355,28 @@
 
                             for(let i = 0; i < data.length; i++) {
                                 tbl += `<tr>
-                                        <td>${data[i].first_name} ${data[i].last_name}</td>
+                                        <td rowspan="${(data[i].members.length == 0)?1:data[i].members.length}">${data[i].first_name} ${data[i].last_name}</td>
                                         <td>${data[i].team_name}</td>
                                         <td>`;
 
                                     if(data[i].members.length > 0){
-                                        tbl += `<b>${data[i].members.length}</b>`;
+                                        //tbl += `<b>${data[i].members.length}</b>`;
+                                        tbl += `${data[i].members[0]}`;
                                     } else {
                                         tbl += `<i>None</i>`
-                                    }
-                                    for(let j = 0; j < data[i].members.length; j++){
-                                        tbl += `
-                                            <span style="padding: 0.15em 0.5em;margin:0.1em;text-transform: uppercase;display:inline-block;font-size: 0.8em; letter-spacing: 1px; color: #333;background-color:rgba(0,0,0,0.1);">${data[i].members[j]}</span>
-                                        `;
                                     }
                                 tbl += `</td>
                                         <td>${data[i].university}</td>
                                     </tr>`;
+
+                                    for(let j = 1; j < data[i].members.length; j++){
+                                        tbl += `<tr>
+                                            <td></td>
+                                            <td>${data[i].members[j]}</td>
+                                            <td></td>
+                                        </tr>
+                                        `;
+                                    }
                             }
                             
                             tbl += `</tbody>
