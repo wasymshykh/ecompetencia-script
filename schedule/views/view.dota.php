@@ -186,7 +186,7 @@
     <div class="content-inner">
     
         <div class="content-title">
-            <h1>Chess</h1>
+            <h1>Dota 2</h1>
             <h3>Fixtures</h3>
         </div>
 
@@ -202,11 +202,11 @@
                 </div>
                 <div class="round-row">
                     <div class="round-team">
-                        <h3>Junaid</h3>
+                        <h3>DOTA TEAM</h3>
                     </div>
                     <div class="round-span">VS</div>
                     <div class="round-team">
-                        <h3>Sakhi Amin</h3>
+                        <h3>S3x</h3>
                     </div>
                     <div class="round-result">
                         <h1>Result</h1>
@@ -227,11 +227,11 @@
                 </div>
                 <div class="round-row">
                     <div class="round-team">
-                        <h3>Ammar Jafri</h3>
+                        <h3>Inviciblei</h3>
                     </div>
                     <div class="round-span">VS</div>
                     <div class="round-team">
-                        <h3>Hammad Nadeem</h3>
+                        <h3>Faisal Iqbal</h3>
                     </div>
                     <div class="round-result">
                         <h1>Result</h1>
@@ -252,11 +252,11 @@
                 </div>
                 <div class="round-row">
                     <div class="round-team">
-                        <h3>Shahzaib</h3>
+                        <h3>Synergy</h3>
                     </div>
                     <div class="round-span">VS</div>
                     <div class="round-team">
-                        <h3>Sahil</h3>
+                        <h3>Dark Knight</h3>
                     </div>
                     <div class="round-result">
                         <h1>Result</h1>
@@ -265,6 +265,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="row-round">
                 <div class="date-content">
                     <div class="date-day">
@@ -276,11 +277,11 @@
                 </div>
                 <div class="round-row">
                     <div class="round-team">
-                        <h3>Awais</h3>
+                        <h3>Master Panther</h3>
                     </div>
                     <div class="round-span">VS</div>
                     <div class="round-team">
-                        <h3>SM Ayyan</h3>
+                        <h3>Pakar Dharak 5</h3>
                     </div>
                     <div class="round-result">
                         <h1>Result</h1>
@@ -289,30 +290,9 @@
                     </div>
                 </div>
             </div>
-            <div class="row-round">
-                <div class="date-content">
-                    <div class="date-day">
-                        <h1>Match <span>Five</span></h1>
-                    </div>
-                    <div class="date-date">
-                        <h3>09:00 AM - 09:15 AM</h3>
-                    </div>
-                </div>
-                <div class="round-row">
-                    <div class="round-team">
-                        <h3>Arbaz</h3>
-                    </div>
-                    <div class="round-span">VS</div>
-                    <div class="round-team">
-                        <h3>Abbas</h3>
-                    </div>
-                    <div class="round-result">
-                        <h1>Result</h1>
-                        <h3 class="winner"><i class="clock"></i> TBA</h3>
-                        <h3 class="loser"><b>TBA</b> to be conducted</h3>
-                    </div>
-                </div>
-            </div>
+
+
+
         </div>
 
     </div>

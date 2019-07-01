@@ -181,16 +181,17 @@
 </style>
 
 
+
 <div id="content">
     <div class="content-inner">
     
         <div class="content-title">
-            <h1>Counter Strike</h1>
+            <h1>Need for Speed <i>NFS</i></h1>
             <h3>Fixtures</h3>
         </div>
 
         <div class="content-body">
-            <!-- <div class="row-round">
+            <div class="row-round">
                 <div class="date-content">
                     <div class="date-day">
                         <h1>Match <span>One</span></h1>
@@ -201,40 +202,19 @@
                 </div>
                 <div class="round-row">
                     <div class="round-team">
-                        <h3>Dark Knight</h3>
+                        <h3>Atif Jamal</h3>
                     </div>
                     <div class="round-span">VS</div>
                     <div class="round-team">
-                        <h3>Dark Knight Here</h3>
-                    </div>
-                    <div class="round-result">
-                        <h1>Result</h1>
-                        <h3 class="winner"><i class="fa fa-trophy"></i><b>Winner</b> Dark Knight <span>Points <b>5</b></span></h3>
-                        <h3 class="loser"><b>Lost</b> Dark Knight Here <span>Points <b>-5</b></span></h3>
-                    </div>
-                </div>
-            </div> -->
-
-            <div class="row-round">
-                <div class="date-content">
-                    <div class="date-day">
-                        <h1>Match <span>One</span></h1>
-                    </div>
-                    <div class="date-date">
-                        <h3>10:30 AM - 11:20 AM</h3>
-                    </div>
-                </div>
-                <div class="round-row">
-                    <div class="round-team">
-                        <h3>Jordon Town</h3>
+                        <h3>Sania Nadeem</h3>
                     </div>
                     <div class="round-span">VS</div>
                     <div class="round-team">
-                        <h3>Team Samad</h3>
+                        <h3>Syed Saad Aly</h3>
                     </div>
                     <div class="round-result">
                         <h1>Result</h1>
-                        <h3 class="winner"><i class="fa fa-trophy"></i><b>Winner</b> W1</h3>
+                        <h3 class="winner"><i class="clock"></i> TBA</h3>
                         <h3 class="loser"><b>TBA</b> to be conducted</h3>
                     </div>
                 </div>
@@ -246,20 +226,24 @@
                         <h1>Match <span>Two</span></h1>
                     </div>
                     <div class="date-date">
-                        <h3>10:30 AM - 11:20 AM</h3>
+                        <h3>09:00 AM - 09:15 AM</h3>
                     </div>
                 </div>
                 <div class="round-row">
                     <div class="round-team">
-                        <h3>Turtles Diamond</h3>
+                        <h3>Babar Abdur Rehman</h3>
                     </div>
                     <div class="round-span">VS</div>
                     <div class="round-team">
-                        <h3>Old School</h3>
+                        <h3>Abdul Rehman</h3>
+                    </div>
+                    <div class="round-span">VS</div>
+                    <div class="round-team">
+                        <h3>Farhan Khan</h3>
                     </div>
                     <div class="round-result">
                         <h1>Result</h1>
-                        <h3 class="winner"><i class="fa fa-trophy"></i><b>Winner</b> W2</h3>
+                        <h3 class="winner"><i class="clock"></i> TBA</h3>
                         <h3 class="loser"><b>TBA</b> to be conducted</h3>
                     </div>
                 </div>
@@ -271,25 +255,28 @@
                         <h1>Match <span>Three</span></h1>
                     </div>
                     <div class="date-date">
-                        <h3>11:30 AM - 12:20 PM</h3>
+                        <h3>09:00 AM - 09:15 AM</h3>
                     </div>
                 </div>
                 <div class="round-row">
                     <div class="round-team">
-                        <h3>GOOD FOR NOTHING</h3>
+                        <h3>Ali Haider</h3>
                     </div>
                     <div class="round-span">VS</div>
                     <div class="round-team">
-                        <h3>Obnoxious</h3>
+                        <h3>Darain Muhammad</h3>
+                    </div>
+                    <div class="round-span">VS</div>
+                    <div class="round-team">
+                        <h3>Syed Ahsan</h3>
                     </div>
                     <div class="round-result">
                         <h1>Result</h1>
-                        <h3 class="winner"><i class="fa fa-trophy"></i><b>Winner</b> W3</h3>
+                        <h3 class="winner"><i class="clock"></i> TBA</h3>
                         <h3 class="loser"><b>TBA</b> to be conducted</h3>
                     </div>
                 </div>
             </div>
-
 
             <div class="row-round">
                 <div class="date-content">
@@ -297,25 +284,28 @@
                         <h1>Match <span>Four</span></h1>
                     </div>
                     <div class="date-date">
-                        <h3>11:30 AM - 12:20 PM</h3>
+                        <h3>09:00 AM - 09:15 AM</h3>
                     </div>
                 </div>
                 <div class="round-row">
                     <div class="round-team">
-                        <h3>IU Avengers</h3>
+                        <h3>Hamees Dawood</h3>
                     </div>
                     <div class="round-span">VS</div>
                     <div class="round-team">
-                        <h3>Fnatic</h3>
+                        <h3>Rabia Yousuf</h3>
+                    </div>
+                    <div class="round-span">VS</div>
+                    <div class="round-team">
+                        <h3>Huzaifa Mustafa</h3>
                     </div>
                     <div class="round-result">
                         <h1>Result</h1>
-                        <h3 class="winner"><i class="fa fa-trophy"></i><b>Winner</b> W4</h3>
+                        <h3 class="winner"><i class="clock"></i> TBA</h3>
                         <h3 class="loser"><b>TBA</b> to be conducted</h3>
                     </div>
                 </div>
             </div>
-
 
             <div class="row-round">
                 <div class="date-content">
@@ -323,25 +313,28 @@
                         <h1>Match <span>Five</span></h1>
                     </div>
                     <div class="date-date">
-                        <h3>12:30 PM - 01:20 PM</h3>
+                        <h3>09:00 AM - 09:15 AM</h3>
                     </div>
                 </div>
                 <div class="round-row">
                     <div class="round-team">
-                        <h3>Kevin</h3>
+                        <h3>Hani Hassan</h3>
                     </div>
                     <div class="round-span">VS</div>
                     <div class="round-team">
-                        <h3>Deadmau5</h3>
+                        <h3>Muhammad Sarim</h3>
+                    </div>
+                    <div class="round-span">VS</div>
+                    <div class="round-team">
+                        <h3>Shahrukh Habib</h3>
                     </div>
                     <div class="round-result">
                         <h1>Result</h1>
-                        <h3 class="winner"><i class="fa fa-trophy"></i><b>Winner</b> W5</h3>
+                        <h3 class="winner"><i class="clock"></i> TBA</h3>
                         <h3 class="loser"><b>TBA</b> to be conducted</h3>
                     </div>
                 </div>
             </div>
-
 
             <div class="row-round">
                 <div class="date-content">
@@ -349,25 +342,28 @@
                         <h1>Match <span>Six</span></h1>
                     </div>
                     <div class="date-date">
-                        <h3>12:30 PM - 01:20 PM</h3>
+                        <h3>09:00 AM - 09:15 AM</h3>
                     </div>
                 </div>
                 <div class="round-row">
                     <div class="round-team">
-                        <h3>Pakar Dakar 5</h3>
+                        <h3>Ali Haider</h3>
                     </div>
-                    <div class="roundOne-span">VS</div>
+                    <div class="round-span">VS</div>
                     <div class="round-team">
-                        <h3>Team Stark</h3>
+                        <h3>Faiz Siddiqui</h3>
+                    </div>
+                    <div class="round-span">VS</div>
+                    <div class="round-team">
+                        <h3>Syed Jone</h3>
                     </div>
                     <div class="round-result">
                         <h1>Result</h1>
-                        <h3 class="winner"><i class="fa fa-trophy"></i><b>Winner</b> W6</h3>
+                        <h3 class="winner"><i class="clock"></i> TBA</h3>
                         <h3 class="loser"><b>TBA</b> to be conducted</h3>
                     </div>
                 </div>
             </div>
-
 
             <div class="row-round">
                 <div class="date-content">
@@ -375,25 +371,28 @@
                         <h1>Match <span>Seven</span></h1>
                     </div>
                     <div class="date-date">
-                        <h3>01:30 PM - 02:20 PM</h3>
+                        <h3>09:00 AM - 09:15 AM</h3>
                     </div>
                 </div>
                 <div class="round-row">
                     <div class="round-team">
-                        <h3>Fukra Boyz</h3>
+                        <h3>Shahnawaz Irfan</h3>
                     </div>
                     <div class="round-span">VS</div>
                     <div class="round-team">
-                        <h3>TEAM_JZY</h3>
+                        <h3>Arsalan K</h3>
+                    </div>
+                    <div class="round-span">VS</div>
+                    <div class="round-team">
+                        <h3>Waji</h3>
                     </div>
                     <div class="round-result">
                         <h1>Result</h1>
-                        <h3 class="winner"><i class="fa fa-trophy"></i><b>Winner</b> W7</h3>
+                        <h3 class="winner"><i class="clock"></i> TBA</h3>
                         <h3 class="loser"><b>TBA</b> to be conducted</h3>
                     </div>
                 </div>
             </div>
-
 
             <div class="row-round">
                 <div class="date-content">
@@ -401,25 +400,28 @@
                         <h1>Match <span>Eight</span></h1>
                     </div>
                     <div class="date-date">
-                        <h3>01:30 PM - 02:20 PM</h3>
+                        <h3>09:00 AM - 09:15 AM</h3>
                     </div>
                 </div>
                 <div class="round-row">
                     <div class="round-team">
-                        <h3>Dark Knight</h3>
+                        <h3>Avinash Kumar</h3>
                     </div>
                     <div class="round-span">VS</div>
                     <div class="round-team">
-                        <h3>Team Z</h3>
+                        <h3>Farhan Khan</h3>
+                    </div>
+                    <div class="round-span">VS</div>
+                    <div class="round-team">
+                        <h3>Muhammad Umar</h3>
                     </div>
                     <div class="round-result">
                         <h1>Result</h1>
-                        <h3 class="winner"><i class="fa fa-trophy"></i><b>Winner</b> W8</h3>
+                        <h3 class="winner"><i class="clock"></i> TBA</h3>
                         <h3 class="loser"><b>TBA</b> to be conducted</h3>
                     </div>
                 </div>
             </div>
-
 
             <div class="row-round">
                 <div class="date-content">
@@ -427,25 +429,28 @@
                         <h1>Match <span>Nine</span></h1>
                     </div>
                     <div class="date-date">
-                        <h3>02:30 PM - 03:20 PM</h3>
+                        <h3>09:00 AM - 09:15 AM</h3>
                     </div>
                 </div>
                 <div class="round-row">
                     <div class="round-team">
-                        <h3>Unbeatable5</h3>
+                        <h3>Bilal Bhatti</h3>
                     </div>
                     <div class="round-span">VS</div>
                     <div class="round-team">
-                        <h3>Team Stark</h3>
+                        <h3>Saad Ashnat</h3>
+                    </div>
+                    <div class="round-span">VS</div>
+                    <div class="round-team">
+                        <h3>Umer</h3>
                     </div>
                     <div class="round-result">
                         <h1>Result</h1>
-                        <h3 class="winner"><i class="fa fa-trophy"></i><b>Winner</b> W9</h3>
+                        <h3 class="winner"><i class="clock"></i> TBA</h3>
                         <h3 class="loser"><b>TBA</b> to be conducted</h3>
                     </div>
                 </div>
             </div>
-
 
             <div class="row-round">
                 <div class="date-content">
@@ -453,20 +458,24 @@
                         <h1>Match <span>Ten</span></h1>
                     </div>
                     <div class="date-date">
-                        <h3>02:30 PM - 03:20 PM</h3>
+                        <h3>09:00 AM - 09:15 AM</h3>
                     </div>
                 </div>
                 <div class="round-row">
                     <div class="round-team">
-                        <h3>Shooting Stars</h3>
+                        <h3>Hazaiq Khatri</h3>
                     </div>
                     <div class="round-span">VS</div>
                     <div class="round-team">
-                        <h3>LiyariPlayers</h3>
+                        <h3>Ali Aurangzeb</h3>
+                    </div>
+                    <div class="round-span">VS</div>
+                    <div class="round-team">
+                        <h3>Zainab Ashraf</h3>
                     </div>
                     <div class="round-result">
                         <h1>Result</h1>
-                        <h3 class="winner"><i class="fa fa-trophy"></i><b>Winner</b> W10</h3>
+                        <h3 class="winner"><i class="clock"></i> TBA</h3>
                         <h3 class="loser"><b>TBA</b> to be conducted</h3>
                     </div>
                 </div>
@@ -479,25 +488,58 @@
                         <h1>Match <span>Eleven</span></h1>
                     </div>
                     <div class="date-date">
-                        <h3>02:30 PM - 03:20 PM</h3>
+                        <h3>09:00 AM - 09:15 AM</h3>
                     </div>
                 </div>
                 <div class="round-row">
                     <div class="round-team">
-                        <h3>Firefighter Bomb</h3>
+                        <h3>Manan Saleem</h3>
                     </div>
                     <div class="round-span">VS</div>
                     <div class="round-team">
-                        <h3>Chor-5</h3>
+                        <h3>Usama</h3>
+                    </div>
+                    <div class="round-span">VS</div>
+                    <div class="round-team">
+                        <h3>Awais</h3>
                     </div>
                     <div class="round-result">
                         <h1>Result</h1>
-                        <h3 class="winner"><i class="fa fa-trophy"></i><b>Winner</b> W11</h3>
+                        <h3 class="winner"><i class="clock"></i> TBA</h3>
                         <h3 class="loser"><b>TBA</b> to be conducted</h3>
                     </div>
                 </div>
             </div>
 
+
+            <div class="row-round">
+                <div class="date-content">
+                    <div class="date-day">
+                        <h1>Match <span>Twelve</span></h1>
+                    </div>
+                    <div class="date-date">
+                        <h3>09:00 AM - 09:15 AM</h3>
+                    </div>
+                </div>
+                <div class="round-row">
+                    <div class="round-team">
+                        <h3>Khurram</h3>
+                    </div>
+                    <div class="round-span">VS</div>
+                    <div class="round-team">
+                        <h3>Muqadas Ilyas</h3>
+                    </div>
+                    <div class="round-span">VS</div>
+                    <div class="round-team">
+                        <h3>m Rizwan</h3>
+                    </div>
+                    <div class="round-result">
+                        <h1>Result</h1>
+                        <h3 class="winner"><i class="clock"></i> TBA</h3>
+                        <h3 class="loser"><b>TBA</b> to be conducted</h3>
+                    </div>
+                </div>
+            </div>
 
 
 

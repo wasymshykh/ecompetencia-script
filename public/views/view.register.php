@@ -8,9 +8,8 @@
                 <h3>Easy <span>2 steps</span> handy registration!</h3>
             </div>
             <div class="c-form-content" style="min-height: 50vh;">
-                <h2 style="text-transform: uppercase; font-weight: 900; letter-spacing: 2px; font-size: 3em; padding: 2em 0 0 0; text-align:center;">Registrations are closed!</h2>
-                <p style="text-transform: uppercase; font-weight: 400; letter-spacing: 2px; font-size: 2.4em; padding: 0 0 2em 0; text-align:center;">No slots left, it's full house!</p>
-<?php /* ?>
+                <!-- <h2 style="text-transform: uppercase; font-weight: 900; letter-spacing: 2px; font-size: 3em; padding: 2em 0 0 0; text-align:center;">Registrations are closed!</h2>
+                <p style="text-transform: uppercase; font-weight: 400; letter-spacing: 2px; font-size: 2.4em; padding: 0 0 2em 0; text-align:center;">No slots left, it's full house!</p> -->
                 
                 <?php if(isset($showConfirmed) && $showConfirmed): ?>
                 <div class="registration-confirmed">
@@ -127,7 +126,6 @@
 
                 <?php endif; ?>
 
-<?php */ ?>
             </div>
         </div>
     </form>
@@ -286,7 +284,7 @@
 </style>
 
 
-<div id="pageFull">
+<!-- <div id="pageFull">
     <div class="pageFull-modal">
         <div id="pF-m-close">
             <i class="fas fa-times"></i>
@@ -295,7 +293,7 @@
         <h3>Registrations Closed</h3>
         <p>Hope to see there!</p>
     </div>
-</div>
+</div> -->
 
 
 <script>
