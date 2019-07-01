@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 07, 2019 at 11:17 AM
--- Server version: 5.7.25-0ubuntu0.18.10.2
--- PHP Version: 7.3.3-1+ubuntu18.10.1+deb.sury.org+1
+-- Generation Time: Jul 01, 2019 at 08:42 PM
+-- Server version: 5.7.26-0ubuntu0.19.04.1
+-- PHP Version: 7.3.4-1+ubuntu18.10.1+deb.sury.org+3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -38,6 +38,25 @@ CREATE TABLE `ambassadors` (
   `ambassador_avatar` varchar(512) NOT NULL,
   `ambassador_status` enum('E','D') DEFAULT 'E' COMMENT 'E - Enabled, D - Disabled',
   `accepted_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ambassador_applicant`
+--
+
+CREATE TABLE `ambassador_applicant` (
+  `id` int(11) NOT NULL,
+  `fname` varchar(255) NOT NULL,
+  `lname` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `phoneno` varchar(255) NOT NULL,
+  `experience` text NOT NULL,
+  `institute_ID` int(11) NOT NULL,
+  `avatar` varchar(512) NOT NULL,
+  `status` enum('A','R','S') NOT NULL DEFAULT 'S' COMMENT 'S - Submitted, A - Approved, R - Rejected',
+  `submission_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -273,6 +292,28 @@ CREATE TABLE `members` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `member_applicant`
+--
+
+CREATE TABLE `member_applicant` (
+  `id` int(11) NOT NULL,
+  `fname` varchar(100) NOT NULL,
+  `lname` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `phoneno` varchar(100) NOT NULL,
+  `program` varchar(100) NOT NULL,
+  `semester` varchar(100) NOT NULL,
+  `regno` varchar(100) NOT NULL,
+  `skill` varchar(100) NOT NULL,
+  `experience` varchar(1300) NOT NULL,
+  `experienceyes` varchar(100) NOT NULL,
+  `submission_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `avatar` varchar(100) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `participants`
 --
 
@@ -327,7 +368,7 @@ CREATE TABLE `site_settings` (
 --
 
 INSERT INTO `site_settings` (`setting_name`, `setting_value`) VALUES
-('ambassador_applicants', 'false'),
+('ambassador_applicants', 'true'),
 ('team_applicants', 'false');
 
 -- --------------------------------------------------------
@@ -421,6 +462,13 @@ ALTER TABLE `ambassadors`
   ADD KEY `institute_ID` (`institute_ID`);
 
 --
+-- Indexes for table `ambassador_applicant`
+--
+ALTER TABLE `ambassador_applicant`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `institute_ID` (`institute_ID`);
+
+--
 -- Indexes for table `categories`
 --
 ALTER TABLE `categories`
@@ -498,6 +546,12 @@ ALTER TABLE `members`
   ADD KEY `institute_ID` (`institute_ID`);
 
 --
+-- Indexes for table `member_applicant`
+--
+ALTER TABLE `member_applicant`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `participants`
 --
 ALTER TABLE `participants`
@@ -572,6 +626,11 @@ ALTER TABLE `users`
 ALTER TABLE `ambassadors`
   MODIFY `ambassador_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 --
+-- AUTO_INCREMENT for table `ambassador_applicant`
+--
+ALTER TABLE `ambassador_applicant`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+--
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
@@ -615,7 +674,7 @@ ALTER TABLE `institutes`
 -- AUTO_INCREMENT for table `loggers`
 --
 ALTER TABLE `loggers`
-  MODIFY `logger_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=817;
+  MODIFY `logger_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=818;
 --
 -- AUTO_INCREMENT for table `management`
 --
@@ -625,12 +684,17 @@ ALTER TABLE `management`
 -- AUTO_INCREMENT for table `members`
 --
 ALTER TABLE `members`
-  MODIFY `member_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=194;
+  MODIFY `member_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=218;
+--
+-- AUTO_INCREMENT for table `member_applicant`
+--
+ALTER TABLE `member_applicant`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=188;
 --
 -- AUTO_INCREMENT for table `participants`
 --
 ALTER TABLE `participants`
-  MODIFY `participant_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=231;
+  MODIFY `participant_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=235;
 --
 -- AUTO_INCREMENT for table `reset_requests`
 --
@@ -650,17 +714,17 @@ ALTER TABLE `slots`
 -- AUTO_INCREMENT for table `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `transaction_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=230;
+  MODIFY `transaction_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=234;
 --
 -- AUTO_INCREMENT for table `transaction_details`
 --
 ALTER TABLE `transaction_details`
-  MODIFY `details_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+  MODIFY `details_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=455;
+  MODIFY `user_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=458;
 --
 -- Constraints for dumped tables
 --
@@ -670,6 +734,12 @@ ALTER TABLE `users`
 --
 ALTER TABLE `ambassadors`
   ADD CONSTRAINT `ambassadors_ibfk_1` FOREIGN KEY (`institute_ID`) REFERENCES `institutes` (`institute_ID`);
+
+--
+-- Constraints for table `ambassador_applicant`
+--
+ALTER TABLE `ambassador_applicant`
+  ADD CONSTRAINT `ambassador_applicant_ibfk_1` FOREIGN KEY (`institute_ID`) REFERENCES `institutes` (`institute_ID`);
 
 --
 -- Constraints for table `competitions`
